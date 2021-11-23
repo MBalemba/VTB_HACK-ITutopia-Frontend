@@ -2,15 +2,16 @@ import React from "react";
 import { Route, Routes  } from "react-router-dom";
 
 
-import {routes} from "./utils/path";
+import {AUTH_ROUTE, routes} from "./utils/path";
+import AuthPage from "./components/pages/AuthPage/AuthPage";
 
 function App() {
   return (
     <div className="App">
-      <Routes >
-          {routes.map(({component, path}) =>
-              <Route path={path} component={component} />
-          )}
+      <Routes>
+              <Route>
+                  <Route path={AUTH_ROUTE} element={< AuthPage/>} />
+              </Route>
       </Routes >
     </div>
   );
