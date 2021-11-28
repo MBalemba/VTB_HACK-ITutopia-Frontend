@@ -61,14 +61,13 @@ export const ButtonWrapper = styled.div`
 export const Illustration = styled.img`
  
     position: absolute;
-    object-fit: cover;
     background-repeat: no-repeat;
     
     width: 50%;
     height: 900px;
     left: 877.91px;
     bottom: 0px;
-   
+    object-fit: cover;
 `
 
 
