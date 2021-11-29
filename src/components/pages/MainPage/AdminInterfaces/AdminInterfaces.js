@@ -1,6 +1,8 @@
 import React from 'react';
 import {Container, H1} from "./AdminInterfacesStyle";
-import MonthChart from "./WeekChart/WeekChart";
+import WeekChart from "./WeekChart/WeekChart";
+import PieChart from "./PieChart/PieChart";
+import HistoryTransaction from "./HistoryTransaction/HistoryTransaction";
 
 const AdminInterfaces = () => {
     return (
@@ -9,7 +11,12 @@ const AdminInterfaces = () => {
                 График еженедельных расходов
             </H1>
 
-            <MonthChart />
+            <WeekChart />
+
+            <PieChart />
+
+            <HistoryTransaction />
+
 
 
         </Container>

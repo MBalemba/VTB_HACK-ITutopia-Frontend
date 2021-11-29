@@ -173,7 +173,7 @@ class ApexChat extends React.Component {
 }
 
 
-const MonthChart = () => {
+const WeekChart = () => {
 
 
     return (
@@ -183,4 +183,4 @@ const MonthChart = () => {
     );
 };
 
-export default MonthChart;
+export default WeekChart;
