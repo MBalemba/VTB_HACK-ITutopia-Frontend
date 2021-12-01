@@ -5,6 +5,7 @@ import AuthPage from "./components/pages/AuthPage/AuthPage";
 import MainPage from "./components/pages/MainPage/MainPage";
 import Header from "./components/pages/MainPage/Header/Header";
 import AdminInterfaces from "./components/pages/MainPage/AdminInterfaces/AdminInterfaces";
+import UserInterface from "./components/pages/MainPage/UserInterface/UserInterface";
 
 function App() {
     return (
@@ -17,7 +18,7 @@ function App() {
                     <Route path={ADMIN} element={<AdminInterfaces/>}>
                     </Route>
 
-                    <Route path={USER} element={< AuthPage/>}>
+                    <Route path={USER} element={< UserInterface/>}>
 
                     </Route>
                 </Route>
