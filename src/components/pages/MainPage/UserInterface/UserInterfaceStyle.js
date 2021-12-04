@@ -5,6 +5,7 @@ export const ProfileInfo = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 40px;
 `
 
 export const Account = styled.div`
@@ -30,6 +31,7 @@ export const Textblock = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
+  
 `
 
 export const Fio = styled.span`
@@ -53,8 +55,12 @@ export const Departament = styled.p`
 export const Balance = styled.div`
   background: rgba(0, 87, 255, 0.05);
   border-radius: 10px;
+  padding: 15px 20px;
 `
 
 export const Amount = styled.div`
-
+    
 `
+
+
+

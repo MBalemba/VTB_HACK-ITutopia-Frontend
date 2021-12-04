@@ -1,6 +1,19 @@
 import React from 'react';
 import {Container} from "../AdminInterfaces/AdminInterfacesStyle";
-import {Account, Amount, Balance, Departament, Fio, Picture, ProfileInfo, Textblock} from "./UserInterfaceStyle";
+import {
+    Account,
+    Amount,
+    Balance, BottomMenuCard, ButtonsControl, CardInfo,
+    Cards, CurrentCardText,
+    Departament, Divider,
+    Fio,
+    H, LeftInfoTopMenu, MenuItem,
+    Picture,
+    ProfileInfo, Sliderblock, SpecialOffer, Status,
+    Textblock, TopMenuCard
+} from "./UserInterfaceStyle";
+import SliderCards from "./Cards/SliderCards/SliderCards";
+import CardsBlock from "./Cards/Cards";
 
 
 const UserInterface = () => {
@@ -31,29 +44,10 @@ const UserInterface = () => {
                     </Amount>
                 </Balance>
             </ProfileInfo>
-{/*
-            <Cards>
-                <H>Карты сотрудника</H>
-                <Sliderblock>
 
-                </Sliderblock>
+            <CardsBlock/>
 
-                <CardInfo>
-                    <TopMenuCard>
-
-                    </TopMenuCard>
-                    <Devider/>
-
-                    <BottomMenuCard>
-
-                    </BottomMenuCard>
-                </CardInfo>
-
-                <SpecialOffer>
-
-                </SpecialOffer>
-            </Cards>
-
+            {/*
             <ChartBlock>
 
             </ChartBlock>
