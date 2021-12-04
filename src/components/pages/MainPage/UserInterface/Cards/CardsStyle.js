@@ -36,15 +36,17 @@ export const TopMenuCard = styled.div`
   align-items: center;
 `
 export const Divider = styled.div`
-  
-`
-export const BottomMenuCard = styled.div`
-  
+  width: 800px;
+  height: 1px;
+  left: 880px;
+  top: 869px;
+  background: rgba(0, 22, 86, 0.1);
+  margin: 25px 0px;
 `
 
 
 export const SpecialOffer = styled.div`
-  
+
 `
 
 export const LeftInfoTopMenu = styled.div`
@@ -77,7 +79,7 @@ export const Status = styled.p`
 
 
   color: #001A68;
-  
+
 `
 export const ButtonsControl = styled.div`
   min-height: 40px;
@@ -88,7 +90,7 @@ export const ButtonsControl = styled.div`
 
 export const ButtonWrapper = styled.div`
   width: 120px;
-  height: 40px;    
+  height: 40px;
   margin-right: 10px;
 `
 
@@ -113,7 +115,63 @@ export const Blocker = styled.div`
   height: 40px;
   left: 1640px;
   top: 802px;
-  background: #F64E4E;  
+  background: #F64E4E;
   border-radius: 50%;
 `
+
+export const BottomMenuCard = styled.div`
+display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const Key = styled.div`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  color: rgba(0, 22, 86, 0.5);
+
+`
+
+export const Item = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+export const Dot = styled.div`
+  min-width: 5px;
+  min-height: 5px;
+  margin: 0px 10px;
+  background: rgba(0, 26, 104, 0.15);
+  border-radius: 50%;
+`
+
+export const Value = styled.div`
+
+`
+
+export const ProgressBar = styled.div`
+  width: 203px;
+  height: 7px;
+  background: rgba(0, 17, 68, 0.05);
+  border-radius: 5px;
+`
+
+export const Loader = styled.div`
+  background: #F64E4E;
+  border-radius: 5px;
+  height: 7px;
+  width: ${({percent}) => percent + '%'};
+`
+
+export const ChangeThis = styled.div`
+
+`
+
+
+
+
+
+
 

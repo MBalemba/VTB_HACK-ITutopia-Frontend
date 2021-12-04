@@ -5,14 +5,14 @@ import {
     BottomMenuCard,
     ButtonsControl, ButtonWrapper,
     CardInfo,
-    Cards,
-    CurrentCardText, Divider,
-    H,
-    LeftInfoTopMenu,
-    MenuItem,
+    Cards, ChangeThis,
+    CurrentCardText, Divider, Dot,
+    H, Item, Key,
+    LeftInfoTopMenu, Loader,
+    MenuItem, ProgressBar,
     Sliderblock, SpecialOffer,
     Status, Time,
-    TopMenuCard
+    TopMenuCard, Value
 } from "./CardsStyle";
 import Card from "./Card/Card";
 import MyButton from "../../../../common/Buttons/MyButton";
@@ -113,6 +113,51 @@ const CardsBlock = () => {
                     <Divider/>
 
                     <BottomMenuCard>
+                        <Item>
+                            <Key>
+                                Лимит
+                            </Key>
+                                <Dot>
+
+                                </Dot>
+                            <Value>
+                                {(95000).toLocaleString() +' ₽'}
+                            </Value>
+                        </Item>
+
+                        <Item>
+                            <Key>
+                                Остаток
+                            </Key>
+                                <Dot>
+
+                                </Dot>
+                            <Value>
+                                {(12740).toLocaleString() +' ₽'}
+                            </Value>
+                        </Item>
+
+                        <Item>
+                            <Key>
+                                Срок
+                            </Key>
+                                <Dot>
+
+                                </Dot>
+                            <Value>
+                                20 дней
+                            </Value>
+                        </Item>
+
+                        <ProgressBar>
+                            <Loader percent={'23'}>
+
+                            </Loader>
+                        </ProgressBar>
+
+                        <ChangeThis>
+                            Изменить
+                        </ChangeThis>
 
                     </BottomMenuCard>
                 </CardInfo>
