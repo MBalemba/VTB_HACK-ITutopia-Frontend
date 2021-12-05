@@ -3,6 +3,7 @@ import InfoBlock from "./InfoBlock/InfoBlock";
 import {Content} from "./MainPageStyle";
 import Header from "./Header/Header";
 import {Outlet} from "react-router-dom";
+import AdminMenuLeft from "./AdminMenuLeft/AdminMenuLeft";
 
 const MainPage = () => {
     return (
@@ -10,6 +11,7 @@ const MainPage = () => {
             <Header />
             <Content>
                 <InfoBlock />
+                <AdminMenuLeft/>
                 <Outlet />
             </Content>
 
