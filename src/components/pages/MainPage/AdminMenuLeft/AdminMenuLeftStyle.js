@@ -27,6 +27,9 @@ export const AdminCardInfo = styled.div`
   background: linear-gradient(97.26deg, rgba(0, 102, 255, 0.05) 0%, rgba(0, 133, 255, 0.05) 100%);
   border-radius: 15px;
   padding: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `
 
 
@@ -35,6 +38,9 @@ export const CardInfoBlock = styled.div`
   justify-content: space-between;
   margin-bottom: 25px;
   align-items: flex-end;
+  &:last-child{
+    margin-bottom: 0px;
+  }
 `
 
 export const Left = styled.div`
