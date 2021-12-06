@@ -3,6 +3,7 @@ import {Container, H1} from "./AdminInterfacesStyle";
 import WeekChart from "./WeekChart/WeekChart";
 import PieChart from "./PieChart/PieChart";
 import HistoryTransaction from "./HistoryTransaction/HistoryTransaction";
+import {Ph} from "./HistoryTransaction/HistoryTransactionStyle";
 
 const AdminInterfaces = () => {
     return (
@@ -14,6 +15,7 @@ const AdminInterfaces = () => {
             <WeekChart />
 
             <PieChart />
+
 
             <HistoryTransaction />
 

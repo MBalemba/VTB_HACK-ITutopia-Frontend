@@ -2,23 +2,29 @@ import React, {forwardRef, useState} from 'react';
 import {
     AdminLeft,
     AdminRight,
-    Arrow, ButtonDate,
+    Arrow, ButtonDate, ButtonWrapper,
     Container,
-    DatePickerBlock,
+    DatePickerBlock, DonutSection,
     FirstSection,
     GoBack,
     GoBackText,
-    H, TextDatePicker
+    H, HeaderSectionHistory, HistorySection, MenuSection, SelectItem, SelectWrapper, TextDatePicker
 } from "./AdminFullPageStyle";
 import CurrentCheckComponent from "../../MainPage/AdminMenuLeft/CurrentCheckComponent/CurrentCheckComponent";
 import {ProfileInfo} from "../../MainPage/UserInterface/UserInterfaceStyle";
 import {AccountComponent} from "../../MainPage/UserInterface/UserInterface";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import WeekChart from "../../MainPage/AdminInterfaces/WeekChart/WeekChart";
+import PieChart from "../../MainPage/AdminInterfaces/PieChart/PieChart";
+import {SearchC} from "../../MainPage/AdminMenuLeft/AdminMenuLeft";
+import Select from "react-select";
+import MyButton from "../../../common/Buttons/MyButton";
+import HistoryTransaction from "../../MainPage/AdminInterfaces/HistoryTransaction/HistoryTransaction";
 
 
 
-const CustomDatePicker = forwardRef(({ value ='', myText, onClick }, ref) =>
+export const CustomDatePicker = forwardRef(({ value ='', myText, onClick }, ref) =>
     {
         console.log(myText)
 
@@ -36,11 +42,19 @@ const CustomDatePicker = forwardRef(({ value ='', myText, onClick }, ref) =>
     }
 );
 
+
+
+const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+];
+
 const AdminFullPage = () => {
 
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState(new Date());
-
+    const [selectedOption, setSelectedOption] = useState(null);
 
     return (
         <Container>
@@ -63,7 +77,7 @@ const AdminFullPage = () => {
                     <CurrentCheckComponent isLink={false} />
 
 
-                    <AccountComponent fio = 'Иванов Иван Иванович' departamentName = 'Отдел маркетинга' src= '' />
+                    <AccountComponent fio = 'Иванов Иван Иванович' departamentName = 'Владелец счета' src= '' />
 
 
                 </AdminLeft>
@@ -83,12 +97,13 @@ const AdminFullPage = () => {
                         <DatePicker
                             selected={endDate}
                             minDate={startDate}
+                            maxDate={new Date()}
                             onChange={(date) => setEndDate(date)}
                             customInput={<CustomDatePicker myText={'Период до'} />}
                         />
                     </DatePickerBlock>
 
-
+                    <WeekChart />
 
 
 
@@ -97,6 +112,57 @@ const AdminFullPage = () => {
                 </AdminRight>
 
             </FirstSection>
+
+            <DonutSection>
+                <PieChart />
+            </DonutSection>
+
+            <MenuSection>
+                <SearchC/>
+
+                <SelectWrapper>
+                    <SelectItem>
+                        <Select
+                            className={'ads'}
+                            classNamePrefix="menu_admin"
+                            placeholder = 'Статус'
+                            defaultValue={selectedOption}
+                            onChange={setSelectedOption}
+                            options={options}
+                        />
+                    </SelectItem>
+
+                    <SelectItem>
+                        <Select
+                            className={'ads'}
+                            classNamePrefix="menu_admin"
+                            placeholder = 'Статус'
+                            defaultValue={selectedOption}
+                            onChange={setSelectedOption}
+                            options={options}
+                        />
+                    </SelectItem>
+
+
+                </SelectWrapper>
+
+            </MenuSection>
+
+
+            <HistorySection>
+                <HeaderSectionHistory>
+                    <H>История транзакций</H>
+                    <ButtonWrapper>
+                        <MyButton>
+                            Выгрузить отчёт
+                        </MyButton>
+                    </ButtonWrapper>
+                </HeaderSectionHistory>
+
+
+                <HistoryTransaction isHeader={false} />
+            </HistorySection>
+
         </Container>
 
     );

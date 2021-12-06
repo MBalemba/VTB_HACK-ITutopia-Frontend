@@ -26,7 +26,7 @@ const customStyles = {
     }
 }
 
-function SearchC() {
+export function SearchC() {
     return (
         <Search>
             <Input placeholder={'Поиск'} id={'search_1'} type="text"/>

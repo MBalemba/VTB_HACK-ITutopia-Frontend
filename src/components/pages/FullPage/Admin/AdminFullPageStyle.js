@@ -51,6 +51,7 @@ export const H = styled.div`
 `
 export const DatePickerBlock = styled.div`
   position: absolute;
+  top: 0;
   right: 0;
   display: flex;
   justify-content: flex-end;
@@ -68,6 +69,7 @@ export const ButtonDate = styled.div`
   border: 1px solid rgba(0, 26, 104, 0.1);
   box-sizing: border-box;
   border-radius: 10px;
+  cursor: pointer;
 `
 export const TextDatePicker = styled.div`
   font-style: normal;
@@ -76,4 +78,35 @@ export const TextDatePicker = styled.div`
   line-height: 21px;
   color: rgba(0, 26, 104, 0.3);
   margin-right: 13px;
+`
+
+export const DonutSection = styled.div`
+  margin-top: 30px;
+`
+
+export const MenuSection = styled.div`
+  margin-top: 30px;
+`
+
+export const SelectWrapper = styled.div`
+  margin-top: 15px;
+  width: 500px;
+  display: flex;
+  justify-content: flex-start;
+`
+export const SelectItem = styled.div`
+  margin-right: 10px;
+  max-width: 200px;
+`
+export const HistorySection = styled.div`
+  margin-top: 23px;
+`
+export const HeaderSectionHistory = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`
+export const ButtonWrapper = styled.div`
+  width: 157px;
+  height: 43px;
 `

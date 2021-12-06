@@ -11,12 +11,14 @@ import {
     TrItem
 } from "./HistoryTransactionStyle";
 
-export const HistoryTransaction = () => {
+export const HistoryTransaction = ({isHeader=true}) => {
     return (
         <ContainerHistory>
-            <Ph>
+
+            {isHeader && <Ph>
                 История последних операций
-            </Ph>
+            </Ph>}
+
 
             <Block>
                 <Data>

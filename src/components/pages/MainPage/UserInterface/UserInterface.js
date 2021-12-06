@@ -16,6 +16,7 @@ import SliderCards from "./Cards/SliderCards/SliderCards";
 import CardsBlock from "./Cards/Cards";
 import PieChart from "../AdminInterfaces/PieChart/PieChart";
 import HistoryTransaction from "../AdminInterfaces/HistoryTransaction/HistoryTransaction";
+import {Ph} from "../AdminInterfaces/HistoryTransaction/HistoryTransactionStyle";
 
 
 export const AccountComponent = ({fio = '', departamentName = '', src= ''})=>{

@@ -2,9 +2,8 @@ import styled from "styled-components";
 
 
 export const ContainerHistory = styled.div`
-  width: 1600px;
+  width: 100%;
   margin: 0 auto;
-  padding-top: 102px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -21,7 +20,7 @@ export const Ph = styled.div`
 
 
 export const Block = styled.div`
-  width: 860px;
+  width: 100%;
   margin-bottom: 30px;
 `
 
@@ -34,7 +33,7 @@ export const TransactionItems = styled.div`
 
 export const TrItem = styled.div`
   padding: 15px;
-  width: 860px;
+  width: 100%;
   height: 70px;
   display: flex;
   justify-content: space-between;
@@ -186,7 +185,7 @@ export const Currency = styled.div`
 `
 
 export const Divider = styled.div`
-  width: 860px;
+  width: 100%;
   height: 1px;
   margin-top: 4px;
   margin-bottom: 5px;
