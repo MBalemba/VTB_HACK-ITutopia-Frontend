@@ -51,6 +51,7 @@ export const EmployersContent = styled.div`
   
 `
 export const EmployerItem = styled.div`
+  cursor: pointer;
   margin-bottom: 35px;
   &:last-child{
     margin-bottom: 0px;

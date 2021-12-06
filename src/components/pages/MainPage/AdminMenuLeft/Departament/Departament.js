@@ -11,7 +11,12 @@ import {
 import {Card, CardIco, CardNumber} from "../../AdminInterfaces/HistoryTransaction/HistoryTransactionStyle";
 import cardVisaImg from "../../AdminInterfaces/HistoryTransaction/assets/image 1.png";
 
+
+
 const Departament = () => {
+
+
+
     return (
         <Container>
             <DepartamentBlock>

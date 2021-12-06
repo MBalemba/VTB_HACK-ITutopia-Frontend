@@ -13,6 +13,18 @@ export const HeaderCheck = styled.div`
   color: #000000;
   margin-bottom: 20px;
 `
+export const SelectWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+`
+
+export const ItemSelect = styled.div`
+  margin-top: 10px;
+  
+  margin-right: 10px;
+`
+
+
 
 export const AdminCardInfo = styled.div`
   background: linear-gradient(97.26deg, rgba(0, 102, 255, 0.05) 0%, rgba(0, 133, 255, 0.05) 100%);

@@ -1,15 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
 import {ADMIN} from "../../../../utils/path";
 import CurrentCheckComponent from "./CurrentCheckComponent/CurrentCheckComponent";
 import {Container, DepartamentBlock, EmployeesCardsMenu, Input, Search, SearchLogo} from "./AdminMenuLeftStyle";
-import {HeaderCheck} from "./CurrentCheckComponent/CurrentCheckComponentStyle";
+import {HeaderCheck, ItemSelect, SelectWrapper} from "./CurrentCheckComponent/CurrentCheckComponentStyle";
 import Departament from "./Departament/Departament";
-
+import Select from 'react-select';
+import './AdminMenuLeftSelect.css'
 
 let activeStyle = {
     display: "none",
 };
+
+
+const customStyles = {
+    option: {
+        borderRadius: '10px'
+    }
+}
 
 function SearchC() {
     return (
@@ -25,7 +33,15 @@ function SearchC() {
     );
 }
 
+
+const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+];
+
 const AdminMenuLeft = () => {
+    const [selectedOption, setSelectedOption] = useState(null);
     return (
         <Container>
             <CurrentCheckComponent />
@@ -38,6 +54,43 @@ const AdminMenuLeft = () => {
                 </HeaderCheck>
 
                 <SearchC/>
+               <SelectWrapper>
+
+                   <ItemSelect>
+                       <Select
+                           className={'ads'}
+                           classNamePrefix="menu_admin"
+                           placeholder = 'Отдел'
+                           defaultValue={selectedOption}
+                           onChange={setSelectedOption}
+                           options={options}
+                       />
+                   </ItemSelect>
+
+                   <ItemSelect>
+                       <Select
+                           сlassName = 'select'
+                           placeholder = 'Категория'
+                           defaultValue={selectedOption}
+                           onChange={setSelectedOption}
+                           options={options}
+                       />
+                   </ItemSelect>
+
+                   <ItemSelect>
+                       <Select
+                           сlassName = 'select'
+                           placeholder = 'Статус'
+                           defaultValue={selectedOption}
+                           onChange={setSelectedOption}
+                           options={options}
+                       />
+                   </ItemSelect>
+
+
+
+               </SelectWrapper>
+
             </EmployeesCardsMenu>
 
             <DepartamentBlock>
