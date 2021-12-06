@@ -143,7 +143,7 @@ class ApexChat extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot){
-
+/*
         if(prevProps.dateData.length !== this.props.dateData.length){
             const arr = this.props.dateData.map((el,index)=>[index+1 , el.sum])
 
@@ -155,7 +155,7 @@ class ApexChat extends React.Component {
                     store: [...this.props.dateData]
                 }]
             })
-        }
+        }*/
     }
 
 

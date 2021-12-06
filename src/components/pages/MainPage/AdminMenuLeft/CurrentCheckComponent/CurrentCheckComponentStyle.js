@@ -20,9 +20,42 @@ export const SelectWrapper = styled.div`
 
 export const ItemSelect = styled.div`
   margin-top: 10px;
-  
+  min-width: 100px;
+  max-width: 200px;
   margin-right: 10px;
 `
+
+export const AddWrapper = styled.div`
+  margin-top: 40px;
+  margin-bottom: 40px;
+`
+
+export const ItemAdd = styled.div`
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 25px;
+`
+
+export const IcoAdd = styled.div`
+  
+`
+
+export const AddText = styled.div`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  /* identical to box height */
+  color: rgba(0, 26, 104, 0.6);
+  margin-left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+
 
 
 

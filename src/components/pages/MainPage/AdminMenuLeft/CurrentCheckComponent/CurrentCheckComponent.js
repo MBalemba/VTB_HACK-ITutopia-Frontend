@@ -12,12 +12,10 @@ import {
 } from "./CurrentCheckComponentStyle";
 import {ADMIN} from "../../../../../utils/path";
 
-const CurrentCheckComponent = () => {
+const CurrentCheckComponent = ({isLink = true}) => {
     return (
         <CurrentCheck>
-            <HeaderCheck>
-                Текущий счёт
-            </HeaderCheck>
+
 
             <AdminCardInfo>
 
@@ -67,9 +65,9 @@ const CurrentCheckComponent = () => {
                     </Left>
 
 
-                    <Alink to={ADMIN}>
+                    {isLink && <Alink to={ADMIN}>
                         Просмотр
-                    </Alink>
+                    </Alink>}
                 </CardInfoBlock>
             </AdminCardInfo>
 

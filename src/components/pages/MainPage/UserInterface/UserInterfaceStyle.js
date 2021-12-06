@@ -9,7 +9,7 @@ export const ProfileInfo = styled.div`
 `
 
 export const Account = styled.div`
-  min-width: 281px;
+  width: 281px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -17,7 +17,7 @@ export const Account = styled.div`
 `
 
 export const Picture = styled.div`
-  background-url: ${() => `url(${''})`};
+  background-url: ${({src}) => `url(${src})`};
   background-position: center center;
   background-repeat: no-repeat;
   border: 3px solid rgba(4, 33, 96, 0.1);
@@ -31,16 +31,16 @@ export const Textblock = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-  
+
 `
 
 export const Fio = styled.span`
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
   color: #001A68;
+  margin-bottom: 5px;
 `
 
 export const Departament = styled.p`
@@ -48,7 +48,10 @@ export const Departament = styled.p`
   font-weight: 600;
   font-size: 14px;
   line-height: 17px;
+  /* identical to box height */
+
   text-transform: uppercase;
+
   color: rgba(0, 26, 104, 0.4);
 `
 
@@ -59,7 +62,7 @@ export const Balance = styled.div`
 `
 
 export const Amount = styled.div`
-    
+
 `
 
 

@@ -14,27 +14,33 @@ import {
 } from "./UserInterfaceStyle";
 import SliderCards from "./Cards/SliderCards/SliderCards";
 import CardsBlock from "./Cards/Cards";
+import PieChart from "../AdminInterfaces/PieChart/PieChart";
+import HistoryTransaction from "../AdminInterfaces/HistoryTransaction/HistoryTransaction";
 
+
+export const AccountComponent = ({fio = '', departamentName = '', src= ''})=>{
+    return  <Account>
+        <Picture src={src}>
+
+        </Picture>
+
+        <Textblock>
+            <Fio>
+                Иванов Иван Иванович
+            </Fio>
+            <Departament>
+                Отдел маркетинга
+            </Departament>
+        </Textblock>
+
+    </Account>
+}
 
 const UserInterface = () => {
     return (
         <Container>
             <ProfileInfo>
-                <Account>
-                    <Picture>
-
-                    </Picture>
-
-                    <Textblock>
-                        <Fio>
-                            Иванов Иван Иванович
-                        </Fio>
-                        <Departament>
-                            Отдел маркетинга
-                        </Departament>
-                    </Textblock>
-
-                </Account>
+                <AccountComponent fio = 'Иванов Иван Иванович' departamentName = 'Отдел маркетинга' src= '' />
 
 
                 <Balance>
@@ -47,14 +53,9 @@ const UserInterface = () => {
 
             <CardsBlock/>
 
-            {/*
-            <ChartBlock>
+            <PieChart />
 
-            </ChartBlock>
-
-            <HistoryOperationBlock>
-
-            </HistoryOperationBlock>*/}
+            <HistoryTransaction />
 
         </Container>
     );

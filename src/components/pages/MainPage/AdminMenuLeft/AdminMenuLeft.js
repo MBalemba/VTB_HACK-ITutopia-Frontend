@@ -3,7 +3,14 @@ import {NavLink} from "react-router-dom";
 import {ADMIN} from "../../../../utils/path";
 import CurrentCheckComponent from "./CurrentCheckComponent/CurrentCheckComponent";
 import {Container, DepartamentBlock, EmployeesCardsMenu, Input, Search, SearchLogo} from "./AdminMenuLeftStyle";
-import {HeaderCheck, ItemSelect, SelectWrapper} from "./CurrentCheckComponent/CurrentCheckComponentStyle";
+import {
+    AddText,
+    AddWrapper,
+    HeaderCheck, IcoAdd,
+    ItemAdd,
+    ItemSelect,
+    SelectWrapper
+} from "./CurrentCheckComponent/CurrentCheckComponentStyle";
 import Departament from "./Departament/Departament";
 import Select from 'react-select';
 import './AdminMenuLeftSelect.css'
@@ -44,6 +51,9 @@ const AdminMenuLeft = () => {
     const [selectedOption, setSelectedOption] = useState(null);
     return (
         <Container>
+            <HeaderCheck>
+                Текущий счёт
+            </HeaderCheck>
             <CurrentCheckComponent />
 
 
@@ -69,7 +79,8 @@ const AdminMenuLeft = () => {
 
                    <ItemSelect>
                        <Select
-                           сlassName = 'select'
+                           className={'ads'}
+                           classNamePrefix="menu_admin"
                            placeholder = 'Категория'
                            defaultValue={selectedOption}
                            onChange={setSelectedOption}
@@ -79,17 +90,66 @@ const AdminMenuLeft = () => {
 
                    <ItemSelect>
                        <Select
-                           сlassName = 'select'
+                           className={'ads'}
+                           classNamePrefix="menu_admin"
                            placeholder = 'Статус'
                            defaultValue={selectedOption}
                            onChange={setSelectedOption}
                            options={options}
                        />
                    </ItemSelect>
-
-
-
                </SelectWrapper>
+
+                <AddWrapper>
+                    <ItemAdd>
+                        <IcoAdd>
+                            <svg width="55" height="43" viewBox="0 0 55 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="7" y="16" width="42" height="27" rx="7" fill="#001A68" fill-opacity="0.3"/>
+                                <rect width="55" height="36" rx="7" fill="#001A68"/>
+                                <path d="M28.0001 9.75C25.5571 9.75 23.6584 11.8767 23.9342 14.304L24.1744 16.4178C24.3955 18.3635 26.0418 19.8333 28.0001 19.8333C29.9583 19.8333 31.6046 18.3635 31.8257 16.4178L32.0659 14.304C32.3417 11.8767 30.443 9.75 28.0001 9.75Z" fill="white"/>
+                                <path d="M27.8945 21.7051C28.0128 21.2481 27.6968 20.75 27.2246 20.75H26.3009C23.723 20.75 21.4911 22.5404 20.9319 25.0569L20.8402 25.4691C20.7512 25.8699 21.0561 26.25 21.4666 26.25H27.5104C28.0406 26.25 28.3628 25.6239 28.1537 25.1366C27.8778 24.4938 27.7251 23.7856 27.7251 23.0417C27.7251 22.5801 27.7839 22.1322 27.8945 21.7051Z" fill="white"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M37.1667 23.0416C37.1667 20.7635 35.3199 18.9166 33.0417 18.9166C30.7635 18.9166 28.9167 20.7635 28.9167 23.0416C28.9167 25.3198 30.7635 27.1666 33.0417 27.1666C35.3199 27.1666 37.1667 25.3198 37.1667 23.0416ZM30.6061 23.0416C30.6061 22.7126 30.8729 22.4458 31.202 22.4458L32.4459 22.4458V21.326C32.4459 20.9969 32.7126 20.7302 33.0417 20.7302C33.3708 20.7302 33.6376 20.9969 33.6376 21.326L33.6376 22.4458H34.8815C35.2106 22.4458 35.4773 22.7126 35.4773 23.0416C35.4773 23.3707 35.2106 23.6375 34.8815 23.6375H33.6376L33.6376 24.7573C33.6376 25.0864 33.3708 25.3531 33.0417 25.3531C32.7126 25.3531 32.4459 25.0864 32.4459 24.7573V23.6375L31.202 23.6375C30.8729 23.6375 30.6061 23.3707 30.6061 23.0416Z" fill="white"/>
+                            </svg>
+                        </IcoAdd>
+
+                        <AddText>
+                            Добавить сотрудника
+                        </AddText>
+                    </ItemAdd>
+
+                    <ItemAdd>
+                        <IcoAdd>
+                            <svg width="55" height="43" viewBox="0 0 55 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="7" y="16" width="42" height="27" rx="7" fill="#001A68" fill-opacity="0.3"/>
+                                <rect width="55" height="36" rx="7" fill="#001A68"/>
+                                <path d="M28.0001 9.75C25.5571 9.75 23.6584 11.8767 23.9342 14.304L24.1744 16.4178C24.3955 18.3635 26.0418 19.8333 28.0001 19.8333C29.9583 19.8333 31.6046 18.3635 31.8257 16.4178L32.0659 14.304C32.3417 11.8767 30.443 9.75 28.0001 9.75Z" fill="white"/>
+                                <path d="M27.8945 21.7051C28.0128 21.2481 27.6968 20.75 27.2246 20.75H26.3009C23.723 20.75 21.4911 22.5404 20.9319 25.0569L20.8402 25.4691C20.7512 25.8699 21.0561 26.25 21.4666 26.25H27.5104C28.0406 26.25 28.3628 25.6239 28.1537 25.1366C27.8778 24.4938 27.7251 23.7856 27.7251 23.0417C27.7251 22.5801 27.7839 22.1322 27.8945 21.7051Z" fill="white"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M37.1667 23.0416C37.1667 20.7635 35.3199 18.9166 33.0417 18.9166C30.7635 18.9166 28.9167 20.7635 28.9167 23.0416C28.9167 25.3198 30.7635 27.1666 33.0417 27.1666C35.3199 27.1666 37.1667 25.3198 37.1667 23.0416ZM30.6061 23.0416C30.6061 22.7126 30.8729 22.4458 31.202 22.4458L32.4459 22.4458V21.326C32.4459 20.9969 32.7126 20.7302 33.0417 20.7302C33.3708 20.7302 33.6376 20.9969 33.6376 21.326L33.6376 22.4458H34.8815C35.2106 22.4458 35.4773 22.7126 35.4773 23.0416C35.4773 23.3707 35.2106 23.6375 34.8815 23.6375H33.6376L33.6376 24.7573C33.6376 25.0864 33.3708 25.3531 33.0417 25.3531C32.7126 25.3531 32.4459 25.0864 32.4459 24.7573V23.6375L31.202 23.6375C30.8729 23.6375 30.6061 23.3707 30.6061 23.0416Z" fill="white"/>
+                            </svg>
+                        </IcoAdd>
+
+                        <AddText>
+                            Добавить отдел
+                        </AddText>
+                    </ItemAdd>
+
+                    <ItemAdd>
+                        <IcoAdd>
+                            <svg width="55" height="43" viewBox="0 0 55 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="7" y="16" width="42" height="27" rx="7" fill="#001A68" fill-opacity="0.3"/>
+                                <rect width="55" height="36" rx="7" fill="#001A68"/>
+                                <path d="M28.0001 9.75C25.5571 9.75 23.6584 11.8767 23.9342 14.304L24.1744 16.4178C24.3955 18.3635 26.0418 19.8333 28.0001 19.8333C29.9583 19.8333 31.6046 18.3635 31.8257 16.4178L32.0659 14.304C32.3417 11.8767 30.443 9.75 28.0001 9.75Z" fill="white"/>
+                                <path d="M27.8945 21.7051C28.0128 21.2481 27.6968 20.75 27.2246 20.75H26.3009C23.723 20.75 21.4911 22.5404 20.9319 25.0569L20.8402 25.4691C20.7512 25.8699 21.0561 26.25 21.4666 26.25H27.5104C28.0406 26.25 28.3628 25.6239 28.1537 25.1366C27.8778 24.4938 27.7251 23.7856 27.7251 23.0417C27.7251 22.5801 27.7839 22.1322 27.8945 21.7051Z" fill="white"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M37.1667 23.0416C37.1667 20.7635 35.3199 18.9166 33.0417 18.9166C30.7635 18.9166 28.9167 20.7635 28.9167 23.0416C28.9167 25.3198 30.7635 27.1666 33.0417 27.1666C35.3199 27.1666 37.1667 25.3198 37.1667 23.0416ZM30.6061 23.0416C30.6061 22.7126 30.8729 22.4458 31.202 22.4458L32.4459 22.4458V21.326C32.4459 20.9969 32.7126 20.7302 33.0417 20.7302C33.3708 20.7302 33.6376 20.9969 33.6376 21.326L33.6376 22.4458H34.8815C35.2106 22.4458 35.4773 22.7126 35.4773 23.0416C35.4773 23.3707 35.2106 23.6375 34.8815 23.6375H33.6376L33.6376 24.7573C33.6376 25.0864 33.3708 25.3531 33.0417 25.3531C32.7126 25.3531 32.4459 25.0864 32.4459 24.7573V23.6375L31.202 23.6375C30.8729 23.6375 30.6061 23.3707 30.6061 23.0416Z" fill="white"/>
+                            </svg>
+                        </IcoAdd>
+
+                        <AddText>
+                            Выпустить карту
+                        </AddText>
+                    </ItemAdd>
+
+                </AddWrapper>
 
             </EmployeesCardsMenu>
 
