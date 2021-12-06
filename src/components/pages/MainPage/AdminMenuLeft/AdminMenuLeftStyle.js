@@ -9,108 +9,67 @@ export const Container = styled.div`
   border-radius: 15px;
   padding: 50px;
 `
+export const EmployeesCardsMenu = styled.div`
 
-export const CurrentCheck = styled.div`
- 
 `
-
-export const HeaderCheck = styled.div`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 26px;
-  color: #000000;
-  margin-bottom: 20px;
-`
-
-export const AdminCardInfo = styled.div`
-  background: linear-gradient(97.26deg, rgba(0, 102, 255, 0.05) 0%, rgba(0, 133, 255, 0.05) 100%);
-  border-radius: 15px;
-  padding: 25px 30px;
+export const Search = styled.label`
+  margin-top: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
-`
-
-
-export const CardInfoBlock = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 25px;
-  align-items: flex-end;
-  &:last-child{
-    margin-bottom: 0px;
-  }
-`
-
-export const Left = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-export const P = styled.div`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 17px;
-  text-transform: uppercase;
-  color: rgba(0, 26, 104, 0.35);
-  margin-bottom: 5px;
-`
-
-export const Number = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
-export const NumberItem = styled.p`
+  align-items: center;
+  padding: 16px 16px 16px 20px;
+  width: 100%;
+  height: 53px;
+  border: 1px solid rgba(0, 26, 104, 0.1);
+  box-sizing: border-box;
+  border-radius: 10px;
   
-  margin-right: 5px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 21px;
-  color: rgba(0, 26, 104, 0.75);
-`
-
-export const Right = styled.div`
-  display: flex;
-  flex-direction: column;
-  
-`
-
-export const Alink = styled(NavLink)`
-  text-decoration: none;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 21px;
-  color: rgba(0, 26, 104, 0.75);
   
   &:hover{
-    color: #8000FF;
+    border: 1px solid #8000FF;
+    -webkit-box-shadow: 0px 4px 18px 0px rgba(128, 0, 255, 0.2);
+    -moz-box-shadow: 0px 4px 18px 0px rgba(128, 0, 255, 0.2);
+    box-shadow: 0px 4px 18px 0px rgba(128, 0, 255, 0.2);
+  }
+  &:focus{
+    border: 1px solid #8000FF;
+    -webkit-box-shadow: 0px 4px 18px 0px rgba(128, 0, 255, 0.2);
+    -moz-box-shadow: 0px 4px 18px 0px rgba(128, 0, 255, 0.2);
+    box-shadow: 0px 4px 18px 0px rgba(128, 0, 255, 0.2);
   }
   
-  &.active{
-    display: none;
-  }
 `
-
-export const Currency = styled.div`
+export const Input = styled.input`
+  width: 90%;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
-  color: rgba(0, 26, 104, 0.75);
+  outline: none;
+  border: none;
+  &::placeholder {
+    color: rgba(0, 26, 104, 0.15);
+  }
+  &:focus{
+    color: black;
+  }
 `
 
-export const MoneyAdmin = styled.div`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  /* identical to box height */
-  color: #001A68;
+
+export const SearchLogo = styled.label`
+
 `
+
+export const DepartamentBlock = styled.div`
+    margin-top: 40px;
+    overflow-y: scroll;
+    max-height: 500px;
+`
+
+
+
+
 
 
 
