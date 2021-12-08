@@ -1,5 +1,5 @@
-import React from "react";
-import {Route, Routes} from "react-router-dom";
+import React, {useContext, useEffect} from "react";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import {ADMIN, AUTH_ROUTE, FULL, FULLPAGEADMIN, MAIN_PAGE, routes, USER} from "./utils/path";
 import AuthPage from "./components/pages/AuthPage/AuthPage";
 import MainPage from "./components/pages/MainPage/MainPage";
@@ -8,33 +8,94 @@ import AdminInterfaces from "./components/pages/MainPage/AdminInterfaces/AdminIn
 import UserInterface from "./components/pages/MainPage/UserInterface/UserInterface";
 import AdminFullPage from "./components/pages/FullPage/Admin/AdminFullPage";
 import FullPage from "./components/pages/FullPage/FullPage";
+import {observer} from "mobx-react-lite";
+import {Context} from "./index";
 
-function App() {
+
+function Redirect(isAuth) {
+
+    let navigate = useNavigate();
+
+    useEffect(()=>{
+
+        if(isAuth){
+            navigate(AUTH_ROUTE, { replace: true })
+        } else {
+            navigate(MAIN_PAGE+'/'+ADMIN, { replace: true })
+        }
+
+    }, [])
+
+    return (
+        <>
+
+        </>
+    )
+}
+
+
+const App = observer(() => {
+
+    const {login} = useContext(Context)
+    let navigate = useNavigate();
+
+    useEffect(() => {
+
+        login.doRefresh().then(() => {
+            debugger
+            setTimeout(() => {
+                login.setFirstLoad(false)
+            }, 500)
+                navigate('../'+MAIN_PAGE+'/'+ADMIN, { replace: true })
+
+        }).catch(() => {
+            debugger
+            setTimeout(() => {
+                login.setFirstLoad(false)
+            }, 500)
+            navigate('../'+AUTH_ROUTE, { replace: true })
+        })
+    }, [])
+
+
+    if( login.FirstLoad){
+        return <div>
+            загрузка
+        </div>
+    }
+
     return (
         <div className="App">
-            <Routes>
 
-                <Route path={AUTH_ROUTE} element={< AuthPage/>}/>
-                <Route path={MAIN_PAGE} element={< MainPage/>}>
 
-                    <Route path={ADMIN} element={<AdminInterfaces/>}>
+
+                <Routes>
+
+                    <Route path={'/'}>
+                        <Route path={AUTH_ROUTE} element={< AuthPage/>}/>
+                        <Route path={MAIN_PAGE} element={< MainPage/>}>
+                            <Route path={ADMIN} element={<AdminInterfaces/>}>
+                            </Route>
+
+                            <Route path={USER} element={< UserInterface/>}>
+
+                            </Route>
+                        </Route>
+
+                        <Route path={FULL} element={<FullPage/>} >
+                            <Route path={FULLPAGEADMIN} element={<AdminFullPage/>} >
+
+                            </Route>
+                        </Route>
+
+                        <Route path="*" element={<Redirect isAuth={login.IsAuth}/>} />
                     </Route>
 
-                    <Route path={USER} element={< UserInterface/>}>
-
-                    </Route>
-                </Route>
-
-                <Route path={FULL} element={<FullPage/>} >
-                    <Route path={FULLPAGEADMIN} element={<AdminFullPage/>} >
-
-                    </Route>
-                </Route>
+                </Routes>
 
 
-            </Routes>
         </div>
     );
-}
+})
 
 export default App;

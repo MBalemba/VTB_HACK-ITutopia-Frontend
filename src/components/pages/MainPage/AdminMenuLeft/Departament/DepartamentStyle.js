@@ -58,12 +58,21 @@ export const EmployerItem = styled.div`
   }
 `
 export const Fio = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
   color: #001A68;
   margin-bottom: 20px;
+`
+export const ButtonDots = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
 `
 export const Cards = styled.div`
 

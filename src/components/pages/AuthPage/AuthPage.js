@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import MyButton from "../../common/Buttons/MyButton";
 import illustration from './../../../assets/img/Illustration.png'
 import logo from './../../../assets/img/logoAuthField.svg'
@@ -12,9 +12,31 @@ import {
     InputWrapper,
     Logo
 } from "./AuthPageStyles";
+import {Context} from "../../../index";
+import {observer} from "mobx-react-lite";
+import {useNavigate} from "react-router-dom";
+import {ADMIN, AUTH_ROUTE, MAIN_PAGE} from "../../../utils/path";
 
-const AuthPage = () => {
+const AuthPage = observer(() => {
 
+    let navigate = useNavigate();
+    const [login, setLogin] = useState();
+    const [password, setPassword] = useState();
+    const {login: loginStore} = useContext(Context)
+
+    useEffect(()=>{
+        if(loginStore.IsAuth){
+            navigate('../'+MAIN_PAGE+'/'+ADMIN, { replace: true })
+        }
+    }, [])
+
+
+    function doRequest() {
+        debugger
+        loginStore.doAutorizate(login, password).then(()=>{
+
+        })
+    }
 
 
     return (
@@ -31,15 +53,15 @@ const AuthPage = () => {
 
 
                 <InputWrapper>
-                    <Input type={'text'} placeholder={'Логин'} />
+                    <Input value={login} onChange={(e)=>setLogin(e.target.value)} type={'text'} placeholder={'Логин'} />
 
-                    <Input type={'password'} placeholder={'Пароль'} />
+                    <Input value={password} onChange={(e)=>setPassword(e.target.value)} type={'password'} placeholder={'Пароль'} />
                 </InputWrapper>
 
 
 
                 <ButtonWrapper>
-                    <MyButton>
+                    <MyButton clickHandler={doRequest}>
                         Войти
                     </MyButton>
                 </ButtonWrapper>
@@ -53,6 +75,6 @@ const AuthPage = () => {
 
         </HolstAuth>
     );
-};
+});
 
 export default AuthPage;

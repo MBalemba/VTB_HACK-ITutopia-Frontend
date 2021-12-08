@@ -17,7 +17,7 @@ const Container = styled.div`
   height: ${({height})=>height};
 `
 
-const MyButton = ({width='100%', height='100%',bgc='#0057FF' , color='white', children, clickHandler=()=>{}}) => {
+const MyButton = ({width='100%', click = () =>{}, height='100%',bgc='#0057FF' , color='white', children, clickHandler=()=>{}}) => {
     return (
         <Container width={width} height={height}>
             <Button bgc={bgc} color={color} onClick={()=>clickHandler()}>

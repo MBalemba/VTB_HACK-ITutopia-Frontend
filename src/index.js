@@ -1,14 +1,23 @@
-import React from 'react';
+import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
+import LoginStore from "./store/LoginStore";
 
+
+export const Context = createContext(null)
+export const login = new LoginStore()
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
-            <App/>
+
+            <Context.Provider value = {{
+                login: login,
+            }}>
+                <App/>
+            </Context.Provider>
         </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')
