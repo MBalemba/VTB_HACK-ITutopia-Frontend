@@ -17,7 +17,7 @@ export default class LoginStore {
     doAutorizate(name, password) {
         return login(name, password)
             .then((response) => {
-                debugger
+
                 this._isAuthUser = true
 
                 localStorage.setItem('token', response.headers.jwtoken)

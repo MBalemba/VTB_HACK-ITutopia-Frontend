@@ -77,6 +77,7 @@ const AdminMenuLeft = () => {
             <HeaderCheck>
                 Текущий счёт
             </HeaderCheck>
+
             <CurrentCheckComponent/>
 
 

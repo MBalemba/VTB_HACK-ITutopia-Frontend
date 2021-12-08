@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {
     AdminCardInfo, Alink,
     CardInfoBlock,
@@ -11,8 +11,21 @@ import {
     Right
 } from "./CurrentCheckComponentStyle";
 import {ADMIN} from "../../../../../utils/path";
+import {observer} from "mobx-react-lite";
+import {Context} from "../../../../../index";
 
-const CurrentCheckComponent = ({isLink = true}) => {
+const CurrentCheckComponent = observer(({isLink = true}) => {
+
+    const {admin} = useContext(Context)
+
+    useEffect(()=>{
+        admin.getCurrentCheck().then(()=>{
+
+        }).catch(()=>{
+
+        })
+    }, [])
+
     return (
         <CurrentCheck>
 
@@ -26,18 +39,11 @@ const CurrentCheckComponent = ({isLink = true}) => {
                         </P>
 
                         <Number>
-                            <NumberItem>
-                                4241
-                            </NumberItem>
-                            <NumberItem>
-                                0666
-                            </NumberItem>
-                            <NumberItem>
-                                1337
-                            </NumberItem>
-                            <NumberItem>
-                                7640
-                            </NumberItem>
+                            {admin.currentCheck.account_number.map((el,index)=>
+                                <NumberItem key={index}>
+                                    {el}
+                                </NumberItem>
+                            )}
                         </Number>
                     </Left>
 
@@ -48,7 +54,7 @@ const CurrentCheckComponent = ({isLink = true}) => {
                         </P>
 
                         <Currency>
-                            RUB
+                            {admin.currentCheck.currency}
                         </Currency>
                     </Right>
                 </CardInfoBlock>
@@ -60,7 +66,7 @@ const CurrentCheckComponent = ({isLink = true}) => {
                         </P>
 
                         <MoneyAdmin>
-                            {(2821650).toLocaleString() + ' ₽'}
+                            {admin.currentCheck.current_account.toLocaleString() + ' ₽'}
                         </MoneyAdmin>
                     </Left>
 
@@ -73,6 +79,6 @@ const CurrentCheckComponent = ({isLink = true}) => {
 
         </CurrentCheck>
     );
-};
+});
 
 export default CurrentCheckComponent;

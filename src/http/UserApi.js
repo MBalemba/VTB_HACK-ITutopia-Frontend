@@ -14,6 +14,11 @@ export const refresh = async () => {
     return response
 }
 
+export const currentAdminCheck = async () => {
+    const response = await $authHost.get('start/currentAccount')
+    return response
+}
+
 
 
 
