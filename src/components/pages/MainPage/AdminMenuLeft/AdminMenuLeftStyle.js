@@ -13,6 +13,7 @@ export const EmployeesCardsMenu = styled.div`
 
 `
 export const Search = styled.label`
+  cursor: text;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -20,23 +21,11 @@ export const Search = styled.label`
   padding: 16px 16px 16px 20px;
   width: 100%;
   height: 53px;
-  border: 1px solid rgba(0, 26, 104, 0.1);
+  transition: 0.5s;
+  border: ${({focus})=> focus ?'1px solid rgba(0, 26, 104, 0.9)' :'1px solid rgba(0, 26, 104, 0.1)'}; 
   box-sizing: border-box;
   border-radius: 10px;
-  
-  
-  &:hover{
-    border: 1px solid #8000FF;
-    -webkit-box-shadow: 0px 4px 18px 0px rgba(128, 0, 255, 0.2);
-    -moz-box-shadow: 0px 4px 18px 0px rgba(128, 0, 255, 0.2);
-    box-shadow: 0px 4px 18px 0px rgba(128, 0, 255, 0.2);
-  }
-  &:focus{
-    border: 1px solid #8000FF;
-    -webkit-box-shadow: 0px 4px 18px 0px rgba(128, 0, 255, 0.2);
-    -moz-box-shadow: 0px 4px 18px 0px rgba(128, 0, 255, 0.2);
-    box-shadow: 0px 4px 18px 0px rgba(128, 0, 255, 0.2);
-  }
+
   
 `
 export const Input = styled.input`

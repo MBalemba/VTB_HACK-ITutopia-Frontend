@@ -90,7 +90,7 @@ const AdminFullPage = () => {
                         <DatePicker
                             selected={startDate}
                             maxDate={endDate}
-                            onChange={(date) => setStartDate(date)}
+                            onChange={(date) => {console.log(date.getFullYear()+'-'+date.getMonth() +'-'+(Math.floor(date.getDate()/10)<1?'0'+ date.getDate(): date.getDate())) ;setStartDate(date)}}
                             customInput={<CustomDatePicker myText={'Период от'} />}
                         />
 

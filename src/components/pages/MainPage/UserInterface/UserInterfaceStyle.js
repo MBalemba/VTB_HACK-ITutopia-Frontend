@@ -9,10 +9,10 @@ export const ProfileInfo = styled.div`
 `
 
 export const Account = styled.div`
-  width: 281px;
+  width: auto;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 `
 
@@ -25,6 +25,7 @@ export const Picture = styled.div`
   height: 70px;
   background-size: cover;
   border-radius: 50%;
+  margin-right: 20px;
 `
 
 export const Textblock = styled.div`

@@ -27,10 +27,10 @@ export const AccountComponent = ({fio = '', departamentName = '', src= ''})=>{
 
         <Textblock>
             <Fio>
-                Иванов Иван Иванович
+                {fio}
             </Fio>
             <Departament>
-                Отдел маркетинга
+                {departamentName}
             </Departament>
         </Textblock>
 

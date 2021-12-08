@@ -6,18 +6,24 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #0057FF;
+  background: ${({bgc})=>bgc};
   border-radius: 5px;
   width: 100%;
   height: 100%;
-  color: white;
+  color: ${({color})=>color};
+`
+const Container = styled.div`
+  width: ${({width})=>width};
+  height: ${({height})=>height};
 `
 
-const MyButton = (props) => {
+const MyButton = ({width='100%', height='100%',bgc='#0057FF' , color='white', children, clickHandler=()=>{}}) => {
     return (
-            <Button {...props}>
-                {props.children}
+        <Container width={width} height={height}>
+            <Button bgc={bgc} color={color} onClick={()=>clickHandler()}>
+                {children}
             </Button>
+        </Container>
     );
 };
 
