@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from "react";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Navigate, Route, Routes, useNavigate} from "react-router-dom";
 import {ADMIN, AUTH_ROUTE, FULL, FULLPAGEADMIN, MAIN_PAGE, routes, USER} from "./utils/path";
 import AuthPage from "./components/pages/AuthPage/AuthPage";
 import MainPage from "./components/pages/MainPage/MainPage";
@@ -12,23 +12,11 @@ import {observer} from "mobx-react-lite";
 import {Context} from "./index";
 
 
-function Redirect(isAuth) {
-
-    let navigate = useNavigate();
-
-    useEffect(()=>{
-
-        if(isAuth){
-            navigate(AUTH_ROUTE, { replace: true })
-        } else {
-            navigate(MAIN_PAGE+'/'+ADMIN, { replace: true })
-        }
-
-    }, [])
+export function Redirect(to) {
 
     return (
         <>
-
+            return <Navigate to={to} />
         </>
     )
 }
@@ -46,7 +34,7 @@ const App = observer(() => {
             setTimeout(() => {
                 login.setFirstLoad(false)
             }, 500)
-                navigate('../'+MAIN_PAGE+'/'+ADMIN, { replace: true })
+
 
         }).catch(() => {
             debugger
@@ -73,22 +61,29 @@ const App = observer(() => {
 
                     <Route path={'/'}>
                         <Route path={AUTH_ROUTE} element={< AuthPage/>}/>
+
                         <Route path={MAIN_PAGE} element={< MainPage/>}>
                             <Route path={ADMIN} element={<AdminInterfaces/>}>
                             </Route>
 
                             <Route path={USER} element={< UserInterface/>}>
-
+                                <Route path={':id'} element={< UserInterface/>}></Route>
                             </Route>
+
+                            <Route index element={<Navigate to={ADMIN} />} />
+                            <Route path="*" element={<Navigate to={ADMIN} />} />
                         </Route>
 
                         <Route path={FULL} element={<FullPage/>} >
                             <Route path={FULLPAGEADMIN} element={<AdminFullPage/>} >
 
                             </Route>
+
+                            <Route path="*" element={<Navigate to={FULLPAGEADMIN} />} />
                         </Route>
 
-                        <Route path="*" element={<Redirect isAuth={login.IsAuth}/>} />
+                        <Route index element={<Navigate to={AUTH_ROUTE} />} />
+                        <Route path="*" element={<Navigate to={AUTH_ROUTE} />} />
                     </Route>
 
                 </Routes>

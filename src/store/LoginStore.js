@@ -5,7 +5,7 @@ import {login, refresh} from "../http/UserApi";
 export default class LoginStore {
 
     constructor() {
-        this._isAuthUser = true
+        this._isAuthUser = false
         this._firstLoad = true
         makeAutoObservable(this)
     }

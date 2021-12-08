@@ -16,6 +16,8 @@ import {Context} from "../../../index";
 import {observer} from "mobx-react-lite";
 import {useNavigate} from "react-router-dom";
 import {ADMIN, AUTH_ROUTE, MAIN_PAGE} from "../../../utils/path";
+import {Redirect} from "../../../App";
+import { Navigate } from "react-router-dom";
 
 const AuthPage = observer(() => {
 
@@ -23,12 +25,6 @@ const AuthPage = observer(() => {
     const [login, setLogin] = useState();
     const [password, setPassword] = useState();
     const {login: loginStore} = useContext(Context)
-
-    useEffect(()=>{
-        if(loginStore.IsAuth){
-            navigate('../'+MAIN_PAGE+'/'+ADMIN, { replace: true })
-        }
-    }, [])
 
 
     function doRequest() {
@@ -39,8 +35,14 @@ const AuthPage = observer(() => {
     }
 
 
+    if(loginStore.IsAuth){
+        return <Navigate to={('../'+MAIN_PAGE+'/'+ADMIN)} />
+    }
+
     return (
         <HolstAuth>
+
+
             <AuthForm>
 
                 <Logo>
