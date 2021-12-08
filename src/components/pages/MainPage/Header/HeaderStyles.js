@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const HeaderFullScreen = styled.div`
   position: fixed;
-  
+  z-index: 999;
   width: 100%;
   background: #002DB2;
 `
