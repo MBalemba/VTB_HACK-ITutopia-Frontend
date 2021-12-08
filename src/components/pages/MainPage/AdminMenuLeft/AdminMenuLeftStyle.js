@@ -51,7 +51,7 @@ export const SearchLogo = styled.label`
 
 export const DepartamentBlock = styled.div`
     margin-top: 40px;
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 500px;
 `
 

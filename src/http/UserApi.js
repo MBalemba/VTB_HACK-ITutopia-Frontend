@@ -19,6 +19,11 @@ export const currentAdminCheck = async () => {
     return response
 }
 
+export const departmentsWorkersCards = async () => {
+    const response = await $authHost.get('/start/getDepartmentsWorkersCards')
+    return response
+}
+
 
 
 

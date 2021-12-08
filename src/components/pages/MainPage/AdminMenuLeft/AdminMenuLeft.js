@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {NavLink} from "react-router-dom";
 import {ADMIN} from "../../../../utils/path";
 import CurrentCheckComponent from "./CurrentCheckComponent/CurrentCheckComponent";
@@ -19,6 +19,8 @@ import NewCardModal from "./NewCardModal/NewCardModal";
 import {TypeCardBlock} from "./NewCardModal/NewCardModalStyle";
 import NewEmployerModal from "./NewEmployerModal/NewEmployerModal";
 import NewDepartamentModal from "./NewDepartamentModal/NewDepartamentModal";
+import {observer} from "mobx-react-lite";
+import {Context} from "../../../../index";
 
 let activeStyle = {
     display: "none",
@@ -65,12 +67,22 @@ const options = [
     {value: 'vanilla', label: 'Vanilla'},
 ];
 
-const AdminMenuLeft = () => {
+const AdminMenuLeft = observer(() => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [modalCard, setModalCard] = useState(false)
     const [modalEmployer, setModalEmployer] = useState(false)
     const [modalDepartament, setModalDeartament] = useState(false)
+    const {admin} = useContext(Context)
 
+
+
+    useEffect(()=>{
+        admin.getAllTree().then(()=>{
+            
+        }).catch(()=>{
+
+        })
+    }, [])
 
     return (
         <Container>
@@ -198,10 +210,13 @@ const AdminMenuLeft = () => {
             </EmployeesCardsMenu>
 
             <DepartamentBlock>
+                {admin.allTree.map(el=>
+                    <Departament name={el.name} amountOfCards={el.amountOfCards} key={el.id} workers={el.workers}  />
+                )}
+
+                {/*<Departament/>
                 <Departament/>
-                <Departament/>
-                <Departament/>
-                <Departament/>
+                <Departament/>*/}
             </DepartamentBlock>
 
             <NewCardModal active={modalCard} setActive={setModalCard}/>
@@ -209,6 +224,6 @@ const AdminMenuLeft = () => {
             <NewDepartamentModal active={modalDepartament} setActive={setModalDeartament}/>
         </Container>
     );
-};
+});
 
 export default AdminMenuLeft;
