@@ -41,11 +41,12 @@ const Item = ({name, patronymic, surname, id, cards}) => {
             {cards.length!==0 &&
             <Cards>
                 {cards.map(el =>{
+                    debugger
                         let color = '#32C665';
                         switch (el.status) {
                             case 'ACTIVE':
                                 color = '#32C665';
-                            case 'TEMPORARY ':
+                            case 'TEMPORARY BLOCKING':
                                 color = '#A9A9A9';
                             case 'BLOCKING':
                                 color = '#F64E4E';
@@ -55,7 +56,7 @@ const Item = ({name, patronymic, surname, id, cards}) => {
 
                             <CardItem key={el.id}>
                                 <LeftSideCard>
-                                    <Dot color={color}>
+                                    <Dot color={el.status==='ACTIVE'? '#32C665': (el.status==='TEMPORARY BLOCKING'? '#A9A9A9' :'#F64E4E')}>
 
                                     </Dot>
 
@@ -125,7 +126,7 @@ const Item = ({name, patronymic, surname, id, cards}) => {
 
 const Departament = ({name = '', amountOfCards = '', workers = []}) => {
 
-    debugger
+
 
 
     return (

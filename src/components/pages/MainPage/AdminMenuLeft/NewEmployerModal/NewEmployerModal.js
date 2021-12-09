@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Modal from "../../../../common/Modal/Modal";
 import {MiddleContent, ModalContent, ModalFooter} from "../../../../common/Modal/ModalStyle";
 import MyButton from "../../../../common/Buttons/MyButton";
@@ -14,24 +14,37 @@ import {
 import Select from "react-select";
 import {AccountComponent} from "../../UserInterface/UserInterface";
 import {SearchC} from "../AdminMenuLeft";
+import {Context} from "../../../../../index";
+import {observer} from "mobx-react-lite";
 
 
 
 
-const departament = [
-    { value: 'Индивидуальные', label: 'не выбрано' },
-    { value: 'Отдел дизайна', label: 'Отдел дизайна' },
-    { value: 'Отдел маркетинга', label: 'Отдел маркетинга' },
-];
+
 
 
 
 const NewEmployerModal = observer(({active, setActive}) => {
+    const {admin} = useContext(Context)
+
+
+    const departament = admin.allDepartments.map(el=>({
+        value: el.id,
+        label: el.name,
+    }))
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [middleName, setMiddleName] = useState('')
-    const [depart, setDepart] = useState(departament[0]);
+    const [depart, setDepart] = useState({value: -1,
+        label: 'Индивидуальные',});
+
+
+    useEffect(()=>{
+        setDepart({
+            value: admin.allDepartments[0].id,
+            label: admin.allDepartments[0].name,})
+    }, [admin.allDepartments[0].name])
 
     const handleFirstName = (e)=>{
         setFirstName(e.target.value)
@@ -44,7 +57,40 @@ const NewEmployerModal = observer(({active, setActive}) => {
     }
 
     function addEmp() {
-        return undefined;
+
+        let data = {
+            "department_id": depart.value,
+            "name": firstName,
+            "patronymic": middleName,
+            "surname": lastName,
+        }
+
+        if(depart.label === 'Индивидуальные'){
+            data = {...data, "department_id": admin.allDepartments[0].id}
+        }
+
+
+        admin.addWorker(data)
+            .then(() => {
+
+
+                setActive(false)
+                admin.getAllTree().then(() => {
+
+                }).catch(() => {
+
+                })
+
+                admin.getAllWorkers().then(() => {
+
+                }).catch(() => {
+
+                })
+
+            })
+            .catch(() => {
+
+            })
     }
 
     return (
@@ -53,12 +99,30 @@ const NewEmployerModal = observer(({active, setActive}) => {
             <MiddleContent>
                 <Section1>
                     <EmployersSelectBlock>
-                        <AccountComponent fio={(lastName +firstName + middleName)==''?'Ф.И.О.' :(lastName + ' '+firstName + ' '+ middleName)} departamentName={depart.value} src='' />
+                        <AccountComponent fio={(lastName +firstName + middleName)==''?'Ф.И.О.' :(lastName + ' '+firstName + ' '+ middleName)} departamentName={depart.label} src='' />
                     </EmployersSelectBlock>
                 </Section1>
 
                 <Section2>
                     <TypeCardBlock>
+
+                        <TypeCardText>
+                            Выберете отдел
+                        </TypeCardText>
+                        <SelectWrapper>
+                            <Select
+                                className={'ads'}
+                                defaultValue={{
+                                    value: -1,
+                                    label: 'Индивидуальные',
+                                }}
+                                classNamePrefix="menu_admin"
+                                placeholder = 'Категория'
+                                onChange={(data)=>{setDepart(data) }}
+                                options={departament}
+                            />
+                        </SelectWrapper>
+
                          <TypeCardText>
                              Фамилия
                          </TypeCardText>
@@ -81,19 +145,7 @@ const NewEmployerModal = observer(({active, setActive}) => {
                         <InputWrapper>
                             <SearchC handleChange={handleMiddleName} value={middleName} placeholder={'Отчество'} isSearchLogo={false}/>
                         </InputWrapper>
-                        <TypeCardText>
-                            Выберете отдел
-                        </TypeCardText>
-                        <SelectWrapper>
-                            <Select
-                                className={'ads'}
-                                defaultValue={departament[0]}
-                                classNamePrefix="menu_admin"
-                                placeholder = 'Категория'
-                                onChange={(data)=>{setDepart(data) }}
-                                options={departament}
-                            />
-                        </SelectWrapper>
+
 
                     </TypeCardBlock>
                 </Section2>

@@ -31,7 +31,6 @@ const NewDepartamentModal = observer(({employers = [], active, setActive}) => {
     const handlerOnChange = (e) => {
         setNameDepartament(e.target.value);
 
-
     }
 
     function createDepartment() {
@@ -43,8 +42,15 @@ const NewDepartamentModal = observer(({employers = [], active, setActive}) => {
             .then(() => {
                 setWorkers([])
                 setActive(false)
+                setNameDepartament('')
 
                 admin.getAllTree().then(() => {
+
+                }).catch(() => {
+
+                })
+
+                admin.getAllDepartments().then(() => {
 
                 }).catch(() => {
 
@@ -70,7 +76,8 @@ const NewDepartamentModal = observer(({employers = [], active, setActive}) => {
 
 
     function deleteEmp(id) {
-        setWorkers(workers.filter(el => el.id === id))
+        debugger
+        setWorkers(workers.filter(el => !el.id === id))
     }
 
     return (
@@ -101,7 +108,7 @@ const NewDepartamentModal = observer(({employers = [], active, setActive}) => {
                             let isAdd = workers.some(it => it.id === el.id)
 
                             return (
-                                <EmployerItem>
+                                <EmployerItem onClick={() => isAdd ? deleteEmp(el.id) : addEmp(el.id)}>
                                     <LeftSide>
                                         {isAdd && <Check>
                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -117,15 +124,14 @@ const NewDepartamentModal = observer(({employers = [], active, setActive}) => {
                                         </ItemName>
                                     </LeftSide>
 
-                                    <ButtonAdd onClick={() => isAdd ? deleteEmp(el.id) : addEmp(el.id)}
-                                               color={'#0057FF'}>
+                                    <ButtonAdd color={'#0057FF'}>
                                         {isAdd ? 'Отмена' : 'Добавить'}
                                     </ButtonAdd>
                                 </EmployerItem>
                             )
                         })}
 
-                        <EmployerItem>
+                     {/*   <EmployerItem>
                             <LeftSide>
                                 <Check>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -147,11 +153,11 @@ const NewDepartamentModal = observer(({employers = [], active, setActive}) => {
                         </EmployerItem>
                         <EmployerItem>
                             <LeftSide>
-                                {/*<Check>
+                                <Check>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12ZM10.7899 15.2899C11.07 15.5699 11.5299 15.5599 11.7999 15.2699L16.2199 10.4699C16.4599 10.1999 16.4399 9.78988 16.1799 9.54988C15.9199 9.30988 15.4999 9.31988 15.2599 9.58988L11.2699 13.9299L8.86995 11.5299C8.61995 11.2799 8.19995 11.2799 7.94995 11.5299C7.69995 11.7799 7.69995 12.1999 7.94995 12.4499L10.7899 15.2899Z" fill="#32C665"/>
                                     </svg>
-                                </Check>*/}
+                                </Check>
 
                                 <ItemName>
                                     Иванов Иван Иванович
@@ -184,11 +190,11 @@ const NewDepartamentModal = observer(({employers = [], active, setActive}) => {
                         </EmployerItem>
                         <EmployerItem>
                             <LeftSide>
-                                {/*<Check>
+                                <Check>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12ZM10.7899 15.2899C11.07 15.5699 11.5299 15.5599 11.7999 15.2699L16.2199 10.4699C16.4599 10.1999 16.4399 9.78988 16.1799 9.54988C15.9199 9.30988 15.4999 9.31988 15.2599 9.58988L11.2699 13.9299L8.86995 11.5299C8.61995 11.2799 8.19995 11.2799 7.94995 11.5299C7.69995 11.7799 7.69995 12.1999 7.94995 12.4499L10.7899 15.2899Z" fill="#32C665"/>
                                     </svg>
-                                </Check>*/}
+                                </Check>
 
                                 <ItemName>
                                     Иванов Иван Иванович
@@ -218,7 +224,7 @@ const NewDepartamentModal = observer(({employers = [], active, setActive}) => {
                             <ButtonAdd color={'rgba(0, 26, 104, 0.5)'}>
                                 Отмена
                             </ButtonAdd>
-                        </EmployerItem>
+                        </EmployerItem>*/}
                     </EmployersList>
                     }
 
@@ -227,7 +233,11 @@ const NewDepartamentModal = observer(({employers = [], active, setActive}) => {
             </MiddleContent>
 
             <ModalFooter>
-                <MyButton clickHandler={() => setActive(false)} bgc={'#8E8E8E'} width={'108px'} height={'50px'}>
+                <MyButton clickHandler={() => {
+                    setWorkers([])
+                    setActive(false)
+                    setNameDepartament('')
+                }} bgc={'#8E8E8E'} width={'108px'} height={'50px'}>
                     Отмена
                 </MyButton>
 

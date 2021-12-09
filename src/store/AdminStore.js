@@ -1,5 +1,13 @@
 import {makeAutoObservable, toJS} from "mobx";
-import {addDepartment, AllDepartments, AllWorkers, currentAdminCheck, departmentsWorkersCards} from "../http/UserApi";
+import {
+    addCard,
+    addDepartment,
+    addWorker,
+    AllDepartments,
+    AllWorkers,
+    currentAdminCheck,
+    departmentsWorkersCards
+} from "../http/UserApi";
 
 export default class AdminStore {
 
@@ -37,20 +45,13 @@ export default class AdminStore {
         ]
 
         this._allWorkers = [
-            {
-                "department_id": 0,
-                "id": 0,
-                "name": "string",
-                "patronymic": "string",
-                "surname": "string"
-            }
         ]
 
         this._allDepartments = [
             {
                 "account_id": 0,
                 "id": 0,
-                "name": "string"
+                "name": ""
             }
         ]
 
@@ -140,6 +141,27 @@ export default class AdminStore {
 
     addDepartment(data) {
         return addDepartment(data)
+            .then(({data}) => {
+                debugger
+                return Promise.resolve()
+            })
+            .catch(({response}) => {
+                return Promise.reject()
+            })
+    }
+
+    addWorker(data){
+        return addWorker(data)
+            .then(({data}) => {
+                debugger
+                return Promise.resolve()
+            })
+            .catch(({response}) => {
+                return Promise.reject()
+            })
+    }
+    addCard(data){
+        return addCard(data)
             .then(({data}) => {
                 debugger
                 return Promise.resolve()

@@ -53,6 +53,7 @@ export const EmployerItem = styled.div`
   box-sizing: border-box;
   border-radius: 15px;
   margin-top: 15px;
+  cursor: pointer;
 `
 
 export const ButtonAdd =  styled.div`

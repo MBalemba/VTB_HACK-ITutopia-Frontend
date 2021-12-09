@@ -40,6 +40,16 @@ export const addDepartment = async (data) => {
     return response
 }
 
+export const addWorker = async (data) => {
+    const response = await $authHost.post('start/addWorker', data)
+    return response
+}
+
+export const addCard = async (data) => {
+    const response = await $authHost.post('start/addCard', data)
+    return response
+}
+
 
 
 
