@@ -20,7 +20,7 @@ const CurrentCheckComponent = observer(({isLink = true}) => {
 
     useEffect(()=>{
         admin.getCurrentCheck().then(()=>{
-            debugger
+
         }).catch(()=>{
 
         })

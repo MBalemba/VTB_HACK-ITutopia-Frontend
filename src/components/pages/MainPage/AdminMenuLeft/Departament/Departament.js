@@ -10,13 +10,21 @@ import {
 } from "./DepartamentStyle";
 import {Card, CardIco, CardNumber} from "../../AdminInterfaces/HistoryTransaction/HistoryTransactionStyle";
 import cardVisaImg from "../../AdminInterfaces/HistoryTransaction/assets/image 1.png";
+import {Navigate} from "react-router-dom";
+import {ADMIN} from "../../../../../utils/path";
 
 
 const Item = ({name, patronymic, surname, id, cards}) => {
     const [activeMy, setActive] = useState('false');
 
+
+
     return (
-        <EmployerItem style={({ isActive }) =>
+        <EmployerItem onClick={(e)=>{
+            if(cards.length===0){
+                e.preventDefault()
+            }
+        } } style={({ isActive }) =>
         {isActive? setActive(true) :setActive(false)
 
         return ''

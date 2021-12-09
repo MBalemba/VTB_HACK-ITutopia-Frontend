@@ -166,7 +166,10 @@ export const Loader = styled.div`
 `
 
 export const ChangeThis = styled.div`
-
+  cursor: pointer;
+  &:hover{
+    color: #0000ee;
+  }
 `
 
 

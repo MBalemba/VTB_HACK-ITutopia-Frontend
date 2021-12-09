@@ -62,7 +62,6 @@ export default class AdminStore {
     getCurrentCheck() {
         return currentAdminCheck()
             .then(({data}) => {
-debugger
                 this._currentCheck = {
                     account_number: [data.account_number.slice(0, 4), data.account_number.slice(4, 8), data.account_number.slice(8, 12), data.account_number.slice(12, 16), data.account_number.slice(16, 20)],
                     currency: data.currency,
@@ -71,7 +70,7 @@ debugger
                 return Promise.resolve()
             })
             .catch(({response}) => {
-                debugger
+
                 return Promise.reject()
             })
     }

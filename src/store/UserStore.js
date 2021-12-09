@@ -1,5 +1,5 @@
 import {makeAutoObservable, toJS} from "mobx";
-import {getInfoOfCardsByWorkerId, getWorkerInfo, transferToCard} from "../http/UserApi";
+import {getInfoOfCardsByWorkerId, getWorkerInfo, setLimitOnCard, transferToCard} from "../http/UserApi";
 
 
 export default class UserStore {
@@ -16,37 +16,24 @@ export default class UserStore {
             {
                 "account": 5000,
                 "autoUpdate": true,
-                "card_number": '6523124895742365',
+                "card_number": '****************',
                 "currency": "RUB",
                 "id": 1,
-                "limit": 95000,
+                "limit": 0,
                 "payment_system": "VISA",
                 "purpose_of_creation": "Поезда в метро",
-                "remains": 12740,
+                "remains": 0,
                 "status": "ACTIVE",
-                "term": 20,
+                "term": 0,
                 "type": "Транспорт",
                 "worker_id": 1
             },
-            {
-                "account": 5000,
-                "autoUpdate": true,
-                "card_number": '6523124895742365',
-                "currency": "RUB",
-                "id": 1,
-                "limit": 95000,
-                "payment_system": "VISA",
-                "purpose_of_creation": "Поезда в метро",
-                "remains": 12740,
-                "status": "ACTIVE",
-                "term": 20,
-                "type": "Транспорт",
-                "worker_id": 1
-            }
         ]
 
 
-
+        this._isFecthing={
+            isFetchCardsInfo: true,
+        }
 
         makeAutoObservable(this)
     }
@@ -68,8 +55,9 @@ export default class UserStore {
 
 
     getInfoOfCards(id) {
+        debugger
         return getInfoOfCardsByWorkerId(id).then(({data}) => {
-            debugger
+
             this._infoOfCards = [...data]
             return Promise.resolve()
         }).catch(() => {
@@ -83,14 +71,54 @@ export default class UserStore {
 
     transferToCard(data){
         return transferToCard(data).then(()=>{
+
+
+            return Promise.resolve()
+        }).catch(()=>{
+
+
+            return Promise.resolve()
+        })
+    }
+
+    setLimitOnCard(data){
+        return setLimitOnCard(data).then(()=>{
             debugger
 
             return Promise.resolve()
         }).catch(()=>{
-            debugger
 
+            debugger
             return Promise.resolve()
         })
+    }
+
+    CreateInitialCardObj() {
+        this._infoOfCards = [
+            {
+                "account": 5000,
+                "autoUpdate": true,
+                "card_number": '****************',
+                "currency": "RUB",
+                "id": 1,
+                "limit": 0,
+                "payment_system": "VISA",
+                "purpose_of_creation": "Поезда в метро",
+                "remains": 0,
+                "status": "ACTIVE",
+                "term": 0,
+                "type": "Транспорт",
+                "worker_id": 1
+            },
+        ]
+    }
+
+    get isFetching() {
+        return toJS(this._isFecthing)
+    }
+
+    changeIsFetching(obj){
+        this._isFecthing = {...this._isFecthing, ...obj}
     }
 
 

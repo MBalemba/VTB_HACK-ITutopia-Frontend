@@ -18,8 +18,9 @@ import PieChart from "../AdminInterfaces/PieChart/PieChart";
 import HistoryTransaction from "../AdminInterfaces/HistoryTransaction/HistoryTransaction";
 import {Ph} from "../AdminInterfaces/HistoryTransaction/HistoryTransactionStyle";
 import {observer} from "mobx-react-lite";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Context} from "../../../../index";
+import {ADMIN} from "../../../../utils/path";
 
 
 export const AccountComponent = ({fio = '', departamentName = '', src = ''}) => {
@@ -46,6 +47,7 @@ const UserInterface = observer(() => {
     const {user} = useContext(Context)
     const [currentSlide, setCurrentSlide] = useState('0')
     console.log(currentSlide)
+    const navigate = useNavigate()
 
     useEffect(() => {
 
@@ -57,32 +59,54 @@ const UserInterface = observer(() => {
 
     useEffect(() => {
             debugger
+
+            user.changeIsFetching({isFetchCardsInfo: true})
             user.getInfoOfCards(id).then(()=>{
+                debugger
+                if(user.infoOfCards.length === 0) {
+                    navigate('../'+ADMIN)
+                    user.CreateInitialCardObj()
+                } else{
+                    user.changeIsFetching({isFetchCardsInfo: false})
+                }
 
             })
 
     }, [id])
 
+
+
     return (
         <Container>
-            <ProfileInfo>
-                <AccountComponent fio={user.workerInfo.surname+' '+user.workerInfo.name +' '+ user.workerInfo.patronymic} departamentName={user.workerInfo.departmentType} src=''/>
+
+            {
+                !user.isFetching.isFetchCardsInfo ?
+                    <>
+                        <ProfileInfo>
+                            <AccountComponent fio={user.workerInfo.surname+' '+user.workerInfo.name +' '+ user.workerInfo.patronymic} departamentName={user.workerInfo.departmentType} src=''/>
 
 
-                <Balance>
+                            <Balance>
 
-                    <Amount>
-                        Баланс {(user.workerInfo.account).toLocaleString() + ' '}₽
+                                <Amount>
+                                    Баланс {(user.workerInfo.account).toLocaleString() + ' '}₽
 
-                    </Amount>
-                </Balance>
-            </ProfileInfo>
+                                </Amount>
+                            </Balance>
+                        </ProfileInfo>
 
-            <CardsBlock userId={id} departamentName={user.workerInfo.departmentType} fio={user.workerInfo.surname+' '+user.workerInfo.name +' '+ user.workerInfo.patronymic} currentSlide={currentSlide} handleCurrentSlide={setCurrentSlide} cardsInfo={user.infoOfCards} />
 
-            <PieChart/>
 
-            <HistoryTransaction/>
+                        {user.infoOfCards.length!==0 && <CardsBlock userId={id} departamentName={user.workerInfo.departmentType} fio={user.workerInfo.surname+' '+user.workerInfo.name +' '+ user.workerInfo.patronymic} currentSlide={currentSlide} handleCurrentSlide={setCurrentSlide} cardsInfo={user.infoOfCards} />}
+                        <PieChart/>
+
+                        <HistoryTransaction/>
+                    </>
+                :
+                    <>load</>
+
+            }
+
 
         </Container>
     );

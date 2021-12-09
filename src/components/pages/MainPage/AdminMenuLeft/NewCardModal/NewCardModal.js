@@ -20,6 +20,7 @@ import {Context} from "../../../../../index";
 import {useParams} from "react-router-dom";
 
 
+
 const NewCardModal = observer(({active, setActive}) => {
     const {admin, user} = useContext(Context)
     let {id} = useParams();
@@ -100,8 +101,10 @@ const NewCardModal = observer(({active, setActive}) => {
                         </SelectWrapper>
 
 
-                        <SearchC handleChange={handleChangeInput} value={purposeCard} placeholder={'назначение карты'}
+                        <SearchC  handleChange={handleChangeInput} value={purposeCard} placeholder={'назначение карты'}
                                  isSearchLogo={false}/>
+
+
                     </TypeCardBlock>
                 </Section2>
             </MiddleContent>

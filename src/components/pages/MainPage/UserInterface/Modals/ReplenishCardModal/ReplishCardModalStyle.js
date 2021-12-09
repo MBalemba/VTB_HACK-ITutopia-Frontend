@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Section1 = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `
 
 export const Section2 = styled.div`
@@ -13,7 +14,9 @@ export const Section2 = styled.div`
 
 export const EmployersSelectBlock = styled.div`
   margin-left: 35px;
-
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
 `
 export const ItemNumber = styled.div`
 
@@ -35,7 +38,7 @@ export const P = styled.div`
   font-size: 12px;
   line-height: 14px;
   letter-spacing: 0.05em;
-
+  margin-bottom: 2px;
   color: #001A68;
 `
 
@@ -85,11 +88,23 @@ export const SumToTransferText = styled.div`
   font-size: 22px;
   line-height: 26px;
   color: #000000;
+  margin-bottom: 20px;
 `
 export const SumToTransferBlock = styled.div`
-  
-  height: 101px;
+    
 `
 export const Input = styled.input`
   width: 100%;
+`
+export const Error = styled.p`
+  margin-top: 1rem;
+  margin-left: 1rem;
+  opacity: ${({here})=>here?1 :0};
+  transition: 0.5s;
+  color: red;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
 `

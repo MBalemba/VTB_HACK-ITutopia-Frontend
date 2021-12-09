@@ -17,10 +17,12 @@ import {
 import Card from "./Card/Card";
 import MyButton from "../../../../common/Buttons/MyButton";
 import ReplishCardModal from "../Modals/ReplenishCardModal/ReplishCardModal";
+import LimitModal from "../Modals/LomitModal/LimitModal";
 
 const CardsBlock = ({userId ,departamentName, fio, handleCurrentSlide, cardsInfo , currentSlide}) => {
     console.log( cardsInfo)
     const [modalFill, setModalFill] = useState(false)
+    const [modalChange, setModalChange] = useState(false)
     return (
             <Cards>
                 <H>Карты сотрудника</H>
@@ -190,7 +192,7 @@ const CardsBlock = ({userId ,departamentName, fio, handleCurrentSlide, cardsInfo
                             </Loader>
                         </ProgressBar>
 
-                        <ChangeThis>
+                        <ChangeThis onClick={()=>setModalChange(true)} >
                             Изменить
                         </ChangeThis>
 
@@ -201,6 +203,7 @@ const CardsBlock = ({userId ,departamentName, fio, handleCurrentSlide, cardsInfo
 
                 </SpecialOffer>
 
+                <LimitModal userId={userId} cardId={cardsInfo[currentSlide].id}  departamentName={departamentName} fio={fio} info={cardsInfo[currentSlide]} setActive={setModalChange} active={modalChange}/>
                 <ReplishCardModal userId={userId} departamentName={departamentName} fio={fio} info={cardsInfo[currentSlide]} setActive={setModalFill} active={modalFill}/>
             </Cards>
     );

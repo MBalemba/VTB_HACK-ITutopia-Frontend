@@ -64,6 +64,12 @@ export const transferToCard = async (data) => {
 }
 
 
+export const setLimitOnCard = async (data) => {
+    const response = await $authHost.put('/worker/setLimitOnCard?'+`autoUpdate=${data.autoUpdate}&card_id=${data.card_id}&limit=${data.limit}&term=${data.term}`)
+    return response
+}
+
+
 
 
 

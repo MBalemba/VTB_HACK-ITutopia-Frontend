@@ -41,14 +41,26 @@ export function SearchC({
                             handleChange = () => {
                             },
                             value = '',
+                            input=null,
                         }) {
 
     const [focus, isFocus] = useState(false)
 
     return (
         <Search focus={focus}>
-            <Input  onFocus={() => isFocus(true)} onBlur={() => isFocus(false)} onChange={handleChange} value={value}
-                   placeholder={placeholder} id={'search_1'} type={type}/>
+
+            {
+
+                input ===null
+                    ?
+                    <Input  onFocus={() => isFocus(true)} onBlur={() => isFocus(false)} onChange={handleChange} value={value}
+                            placeholder={placeholder} id={'search_1'} type={type}/>
+
+                    :
+                    input()
+
+            }
+
 
 
             {isSearchLogo && <SearchLogo for={'search_1'}>
