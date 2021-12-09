@@ -28,7 +28,7 @@ const CardsBlock = ({userId ,departamentName, fio, handleCurrentSlide, cardsInfo
                 {cardsInfo.length!==0 &&
                 <Sliderblock>
 
-                <SliderCards userId={userId} handleCurrentSlide={handleCurrentSlide} id={'mainpage_1'} render={() =>
+                <SliderCards cardsInfoLength={cardsInfo.length} userId={userId} handleCurrentSlide={handleCurrentSlide} id={'mainpage_1'} render={() =>
                     <>
 
                         {cardsInfo?.map((el, index) =>
@@ -201,7 +201,7 @@ const CardsBlock = ({userId ,departamentName, fio, handleCurrentSlide, cardsInfo
 
                 </SpecialOffer>
 
-                <ReplishCardModal departamentName={departamentName} fio={fio} info={cardsInfo[currentSlide]} setActive={setModalFill} active={modalFill}/>
+                <ReplishCardModal userId={userId} departamentName={departamentName} fio={fio} info={cardsInfo[currentSlide]} setActive={setModalFill} active={modalFill}/>
             </Cards>
     );
 };

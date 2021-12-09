@@ -1,5 +1,5 @@
 import {makeAutoObservable, toJS} from "mobx";
-import {getInfoOfCardsByWorkerId, getWorkerInfo} from "../http/UserApi";
+import {getInfoOfCardsByWorkerId, getWorkerInfo, transferToCard} from "../http/UserApi";
 
 
 export default class UserStore {
@@ -79,6 +79,18 @@ export default class UserStore {
 
     get infoOfCards() {
         return toJS(this._infoOfCards)
+    }
+
+    transferToCard(data){
+        return transferToCard(data).then(()=>{
+            debugger
+
+            return Promise.resolve()
+        }).catch(()=>{
+            debugger
+
+            return Promise.resolve()
+        })
     }
 
 

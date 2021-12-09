@@ -17,11 +17,12 @@ import {SearchC} from "../AdminMenuLeft";
 import CreatableSelect from "react-select/creatable";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../../../index";
+import {useParams} from "react-router-dom";
 
 
 const NewCardModal = observer(({active, setActive}) => {
-    const {admin} = useContext(Context)
-
+    const {admin, user} = useContext(Context)
+    let {id} = useParams();
     let [typeCard, setTypeCard] = useState([
         {value: 'Транспорт', label: 'Транспорт'},
         {value: 'Еда и супермаркеты', label: 'Еда и супермаркеты'},
@@ -118,6 +119,15 @@ const NewCardModal = observer(({active, setActive}) => {
                     }
                     admin.addCard(data).then(()=>{
                         setActive(false)
+
+                        user.getInfoOfCards(id).then(()=>{
+
+                        })
+
+                        user.getWorkerInfo(id).then(()=>{
+
+                        })
+
 
                         admin.getAllTree().then(() => {
 

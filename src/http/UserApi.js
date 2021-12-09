@@ -58,6 +58,10 @@ export const addCard = async (data) => {
     const response = await $authHost.post('start/addCard', data)
     return response
 }
+export const transferToCard = async (data) => {
+    const response = await $authHost.post('/worker/transferToCard?'+`amount=${data.amount}&card_id=${data.id}`, data)
+    return response
+}
 
 
 

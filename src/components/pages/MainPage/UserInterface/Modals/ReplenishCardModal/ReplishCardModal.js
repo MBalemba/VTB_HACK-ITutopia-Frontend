@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {MiddleContent, ModalFooter} from "../../../../../common/Modal/ModalStyle";
 import Card from "../../Cards/Card/Card";
 import Select from "react-select";
@@ -17,10 +17,15 @@ import {
 } from "./ReplishCardModalStyle";
 import CurrentCheckComponent from "../../../AdminMenuLeft/CurrentCheckComponent/CurrentCheckComponent";
 import CurrencyInput from "react-currency-input-field";
+import NumberFormat from 'react-number-format';
+import {InputWrapper} from "../../../AdminMenuLeft/NewEmployerModal/NewEmployerModalStyle";
+import {Context, user} from "../../../../../../index";
+import {observer} from "mobx-react-lite";
 
-const ReplishCardModal = ({info, active, setActive, fio, departamentName}) => {
 
-    const [summ, setSumm] = useState('')
+const ReplishCardModal = observer(({info,userId, active, setActive, fio, departamentName}) => {
+    const {user} = useContext(Context)
+    const [summ, setSumm] = useState('435345')
     return (
         <Modal headerName={'Перевод на карту сотрудника'} active={active} setActive={setActive}>
 
@@ -65,15 +70,8 @@ const ReplishCardModal = ({info, active, setActive, fio, departamentName}) => {
                         <SumToTransferText>
                             Сумма для перевода
                         </SumToTransferText>
-                        <Input
-
-                            placeholder="Please enter a number"
-                            defaultValue={1000}
-                            decimalsLimit={2}
-                            prefix={'₽'}
-                            onC={(value, name) => setSumm(value)}
-                        />
-
+                        <SearchC type={'number'} handleChange={(e)=>{setSumm(e.target.value)}} value={summ} placeholder={'Название отдела'}
+                                 isSearchLogo={false}/>
                     </SumToTransferBlock>
 
                 </Section2>
@@ -85,14 +83,27 @@ const ReplishCardModal = ({info, active, setActive, fio, departamentName}) => {
                 </MyButton>
 
                 <MyButton clickHandler={() => {
+                    user.transferToCard({id: info.id, amount: summ }).then(()=>{
+                        setActive(false)
+                        setSumm('')
 
+                        user.getInfoOfCards(userId).then(()=>{
+
+                        })
+
+                        user.getWorkerInfo(userId).then(()=>{
+
+                        })
+
+
+                    })
 
                 }} disabled={false} width={'200px'}
                           height={'50px'}>
-                    Выпуск карты
+                    Перевести
                 </MyButton>
             </ModalFooter>
         </Modal>)
-};
+});
 
 export default ReplishCardModal;

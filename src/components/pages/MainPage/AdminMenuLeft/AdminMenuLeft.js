@@ -35,6 +35,8 @@ const customStyles = {
 
 export function SearchC({
                             isSearchLogo = true,
+                            type='text',
+
                             placeholder = '',
                             handleChange = () => {
                             },
@@ -45,8 +47,8 @@ export function SearchC({
 
     return (
         <Search focus={focus}>
-            <Input onFocus={() => isFocus(true)} onBlur={() => isFocus(false)} onChange={handleChange} value={value}
-                   placeholder={placeholder} id={'search_1'} type="text"/>
+            <Input  onFocus={() => isFocus(true)} onBlur={() => isFocus(false)} onChange={handleChange} value={value}
+                   placeholder={placeholder} id={'search_1'} type={type}/>
 
 
             {isSearchLogo && <SearchLogo for={'search_1'}>
@@ -115,7 +117,7 @@ const AdminMenuLeft = observer(() => {
                 Текущий счёт
             </HeaderCheck>
 
-            <CurrentCheckComponent isLink={false} />
+            <CurrentCheckComponent isLink={true} />
 
 
             <EmployeesCardsMenu>
