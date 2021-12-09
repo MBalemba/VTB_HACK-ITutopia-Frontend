@@ -68,7 +68,7 @@ const NewCardModal = observer(({active, setActive}) => {
                         </SelectWrapper>
 
                         <AccountComponent
-                            fio={selectedEmployer.value === '' ? 'Ф.И.О.' : selectedEmployer.label.split(' ').map((el, index) => index === 0 ? el + ' ' : (el[0].toUpperCase() + '.')).join('')}
+                            fio={selectedEmployer.value === '' ? 'Ф.И.О.' : selectedEmployer.label.split(' ').map((el, index) => index == 0 ? el + ' ' : (el[0] + '.')).join('')}
                             departamentName={admin.allDepartments.find(el => el.id == admin.allWorkers.find((el) => el.id === selectedEmployer.value)?.department_id)?.name || 'Отдел'}
                             src=''/>
 

@@ -21,8 +21,8 @@ export const Picture = styled.div`
   background-position: center center;
   background-repeat: no-repeat;
   border: 3px solid rgba(4, 33, 96, 0.1);
-  width: 70px;
-  height: 70px;
+  min-width: 70px;
+  min-height: 70px;
   background-size: cover;
   border-radius: 50%;
   margin-right: 20px;

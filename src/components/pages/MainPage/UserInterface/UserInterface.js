@@ -48,19 +48,19 @@ const UserInterface = observer(() => {
     console.log(currentSlide)
 
     useEffect(() => {
-        if(id){
+
             user.getWorkerInfo(id).then(()=>{
 
             })
-        }
+
     }, [id])
 
     useEffect(() => {
-        if(id){
+            debugger
             user.getInfoOfCards(id).then(()=>{
 
             })
-        }
+
     }, [id])
 
     return (
@@ -72,12 +72,13 @@ const UserInterface = observer(() => {
                 <Balance>
 
                     <Amount>
-                        Баланс {(93389).toLocaleString() + ' '}₽
+                        Баланс {(user.workerInfo.account).toLocaleString() + ' '}₽
+
                     </Amount>
                 </Balance>
             </ProfileInfo>
 
-            <CardsBlock currentSlide={currentSlide} handleCurrentSlide={setCurrentSlide} cardsInfo={user.infoOfCards} />
+            <CardsBlock userId={id} departamentName={user.workerInfo.departmentType} fio={user.workerInfo.surname+' '+user.workerInfo.name +' '+ user.workerInfo.patronymic} currentSlide={currentSlide} handleCurrentSlide={setCurrentSlide} cardsInfo={user.infoOfCards} />
 
             <PieChart/>
 

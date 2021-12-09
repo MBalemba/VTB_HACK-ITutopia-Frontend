@@ -78,6 +78,7 @@ export const Fio = styled.div`
   line-height: 21px;
   color: #001A68;
   margin-bottom: 20px;
+  margin-top: 10px;
 `
 export const ButtonDots = styled.div`
   height: 100%;

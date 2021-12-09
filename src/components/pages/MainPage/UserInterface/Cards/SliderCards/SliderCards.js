@@ -54,12 +54,13 @@ class SliderCards extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
 
-        const prevDevices = prevProps?.devices
-        const currentDevices = this.props?.devices
+        const prevDevices = prevProps?.userId
+        const currentDevices = this.props?.userId
 
 
         if(prevDevices !== currentDevices){
-            this.setParameters()
+            debugger
+            setTimeout(()=>{this.setParameters()}, 200)
         }
     }
 
@@ -122,6 +123,8 @@ class SliderCards extends Component {
     }
 
     setEvents() {
+
+        setTimeout(()=>{this.resizeGallery()}, 700)
         this.debounceResizeGalary = debounce(this.resizeGallery)
         window.addEventListener('resize', this.debounceResizeGalary)
         this.containerNode.addEventListener('mouseenter', this.mouseEnter)
@@ -273,6 +276,8 @@ class SliderCards extends Component {
         this.x = this.getPosition()
         this.resetStylePosition()
     }
+
+
 
 
     render() {

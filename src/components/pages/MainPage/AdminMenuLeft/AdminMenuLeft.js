@@ -115,7 +115,7 @@ const AdminMenuLeft = observer(() => {
                 Текущий счёт
             </HeaderCheck>
 
-            <CurrentCheckComponent/>
+            <CurrentCheckComponent isLink={false} />
 
 
             <EmployeesCardsMenu>

@@ -69,8 +69,8 @@ export default class UserStore {
 
     getInfoOfCards(id) {
         return getInfoOfCardsByWorkerId(id).then(({data}) => {
+            debugger
             this._infoOfCards = [...data]
-
             return Promise.resolve()
         }).catch(() => {
             return Promise.reject()

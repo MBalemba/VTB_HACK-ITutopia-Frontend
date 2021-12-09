@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import SliderCards from "./SliderCards/SliderCards";
 import {
     Blocker,
@@ -16,10 +16,11 @@ import {
 } from "./CardsStyle";
 import Card from "./Card/Card";
 import MyButton from "../../../../common/Buttons/MyButton";
+import ReplishCardModal from "../Modals/ReplenishCardModal/ReplishCardModal";
 
-const CardsBlock = ({handleCurrentSlide, cardsInfo , currentSlide}) => {
+const CardsBlock = ({userId ,departamentName, fio, handleCurrentSlide, cardsInfo , currentSlide}) => {
     console.log( cardsInfo)
-
+    const [modalFill, setModalFill] = useState(false)
     return (
             <Cards>
                 <H>Карты сотрудника</H>
@@ -27,7 +28,7 @@ const CardsBlock = ({handleCurrentSlide, cardsInfo , currentSlide}) => {
                 {cardsInfo.length!==0 &&
                 <Sliderblock>
 
-                <SliderCards handleCurrentSlide={handleCurrentSlide} id={'mainpage_1'} render={() =>
+                <SliderCards userId={userId} handleCurrentSlide={handleCurrentSlide} id={'mainpage_1'} render={() =>
                     <>
 
                         {cardsInfo?.map((el, index) =>
@@ -66,7 +67,7 @@ const CardsBlock = ({handleCurrentSlide, cardsInfo , currentSlide}) => {
                                     Статус
                                 </p>
                                 <Status>
-                                    {cardsInfo[currentSlide].status}
+                                    {cardsInfo[currentSlide]?.status}
                                 </Status>
                             </MenuItem>
 
@@ -75,7 +76,7 @@ const CardsBlock = ({handleCurrentSlide, cardsInfo , currentSlide}) => {
                                     Баланс
                                 </p>
                                 <Status>
-                                    {(cardsInfo[currentSlide].account).toLocaleString()+' ₽'}
+                                    {(cardsInfo[currentSlide]?.account)?.toLocaleString()+' ₽'}
                                 </Status>
                             </MenuItem>
 
@@ -85,7 +86,7 @@ const CardsBlock = ({handleCurrentSlide, cardsInfo , currentSlide}) => {
                                 </p>
 
                                 <Status>
-                                    {cardsInfo[currentSlide].type}
+                                    {cardsInfo[currentSlide]?.type}
                                 </Status>
                             </MenuItem>
 
@@ -95,7 +96,7 @@ const CardsBlock = ({handleCurrentSlide, cardsInfo , currentSlide}) => {
                                 </p>
 
                                 <Status>
-                                    {cardsInfo[currentSlide].purpose_of_creation}
+                                    {cardsInfo[currentSlide]?.purpose_of_creation}
                                 </Status>
                             </MenuItem>
 
@@ -104,7 +105,7 @@ const CardsBlock = ({handleCurrentSlide, cardsInfo , currentSlide}) => {
 
                         <ButtonsControl>
                             <ButtonWrapper>
-                                <MyButton>
+                                <MyButton clickHandler={()=>setModalFill(true)} >
                                     Пополнить
                                 </MyButton>
                             </ButtonWrapper>
@@ -135,7 +136,13 @@ const CardsBlock = ({handleCurrentSlide, cardsInfo , currentSlide}) => {
 
                                 </Dot>
                             <Value>
-                                {(95000).toLocaleString() +' ₽'}
+
+                                {cardsInfo[currentSlide]?.term === 0 ?
+                                    '-'
+                                    :
+
+                                    ((cardsInfo[currentSlide]?.limit).toLocaleString() +' ₽')
+                                }
                             </Value>
                         </Item>
 
@@ -147,7 +154,14 @@ const CardsBlock = ({handleCurrentSlide, cardsInfo , currentSlide}) => {
 
                                 </Dot>
                             <Value>
-                                {(12740).toLocaleString() +' ₽'}
+                                {cardsInfo[currentSlide].term === 0 ?
+                                    '-'
+                                    :
+
+                                    ((cardsInfo[currentSlide].remains).toLocaleString() +' ₽')
+                                }
+
+
                             </Value>
                         </Item>
 
@@ -159,12 +173,19 @@ const CardsBlock = ({handleCurrentSlide, cardsInfo , currentSlide}) => {
 
                                 </Dot>
                             <Value>
-                                20 дней
+
+                                {cardsInfo[currentSlide].term === 0 ?
+                                    '-'
+                                    :
+
+                                    (cardsInfo[currentSlide].term+ ' дней')
+                                }
+
                             </Value>
                         </Item>
 
                         <ProgressBar>
-                            <Loader percent={'23'}>
+                            <Loader percent={cardsInfo[currentSlide].term === 0 ? 0: cardsInfo[currentSlide].limit/ cardsInfo[currentSlide].remains *100}>
 
                             </Loader>
                         </ProgressBar>
@@ -179,6 +200,8 @@ const CardsBlock = ({handleCurrentSlide, cardsInfo , currentSlide}) => {
                 <SpecialOffer>
 
                 </SpecialOffer>
+
+                <ReplishCardModal departamentName={departamentName} fio={fio} info={cardsInfo[currentSlide]} setActive={setModalFill} active={modalFill}/>
             </Cards>
     );
 };

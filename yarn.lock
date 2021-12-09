@@ -12426,6 +12426,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-currency-input-field@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "react-currency-input-field@npm:3.6.0"
+  peerDependencies:
+    react: ^16.9.0 || ^17.0.0
+  checksum: 588f51af32b253e0e62fdae306a389688a25beaf66bc3ab64f110612970b6c8058a5de60535efbfbb64755ebd7f924ab6d252353b2e163ec1ac146d28e23ac79
+  languageName: node
+  linkType: hard
+
 "react-datepicker@npm:^4.5.0":
   version: 4.5.0
   resolution: "react-datepicker@npm:4.5.0"
@@ -15192,6 +15201,7 @@ __metadata:
     mobx-react-lite: ^3.2.1
     react: ^17.0.2
     react-apexcharts: ^1.3.9
+    react-currency-input-field: ^3.6.0
     react-datepicker: ^4.5.0
     react-dom: ^17.0.2
     react-router-dom: ^6.0.2
