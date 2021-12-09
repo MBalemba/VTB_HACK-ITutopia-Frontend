@@ -36,7 +36,7 @@ const customStyles = {
 export function SearchC({
                             isSearchLogo = true,
                             placeholder = '',
-                            handleChange= () => {
+                            handleChange = () => {
                             },
                             value = '',
                         }) {
@@ -45,7 +45,8 @@ export function SearchC({
 
     return (
         <Search focus={focus}>
-            <Input onFocus={()=>isFocus(true)} onBlur={()=> isFocus(false)} onChange={handleChange} value={value} placeholder={placeholder} id={'search_1'} type="text"/>
+            <Input onFocus={() => isFocus(true)} onBlur={() => isFocus(false)} onChange={handleChange} value={value}
+                   placeholder={placeholder} id={'search_1'} type="text"/>
 
 
             {isSearchLogo && <SearchLogo for={'search_1'}>
@@ -75,11 +76,26 @@ const AdminMenuLeft = observer(() => {
     const {admin} = useContext(Context)
 
 
+    useEffect(() => {
+        admin.getAllTree().then(() => {
 
-    useEffect(()=>{
-        admin.getAllTree().then(()=>{
-            
-        }).catch(()=>{
+        }).catch(() => {
+
+        })
+    }, [])
+
+    useEffect(() => {
+        admin.getAllWorkers().then(()=>{
+
+        }).catch(() => {
+
+        })
+    }, [])
+
+    useEffect(() => {
+        admin.getAllDepartments().then(()=>{
+
+        }).catch(() => {
 
         })
     }, [])
@@ -136,7 +152,7 @@ const AdminMenuLeft = observer(() => {
                 </SelectWrapper>
 
                 <AddWrapper>
-                    <ItemAdd onClick={()=>setModalEmployer(true)}>
+                    <ItemAdd onClick={() => setModalEmployer(true)}>
                         <IcoAdd>
                             <svg width="55" height="43" viewBox="0 0 55 43" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -159,7 +175,7 @@ const AdminMenuLeft = observer(() => {
                         </AddText>
                     </ItemAdd>
 
-                    <ItemAdd onClick={()=>setModalDeartament(true)}>
+                    <ItemAdd onClick={() => setModalDeartament(true)}>
                         <IcoAdd>
                             <svg width="55" height="43" viewBox="0 0 55 43" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -210,8 +226,8 @@ const AdminMenuLeft = observer(() => {
             </EmployeesCardsMenu>
 
             <DepartamentBlock>
-                {admin.allTree.map(el=>
-                    <Departament name={el.name} amountOfCards={el.amountOfCards} key={el.id} workers={el.workers}  />
+                {admin.allTree.map(el =>
+                    <Departament name={el.name} amountOfCards={el.amountOfCards} key={el.id} workers={el.workers}/>
                 )}
 
                 {/*<Departament/>
@@ -220,8 +236,8 @@ const AdminMenuLeft = observer(() => {
             </DepartamentBlock>
 
             <NewCardModal active={modalCard} setActive={setModalCard}/>
-            <NewEmployerModal  active={modalEmployer} setActive={setModalEmployer}/>
-            <NewDepartamentModal active={modalDepartament} setActive={setModalDeartament}/>
+            <NewEmployerModal active={modalEmployer} setActive={setModalEmployer}/>
+            <NewDepartamentModal employers={admin.allWorkers} active={modalDepartament} setActive={setModalDeartament}/>
         </Container>
     );
 });

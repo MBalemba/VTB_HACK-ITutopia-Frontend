@@ -26,7 +26,7 @@ const departament = [
 
 
 
-const NewEmployerModal = ({active, setActive}) => {
+const NewEmployerModal = observer(({active, setActive}) => {
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -41,6 +41,10 @@ const NewEmployerModal = ({active, setActive}) => {
     }
     const handleMiddleName = (e)=>{
         setMiddleName(e.target.value)
+    }
+
+    function addEmp() {
+        return undefined;
     }
 
     return (
@@ -100,12 +104,12 @@ const NewEmployerModal = ({active, setActive}) => {
                     Отмена
                 </MyButton>
 
-                <MyButton width={'200px'} height={'50px'}>
+                <MyButton disabled={middleName.trim() == '' || middleName.trim() == '' || middleName.trim() == ''} clickHandler={addEmp} width={'200px'} height={'50px'}>
                     Добавить сотрудника
                 </MyButton>
             </ModalFooter>
         </Modal>
     );
-};
+});
 
 export default NewEmployerModal;

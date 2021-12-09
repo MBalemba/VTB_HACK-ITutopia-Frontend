@@ -4,14 +4,14 @@ import styled from "styled-components";
 export const Section1 = styled.div`
   
   justify-content: space-between;
-  margin-bottom: 70px;
+  margin-bottom: 25px;
   align-items: center;
 `
 
 export const Section2 = styled.div`
   display: flex;
   flex-direction: column;
-  height: 368px;
+  max-height: 368px;
   
 `
 export const EmployersSelectBlock = styled.div`

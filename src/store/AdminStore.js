@@ -1,5 +1,5 @@
 import {makeAutoObservable, toJS} from "mobx";
-import {currentAdminCheck, departmentsWorkersCards} from "../http/UserApi";
+import {addDepartment, AllDepartments, AllWorkers, currentAdminCheck, departmentsWorkersCards} from "../http/UserApi";
 
 export default class AdminStore {
 
@@ -33,6 +33,24 @@ export default class AdminStore {
                         "surname": "string"
                     }
                 ]
+            }
+        ]
+
+        this._allWorkers = [
+            {
+                "department_id": 0,
+                "id": 0,
+                "name": "string",
+                "patronymic": "string",
+                "surname": "string"
+            }
+        ]
+
+        this._allDepartments = [
+            {
+                "account_id": 0,
+                "id": 0,
+                "name": "string"
             }
         ]
 
@@ -81,6 +99,54 @@ export default class AdminStore {
     get allTree() {
         debugger
         return toJS(this._allTree)
+    }
+
+    getAllWorkers() {
+        return AllWorkers().then(({data}) => {
+            debugger
+            this._allWorkers = [
+                ...data
+            ]
+            return Promise.resolve()
+        })
+            .catch(({response}) => {
+
+                return Promise.reject()
+            })
+    }
+
+    get allWorkers() {
+        return this._allWorkers
+    }
+
+    getAllDepartments() {
+        return AllDepartments().then(({data}) => {
+            debugger
+            this._allDepartments= [
+                ...data
+            ]
+            return Promise.resolve()
+        })
+            .catch(({response}) => {
+
+                return Promise.reject()
+            })
+    }
+
+    get allDepartments() {
+        return this._allDepartments
+    }
+
+
+    addDepartment(data) {
+        return addDepartment(data)
+            .then(({data}) => {
+                debugger
+                return Promise.resolve()
+            })
+            .catch(({response}) => {
+                return Promise.reject()
+            })
     }
 
 

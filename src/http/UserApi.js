@@ -24,6 +24,22 @@ export const departmentsWorkersCards = async () => {
     return response
 }
 
+export const AllWorkers = async () => {
+    const response = await $authHost.get('/start/getAllWorkers')
+    return response
+}
+
+export const AllDepartments = async () => {
+    const response = await $authHost.get('start/getAllDepartments')
+    return response
+}
+
+
+export const addDepartment = async (data) => {
+    const response = await $authHost.post('start/addDepartment', data)
+    return response
+}
+
 
 
 

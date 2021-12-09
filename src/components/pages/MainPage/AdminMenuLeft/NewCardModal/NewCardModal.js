@@ -94,7 +94,7 @@ const NewCardModal = ({active, setActive}) => {
                     Отмена
                 </MyButton>
 
-                <MyButton width={'200px'} height={'50px'}>
+                <MyButton  width={'200px'} height={'50px'}>
                     Выполнить перевод
                 </MyButton>
             </ModalFooter>

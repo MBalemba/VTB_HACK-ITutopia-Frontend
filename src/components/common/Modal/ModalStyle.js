@@ -46,7 +46,11 @@ export const ModalFooter = styled.div`
   justify-content: space-between;
 `
 export const ModalHeader = styled.div`
-    
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 26px;
+  color: #000000;
 `
 export const MiddleContent = styled.div`
   margin-top: 40px;
