@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     AmountCards, ButtonDots, CardItem, Cards,
     Container,
@@ -13,81 +13,87 @@ import cardVisaImg from "../../AdminInterfaces/HistoryTransaction/assets/image 1
 
 
 const Item = ({name, patronymic, surname, id, cards}) => {
-
+    const [activeMy, setActive] = useState('false');
 
     return (
-        <EmployerItem>
-            <Fio onMouseEnter={() => {
-            }} onMouseLeave={() => {
-            }}>
-                <div>
-                    {surname+ ' '+ name + ' '+ patronymic}
-                </div>
+        <EmployerItem style={({ isActive }) =>
+        {isActive? setActive(true) :setActive(false)
 
-                <ButtonDots>
-                    <svg width="18" height="4" viewBox="0 0 18 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M2 0C3.10457 0 4 0.895431 4 2C4 3.10457 3.10457 4 2 4C0.895431 4 0 3.10457 0 2C0 0.895431 0.89543 0 2 0Z"
-                            fill="#001A68" fill-opacity="0.2"/>
-                        <path
-                            d="M16 0C17.1046 0 18 0.895431 18 2C18 3.10457 17.1046 4 16 4C14.8954 4 14 3.10457 14 2C14 0.895431 14.8954 0 16 0Z"
-                            fill="#001A68" fill-opacity="0.2"/>
-                        <path
-                            d="M11 2C11 0.895431 10.1046 0 9 0C7.89543 0 7 0.895431 7 2C7 3.10457 7.89543 4 9 4C10.1046 4 11 3.10457 11 2Z"
-                            fill="#001A68" fill-opacity="0.2"/>
-                    </svg>
-                </ButtonDots>
-            </Fio>
-            {cards.length!==0 &&
-            <Cards>
-                {cards.map(el =>{
-                    debugger
-                        let color = '#32C665';
-                        switch (el.status) {
-                            case 'ACTIVE':
-                                color = '#32C665';
-                            case 'TEMPORARY BLOCKING':
-                                color = '#A9A9A9';
-                            case 'BLOCKING':
-                                color = '#F64E4E';
+        return ''
+        }
+        } class to={'../home/user/'+id}>
+
+                <Fio onMouseEnter={() => {
+                }} onMouseLeave={() => {
+                }}>
+                    <div>
+                        {surname+ ' '+ name + ' '+ patronymic}
+                    </div>
+
+                    <ButtonDots>
+                        <svg width="18" height="4" viewBox="0 0 18 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M2 0C3.10457 0 4 0.895431 4 2C4 3.10457 3.10457 4 2 4C0.895431 4 0 3.10457 0 2C0 0.895431 0.89543 0 2 0Z"
+                                fill="#001A68" fill-opacity="0.2"/>
+                            <path
+                                d="M16 0C17.1046 0 18 0.895431 18 2C18 3.10457 17.1046 4 16 4C14.8954 4 14 3.10457 14 2C14 0.895431 14.8954 0 16 0Z"
+                                fill="#001A68" fill-opacity="0.2"/>
+                            <path
+                                d="M11 2C11 0.895431 10.1046 0 9 0C7.89543 0 7 0.895431 7 2C7 3.10457 7.89543 4 9 4C10.1046 4 11 3.10457 11 2Z"
+                                fill="#001A68" fill-opacity="0.2"/>
+                        </svg>
+                    </ButtonDots>
+                </Fio>
+                {cards.length!==0 &&
+                <Cards>
+                    {cards.map(el =>{
+
+                            let color = '#32C665';
+                            switch (el.status) {
+                                case 'ACTIVE':
+                                    color = '#32C665';
+                                case 'TEMPORARY BLOCKING':
+                                    color = '#A9A9A9';
+                                case 'BLOCKING':
+                                    color = '#F64E4E';
+                            }
+
+                            return (
+
+                                <CardItem key={el.id}>
+                                    <LeftSideCard>
+                                        <Dot color={el.status==='ACTIVE'? '#32C665': (el.status==='TEMPORARY BLOCKING'? '#A9A9A9' :'#F64E4E')}>
+
+                                        </Dot>
+
+                                        <Card>
+                                            <CardIco src={cardVisaImg}>
+                                            </CardIco>
+                                            <CardNumber>
+                                                *{el.card_number.slice(12,16)}
+                                            </CardNumber>
+                                        </Card>
+
+                                        <Summ>
+                                            {(el.account).toLocaleString() + ' ₽'}
+                                        </Summ>
+                                    </LeftSideCard>
+
+                                    <Line>
+
+                                    </Line>
+
+
+                                    <Kategory>
+                                        {el.type}
+                                    </Kategory>
+                                </CardItem>
+                            )
                         }
 
-                        return (
+                    )}
 
-                            <CardItem key={el.id}>
-                                <LeftSideCard>
-                                    <Dot color={el.status==='ACTIVE'? '#32C665': (el.status==='TEMPORARY BLOCKING'? '#A9A9A9' :'#F64E4E')}>
-
-                                    </Dot>
-
-                                    <Card>
-                                        <CardIco src={cardVisaImg}>
-                                        </CardIco>
-                                        <CardNumber>
-                                            *{el.card_number.slice(12,16)}
-                                        </CardNumber>
-                                    </Card>
-
-                                    <Summ>
-                                        {(el.account).toLocaleString() + ' ₽'}
-                                    </Summ>
-                                </LeftSideCard>
-
-                                <Line>
-
-                                </Line>
-
-
-                                <Kategory>
-                                    {el.type}
-                                </Kategory>
-                            </CardItem>
-                        )
-                    }
-
-                )}
-
-                {/* <CardItem>
+                    {/* <CardItem>
                     <LeftSideCard>
                         <Dot color={'#32C665'}>
 
@@ -116,8 +122,8 @@ const Item = ({name, patronymic, surname, id, cards}) => {
                     </Kategory>
                 </CardItem>*/}
 
-            </Cards>
-            }
+                </Cards>
+                }
 
         </EmployerItem>
 

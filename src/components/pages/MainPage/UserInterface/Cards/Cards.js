@@ -17,32 +17,46 @@ import {
 import Card from "./Card/Card";
 import MyButton from "../../../../common/Buttons/MyButton";
 
-const CardsBlock = () => {
+const CardsBlock = ({handleCurrentSlide, cardsInfo , currentSlide}) => {
+    console.log( cardsInfo)
+
     return (
             <Cards>
                 <H>Карты сотрудника</H>
+
+                {cardsInfo.length!==0 &&
                 <Sliderblock>
-                    <SliderCards id={'mainpage_1'} render={() =>
-                        <>
-                            <div className="slide slide-3">
-                                <Card/>
+
+                <SliderCards handleCurrentSlide={handleCurrentSlide} id={'mainpage_1'} render={() =>
+                    <>
+
+                        {cardsInfo?.map((el, index) =>
+                            <div key={index} className={"slide"}>
+                                <Card data={el} />
                             </div>
-                            <div className="slide slide-1">
-                                <Card/>
-                            </div>
-                            <div className="slide slide-2">
-                                <Card/>
-                            </div>
-                            <div className="slide slide-4">
-                                <Card/>
-                            </div>
-                        </>
-                    }/>
+                        )}
+
+                {/*<div className="slide slide-3">
+                    <Card data={cardsInfo[0]}/>
+                </div>
+                <div className="slide slide-1">
+                    <Card data={cardsInfo[1]}/>
+                </div>*/}
+               {/* <div className="slide slide-2">
+                    <Card/>
+                </div>
+                <div className="slide slide-4">
+                    <Card/>
+                </div>*/}
+                    </>
+                }/>
 
                     <CurrentCardText>
-                        ТЕКУЩАЯ
+                    ТЕКУЩАЯ
                     </CurrentCardText>
-                </Sliderblock>
+                    </Sliderblock>
+
+                    }
 
                 <CardInfo>
                     <TopMenuCard>
@@ -52,7 +66,7 @@ const CardsBlock = () => {
                                     Статус
                                 </p>
                                 <Status>
-                                    Активна
+                                    {cardsInfo[currentSlide].status}
                                 </Status>
                             </MenuItem>
 
@@ -61,7 +75,7 @@ const CardsBlock = () => {
                                     Баланс
                                 </p>
                                 <Status>
-                                    {(18260).toLocaleString()+' ₽'}
+                                    {(cardsInfo[currentSlide].account).toLocaleString()+' ₽'}
                                 </Status>
                             </MenuItem>
 
@@ -71,7 +85,7 @@ const CardsBlock = () => {
                                 </p>
 
                                 <Status>
-                                    Транспорт
+                                    {cardsInfo[currentSlide].type}
                                 </Status>
                             </MenuItem>
 
@@ -81,7 +95,7 @@ const CardsBlock = () => {
                                 </p>
 
                                 <Status>
-                                    Оплата такси
+                                    {cardsInfo[currentSlide].purpose_of_creation}
                                 </Status>
                             </MenuItem>
 

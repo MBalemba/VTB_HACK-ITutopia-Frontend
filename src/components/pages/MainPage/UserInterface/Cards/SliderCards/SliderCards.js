@@ -112,6 +112,7 @@ class SliderCards extends Component {
     }
 
     getPosition() {
+        this.props.handleCurrentSlide(this.currentSlide);
         return -this.currentSlide * this.width
     }
 

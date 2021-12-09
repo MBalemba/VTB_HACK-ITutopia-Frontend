@@ -62,7 +62,7 @@ export default class AdminStore {
     getCurrentCheck() {
         return currentAdminCheck()
             .then(({data}) => {
-
+debugger
                 this._currentCheck = {
                     account_number: [data.account_number.slice(0, 4), data.account_number.slice(4, 8), data.account_number.slice(8, 12), data.account_number.slice(12, 16), data.account_number.slice(16, 20)],
                     currency: data.currency,
@@ -71,7 +71,7 @@ export default class AdminStore {
                 return Promise.resolve()
             })
             .catch(({response}) => {
-
+                debugger
                 return Promise.reject()
             })
     }
@@ -84,7 +84,7 @@ export default class AdminStore {
     getAllTree() {
         return departmentsWorkersCards()
             .then(({data}) => {
-                debugger
+
                 this._allTree = [
                     ...data
                 ]
@@ -98,13 +98,12 @@ export default class AdminStore {
 
 
     get allTree() {
-        debugger
         return toJS(this._allTree)
     }
 
     getAllWorkers() {
         return AllWorkers().then(({data}) => {
-            debugger
+
             this._allWorkers = [
                 ...data
             ]
@@ -122,7 +121,7 @@ export default class AdminStore {
 
     getAllDepartments() {
         return AllDepartments().then(({data}) => {
-            debugger
+
             this._allDepartments= [
                 ...data
             ]
@@ -142,7 +141,7 @@ export default class AdminStore {
     addDepartment(data) {
         return addDepartment(data)
             .then(({data}) => {
-                debugger
+
                 return Promise.resolve()
             })
             .catch(({response}) => {
@@ -153,7 +152,7 @@ export default class AdminStore {
     addWorker(data){
         return addWorker(data)
             .then(({data}) => {
-                debugger
+
                 return Promise.resolve()
             })
             .catch(({response}) => {
@@ -163,7 +162,6 @@ export default class AdminStore {
     addCard(data){
         return addCard(data)
             .then(({data}) => {
-                debugger
                 return Promise.resolve()
             })
             .catch(({response}) => {

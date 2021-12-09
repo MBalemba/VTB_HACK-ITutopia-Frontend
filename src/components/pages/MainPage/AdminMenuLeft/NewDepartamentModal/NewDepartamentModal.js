@@ -76,7 +76,7 @@ const NewDepartamentModal = observer(({employers = [], active, setActive}) => {
 
 
     function deleteEmp(id) {
-        debugger
+
         setWorkers(workers.filter(el => !el.id === id))
     }
 

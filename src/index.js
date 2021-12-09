@@ -5,11 +5,13 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import LoginStore from "./store/LoginStore";
 import AdminStore from "./store/AdminStore";
+import UserStore from "./store/UserStore";
 
 
 export const Context = createContext(null)
-export const login = new LoginStore()
-export const admin = new AdminStore()
+export const login = new LoginStore();
+export const admin = new AdminStore();
+export const user = new UserStore();
 
 ReactDOM.render(
     <React.StrictMode>
@@ -18,6 +20,7 @@ ReactDOM.render(
             <Context.Provider value = {{
                 login: login,
                 admin: admin,
+                user: user,
             }}>
                 <App/>
             </Context.Provider>

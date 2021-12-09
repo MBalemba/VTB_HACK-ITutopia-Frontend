@@ -30,14 +30,14 @@ const App = observer(() => {
     useEffect(() => {
 
         login.doRefresh().then(() => {
-            debugger
+
             setTimeout(() => {
                 login.setFirstLoad(false)
             }, 500)
 
 
         }).catch(() => {
-            debugger
+
             setTimeout(() => {
                 login.setFirstLoad(false)
             }, 500)

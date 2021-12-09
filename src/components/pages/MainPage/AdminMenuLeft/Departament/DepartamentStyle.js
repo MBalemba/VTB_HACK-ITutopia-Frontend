@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {NavLink} from "react-router-dom";
 
 export const Container = styled.div`
   width: 100%;
@@ -50,11 +51,21 @@ export const EmployersContent = styled.div`
   padding-top: 20px;
   
 `
-export const EmployerItem = styled.div`
+export const EmployerItem = styled(NavLink)`
   cursor: pointer;
   margin-bottom: 35px;
+  text-decoration: none;
   &:last-child{
     margin-bottom: 0px;
+  }
+  &:active{
+    text-decoration: none;
+  }
+  
+  &.active{
+    min-width: 200px;
+    min-height:200px;
+    background-color:black;
   }
 `
 export const Fio = styled.div`

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Container} from "../AdminInterfaces/AdminInterfacesStyle";
 import {
     Account,
@@ -17,10 +17,13 @@ import CardsBlock from "./Cards/Cards";
 import PieChart from "../AdminInterfaces/PieChart/PieChart";
 import HistoryTransaction from "../AdminInterfaces/HistoryTransaction/HistoryTransaction";
 import {Ph} from "../AdminInterfaces/HistoryTransaction/HistoryTransactionStyle";
+import {observer} from "mobx-react-lite";
+import {useParams} from "react-router-dom";
+import {Context} from "../../../../index";
 
 
-export const AccountComponent = ({fio = '', departamentName = '', src= ''})=>{
-    return  <Account>
+export const AccountComponent = ({fio = '', departamentName = '', src = ''}) => {
+    return <Account>
         <Picture src={src}>
 
         </Picture>
@@ -37,11 +40,33 @@ export const AccountComponent = ({fio = '', departamentName = '', src= ''})=>{
     </Account>
 }
 
-const UserInterface = () => {
+const UserInterface = observer(() => {
+
+    let {id} = useParams();
+    const {user} = useContext(Context)
+    const [currentSlide, setCurrentSlide] = useState('0')
+    console.log(currentSlide)
+
+    useEffect(() => {
+        if(id){
+            user.getWorkerInfo(id).then(()=>{
+
+            })
+        }
+    }, [id])
+
+    useEffect(() => {
+        if(id){
+            user.getInfoOfCards(id).then(()=>{
+
+            })
+        }
+    }, [id])
+
     return (
         <Container>
             <ProfileInfo>
-                <AccountComponent fio = 'Иванов Иван Иванович' departamentName = 'Отдел маркетинга' src= '' />
+                <AccountComponent fio={user.workerInfo.surname+' '+user.workerInfo.name +' '+ user.workerInfo.patronymic} departamentName={user.workerInfo.departmentType} src=''/>
 
 
                 <Balance>
@@ -52,14 +77,14 @@ const UserInterface = () => {
                 </Balance>
             </ProfileInfo>
 
-            <CardsBlock/>
+            <CardsBlock currentSlide={currentSlide} handleCurrentSlide={setCurrentSlide} cardsInfo={user.infoOfCards} />
 
-            <PieChart />
+            <PieChart/>
 
-            <HistoryTransaction />
+            <HistoryTransaction/>
 
         </Container>
     );
-};
+});
 
 export default UserInterface;

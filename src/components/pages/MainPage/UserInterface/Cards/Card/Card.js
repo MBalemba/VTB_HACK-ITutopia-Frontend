@@ -13,11 +13,14 @@ import {
 } from "./CardStyle";
 
 const Card = ({
-                  cardnumber = ['2343', '4334', '2343', '3423'],
-                  personName = 'IVANOV IVAN',
-                  moneyAmount = '18298',
+                    data,
                     isEmpty = false
               }) => {
+
+    
+    console.log(data);
+    
+
     return (
         <Container>
             <BigCircle/>
@@ -39,7 +42,7 @@ const Card = ({
                     <SumBlock>
                         {isEmpty ? '0 ₽':
                             (
-                                moneyAmount + ' ₽'
+                                (data.account).toLocaleString() + ' ₽'
                             )
                         }
 
@@ -48,7 +51,7 @@ const Card = ({
 
                 <MiddleBlock>
                     <Category>
-                        Транспорт
+                        {data?.type}
                     </Category>
 
                     <NumberBlock>
@@ -64,12 +67,18 @@ const Card = ({
                                     </NumberItem>
                                     )
                                 :
-                                cardnumber.map((el, id) =>
 
-                                    <NumberItem key={id}>
-                                        {el}
-                                    </NumberItem>
-                                )
+
+
+
+                                            [data.card_number.slice(0, 4), data.card_number.slice(4, 8), data.card_number.slice(8, 12), data.card_number.slice(12, 16)].map((el, id) =>
+
+                                                <NumberItem key={id}>
+                                                    {el}
+                                                </NumberItem>
+                                            )
+
+
                             }
 
                         </Number>
@@ -84,10 +93,10 @@ const Card = ({
                 </MiddleBlock>
 
                 <FooterCard>
-                    <FioCard>
-                        {!isEmpty && personName}
-                        {isEmpty && '**** ****'}
-                    </FioCard>
+                    {/*<FioCard>*/}
+                    {/*    {!isEmpty && personName}*/}
+                    {/*    {isEmpty && '**** ****'}*/}
+                    {/*</FioCard>*/}
 
                     <LogoCard>
                         <svg width="41" height="14" viewBox="0 0 41 14" fill="none" xmlns="http://www.w3.org/2000/svg">

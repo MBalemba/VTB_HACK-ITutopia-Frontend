@@ -28,7 +28,7 @@ const AuthPage = observer(() => {
 
 
     function doRequest() {
-        debugger
+
         loginStore.doAutorizate(login, password).then(()=>{
 
         })
