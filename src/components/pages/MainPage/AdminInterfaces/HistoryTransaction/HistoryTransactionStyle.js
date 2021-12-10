@@ -90,8 +90,16 @@ export const IcoUp = () => {
 
 export const TransactionFIRM = styled.div`
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-width: 20%;
+`
+export const Wrapper_1 = styled.div`
+  min-width: 70%;
+  display: flex;
   justify-content: space-between;
   align-items: center;
+
 `
 
 export const Picture = styled.div`

@@ -8,7 +8,7 @@ import {
     Ph, Picture, Price, PriceValue, TextBlock, Time,
     TransactionFIRM,
     TransactionItems,
-    TrItem
+    TrItem, Wrapper_1
 } from "./HistoryTransactionStyle";
 import {objIcons} from "../../../../../assets/SpentMoneyServicesIcons/ObjIcons";
 import MyButton from "../../../../common/Buttons/MyButton";
@@ -77,49 +77,58 @@ export const HistoryTransaction = observer(({isHeader = true, data: information 
                                                 </TextBlock>
                                             </TransactionFIRM>
 
-                                            <Person>
-                                                <IcoPerson>
-                                                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
-                                                         xmlns="http://www.w3.org/2000/svg">
-                                                        <circle cx="12.7974" cy="12" r="12" fill="#0057FF" fill-opacity="0.1"/>
-                                                        <path
-                                                            d="M12.5472 6.16602C9.38495 6.16602 6.71387 8.8371 6.71387 11.9993C6.71387 15.1616 9.38495 17.8327 12.5472 17.8327C15.7095 17.8327 18.3805 15.1616 18.3805 11.9993C18.3805 8.8371 15.7095 6.16602 12.5472 6.16602ZM12.5472 9.08268C13.5546 9.08268 14.2972 9.82468 14.2972 10.8327C14.2972 11.8407 13.5546 12.5827 12.5472 12.5827C11.5404 12.5827 10.7972 11.8407 10.7972 10.8327C10.7972 9.82468 11.5404 9.08268 12.5472 9.08268ZM9.5687 14.783C10.092 14.013 10.9646 13.4997 11.9639 13.4997H13.1305C14.1304 13.4997 15.0025 14.013 15.5257 14.783C14.7802 15.581 13.7226 16.0827 12.5472 16.0827C11.3718 16.0827 10.3142 15.581 9.5687 14.783Z"
-                                                            fill="#0057FF"/>
-                                                    </svg>
 
-                                                </IcoPerson>
+                                            <Wrapper_1>
 
-                                                <Fio>
-                                                    {fio}
-                                                </Fio>
-                                            </Person>
+                                                <Person>
+                                                    <IcoPerson>
+                                                        <svg width="25" height="24" viewBox="0 0 25 24" fill="none"
+                                                             xmlns="http://www.w3.org/2000/svg">
+                                                            <circle cx="12.7974" cy="12" r="12" fill="#0057FF" fill-opacity="0.1"/>
+                                                            <path
+                                                                d="M12.5472 6.16602C9.38495 6.16602 6.71387 8.8371 6.71387 11.9993C6.71387 15.1616 9.38495 17.8327 12.5472 17.8327C15.7095 17.8327 18.3805 15.1616 18.3805 11.9993C18.3805 8.8371 15.7095 6.16602 12.5472 6.16602ZM12.5472 9.08268C13.5546 9.08268 14.2972 9.82468 14.2972 10.8327C14.2972 11.8407 13.5546 12.5827 12.5472 12.5827C11.5404 12.5827 10.7972 11.8407 10.7972 10.8327C10.7972 9.82468 11.5404 9.08268 12.5472 9.08268ZM9.5687 14.783C10.092 14.013 10.9646 13.4997 11.9639 13.4997H13.1305C14.1304 13.4997 15.0025 14.013 15.5257 14.783C14.7802 15.581 13.7226 16.0827 12.5472 16.0827C11.3718 16.0827 10.3142 15.581 9.5687 14.783Z"
+                                                                fill="#0057FF"/>
+                                                        </svg>
 
-                                            <Departament>
-                                                {name}
-                                            </Departament>
+                                                    </IcoPerson>
 
-                                            <Category>
-                                                {type}
-                                            </Category>
+                                                    <Fio>
+                                                        {fio}
+                                                    </Fio>
+                                                </Person>
 
-                                            <Card>
-                                                <CardIco src={cardVisaImg}>
-                                                </CardIco>
-                                                <CardNumber>
-                                                    *{Number(card_number) % 10000}
-                                                </CardNumber>
-                                            </Card>
+                                                <Wrapper_1>
 
-                                            <Price>
-                                                <PriceValue>
-                                                    {(value).toLocaleString()}
-                                                </PriceValue>
+                                                    <Departament>
+                                                        {name}
+                                                    </Departament>
 
-                                                <Currency>
-                                                    {currency}
-                                                </Currency>
+                                                    <Category>
+                                                        {type}
+                                                    </Category>
 
-                                            </Price>
+                                                    <Card>
+                                                        <CardIco src={cardVisaImg}>
+                                                        </CardIco>
+                                                        <CardNumber>
+                                                            *{Number(card_number) % 10000}
+                                                        </CardNumber>
+                                                    </Card>
+
+                                                    <Price>
+                                                        <PriceValue>
+                                                            {(value).toLocaleString()}
+                                                        </PriceValue>
+
+                                                        <Currency>
+                                                            {currency}
+                                                        </Currency>
+
+                                                    </Price>
+
+                                                </Wrapper_1>
+
+                                            </Wrapper_1>
 
                                         </TrItem>
                                         <Divider/>
@@ -137,7 +146,7 @@ export const HistoryTransaction = observer(({isHeader = true, data: information 
             {
                 paginate && <PaginationBlock>
                     <MyButton clickHandler={paginateClick} width={'240px'} height={'40px'}>
-                        Загрузить еще {admin.currentPage}
+                        Загрузить еще
                     </MyButton>
 
                 </PaginationBlock>

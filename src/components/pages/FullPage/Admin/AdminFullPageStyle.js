@@ -27,6 +27,11 @@ export const GoBack = styled.div`
   justify-content: flex-start;
   cursor: pointer;
   margin-bottom: 40px;
+  transition: 0.5s;
+  &:hover{
+    transform: translateX(-1em);
+    transform: scale(1.05);
+  }
 `
 export const Arrow = styled.div`
   margin-right: 8px;
