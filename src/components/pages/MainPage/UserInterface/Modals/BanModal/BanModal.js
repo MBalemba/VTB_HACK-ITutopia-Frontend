@@ -95,15 +95,26 @@ const BanModal = ({info, cardId, userId, active, setActive, fio, departamentName
                 <MyButton bgc={'#F64E4E'} clickHandler={() => {
                     user.perpetualCardBlocking(cardId).then(()=>{
                         setActive(false)
+
+                        admin.fiveGeneralInformation().then(() => {
+
+                        }).catch(() => {
+
+                        })
+
+
+                        admin.getAllTree().then(() => {
+
+                        }).catch(() => {
+
+                        })
+
+
                     }).catch(()=>{
 
                     })
 
-                    admin.getAllTree().then(() => {
 
-                    }).catch(() => {
-
-                    })
 
 
 

@@ -26,7 +26,7 @@ const LimitModal = observer(({info, cardId, userId, active, setActive, fio, depa
 
 
     let {id} = useParams();
-    const {user} = useContext(Context)
+    const {user, admin} = useContext(Context)
     const [days, setDays] = useState('')
     const [summ, setSumm] = useState('')
     const [check, setCheck] = useState(false)
@@ -157,6 +157,8 @@ const LimitModal = observer(({info, cardId, userId, active, setActive, fio, depa
 
                 <MyButton clickHandler={() => {
 
+
+
                     const data = {
                         autoUpdate: check,
                         card_id: cardId,
@@ -169,13 +171,22 @@ const LimitModal = observer(({info, cardId, userId, active, setActive, fio, depa
                         setCheck(false)
                         setSumm('')
                         setDays('')
+
+                        admin.fiveGeneralInformation().then(() => {
+
+                        }).catch(() => {
+
+                        })
+
+                        user.getInfoOfCards(id).then(()=>{
+
+                        })
+
                     })
 
 
 
-                    user.getInfoOfCards(id).then(()=>{
 
-                    })
 
 
                 }} disabled={days==='' || summ===''} width={'200px'}
