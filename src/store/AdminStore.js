@@ -68,6 +68,7 @@ export default class AdminStore {
         //pagination
 
         this.currentPage = 0;
+        this.buttonDisabled = false
         this.isfetchingAdditionalData = false
 
         makeAutoObservable(this)
@@ -195,7 +196,7 @@ export default class AdminStore {
 
 
         return expenseSchedule(str).then(({data}) => {
-            debugger
+
             this._expenseSchedule = data
 
 
@@ -209,19 +210,10 @@ export default class AdminStore {
 
     topSpendingCategories(queryObj = {}) {
 
-        let j = 0;
-        let str;
+        let str = createQuery(queryObj)
 
-
-        for (let i in queryObj) {
-            j++
-        }
-
-        if (j === 0) {
-            str = ''
-        }
-
-        return topSpendingCategories(queryObj).then(({data}) => {
+        return topSpendingCategories(str).then(({data}) => {
+            debugger
             this._topSpendingCategories = data
             return Promise.resolve()
         })
@@ -232,29 +224,43 @@ export default class AdminStore {
     }
 
     transactionHistory(queryObj = {}, clear = true) {
-
-        let j = 0;
-        let str;
-
-        queryObj = {...queryObj, page: this.currentPage}
-
-
-        for (let i in queryObj) {
-            j++
+        debugger
+        if(clear){
+            this.currentPage = 0
         }
 
-        if (j === 0) {
-            str = ''
+        let str = createQuery(queryObj)
+
+        if(str!==''){
+            str= str + '&page=' + this.currentPage
+        } else{
+            str = '?page=' + this.currentPage
         }
 
+        return transactionHistory(str).then(({data}) => {
 
-        return transactionHistory(queryObj).then(({data}) => {
+            if(data[0]=== null && this.currentPage === 0 ){
+                this._transactionHistory = []
+                this.buttonDisabled = true
+                return Promise.resolve()
+            }
+
+            this.buttonDisabled = false
+
+
             if (clear) {
                 this.currentPage = 1
                 this._transactionHistory = data
             } else {
-                this._transactionHistory = [...this._transactionHistory, ...data]
-                this.currentPage = this.currentPage + 1
+
+                if(data[0]=== null){
+                    this.buttonDisabled = true
+                    return Promise.resolve()
+                }
+                    this._transactionHistory = [...this._transactionHistory, ...data]
+                    this.currentPage = this.currentPage + 1
+
+
             }
 
 
@@ -281,6 +287,10 @@ export default class AdminStore {
 
     get getTypeOfCards(){
         return this._typeOfCards.map(el=>({value: el, label: el}))
+    }
+
+    get getButtonDisabled(){
+        return this.buttonDisabled
     }
 
 

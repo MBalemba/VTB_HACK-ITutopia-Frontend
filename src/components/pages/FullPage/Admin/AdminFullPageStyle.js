@@ -83,6 +83,7 @@ export const TextDatePicker = styled.div`
 
 export const DonutSection = styled.div`
   margin-top: 30px;
+  
 `
 
 export const MenuSection = styled.div`
@@ -97,6 +98,7 @@ export const SelectWrapper = styled.div`
 `
 export const SelectItem = styled.div`
   margin-right: 10px;
+  min-width: 200px;
   max-width: 200px;
 `
 export const HistorySection = styled.div`

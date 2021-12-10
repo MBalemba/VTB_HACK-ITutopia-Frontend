@@ -97,7 +97,7 @@ const AdminFullPage = observer(() => {
 
     //get data for pie
      useEffect(() => {
-        admin.topSpendingCategories({})
+        admin.topSpendingCategories(getQueryObject())
             .then(() => {
 
                 }
@@ -108,7 +108,7 @@ const AdminFullPage = observer(() => {
 
     //get history
     useEffect(() => {
-        admin.transactionHistory({})
+        admin.transactionHistory(getQueryObject(false))
             .then(() => {
 
                 }
@@ -139,7 +139,7 @@ const AdminFullPage = observer(() => {
 
 
     function clickButtonPaginate() {
-        admin.transactionHistory(getQueryObject(),false)
+        admin.transactionHistory(getQueryObject(false),false)
             .then(() => {
 
                 }
@@ -154,10 +154,11 @@ const AdminFullPage = observer(() => {
             if(startDate ===''){
 
             } else{
-                obj.from = startDate.getFullYear()+'-'+startDate.getMonth() +'-'+(Math.floor(startDate.getDate()/10)<1?'0'+ startDate.getDate(): startDate.getDate())
+                obj.from = startDate.getFullYear()+'-'+(Math.floor((startDate.getMonth()+1)/10)<1 ? ('0'+ (startDate.getMonth()+1)) : (startDate.getMonth()+1)) +'-'+(Math.floor(startDate.getDate()/10)<1?'0'+ startDate.getDate(): startDate.getDate())
+
             }
 
-            obj.to = endDate.getFullYear()+'-'+(Math.floor(endDate.getMonth()/10)<1?('0'+ endDate.getMonth()): endDate.getMonth()) +'-'+(Math.floor(endDate.getDate()/10)<1?'0'+ endDate.getDate(): endDate.getDate())
+            obj.to = endDate.getFullYear()+'-'+(Math.floor((endDate.getMonth()+1)/10)<1 ? ('0'+ (endDate.getMonth()+1)) : (endDate.getMonth()+1)) +'-'+(Math.floor(endDate.getDate()/10)<1?'0'+ endDate.getDate(): endDate.getDate())
 
             if(selectedOption) obj.purpose =selectedOption.value
 
@@ -287,7 +288,7 @@ const AdminFullPage = observer(() => {
 
 
                 <ContainerTransaction>
-                    <HistoryTransaction paginateClick={clickButtonPaginate}  paginate={true} data={admin.getTransactionHistory} />
+                    <HistoryTransaction paginateClick={clickButtonPaginate}  paginate={!admin.getButtonDisabled} data={admin.getTransactionHistory} />
                 </ContainerTransaction>
             </HistorySection>
 

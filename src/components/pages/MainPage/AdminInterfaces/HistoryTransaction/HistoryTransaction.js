@@ -22,7 +22,7 @@ export const HistoryTransaction = observer(({isHeader = true, data: information 
         <ContainerHistory>
 
             {isHeader && <Ph>
-                {information?.length === 0 ? 'У вас нет истори операций' : 'История последних операций'}
+                {information?.length === 0 ? 'У вас нет истории операции по таким критериям' : 'История последних операций'}
             </Ph>}
 
 
@@ -134,13 +134,16 @@ export const HistoryTransaction = observer(({isHeader = true, data: information 
                 )
             }
 
+            {
+                paginate && <PaginationBlock>
+                    <MyButton clickHandler={paginateClick} width={'240px'} height={'40px'}>
+                        Загрузить еще {admin.currentPage}
+                    </MyButton>
 
-            <PaginationBlock>
-                <MyButton clickHandler={paginateClick} width={'240px'} height={'40px'}>
-                    Загрузить еще {admin.currentPage}
-                </MyButton>
+                </PaginationBlock>
 
-            </PaginationBlock>
+            }
+
 
         </ContainerHistory>
 

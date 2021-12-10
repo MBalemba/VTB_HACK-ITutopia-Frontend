@@ -89,12 +89,12 @@ export const expenseSchedule = async (str='') => {
 }
 
 export const topSpendingCategories = async (str='') => {
-    const response = await $authHost.get('/transaction/topSpendingCategories')
+    const response = await $authHost.get('/transaction/topSpendingCategories'+str)
     return response
 }
 
-export const transactionHistory = async () => {
-    const response = await $authHost.get('/transaction/transactionHistory')
+export const transactionHistory = async (str) => {
+    const response = await $authHost.get('/transaction/transactionHistory'+str)
     return response
 }
 
