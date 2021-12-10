@@ -244,6 +244,7 @@ const AdminFullPage = observer(() => {
                 <SelectWrapper>
                     <SelectItem>
                         <Select
+                            isClearable={true}
                             className={'ads'}
                             classNamePrefix="menu_admin"
                             placeholder = 'Тип'
@@ -255,6 +256,8 @@ const AdminFullPage = observer(() => {
 
                     <SelectItem>
                         <Select
+                            isClearable
+                            isClosed ={true}
                             className={'ads'}
                             classNamePrefix="menu_admin"
                             placeholder = 'Назначение'
