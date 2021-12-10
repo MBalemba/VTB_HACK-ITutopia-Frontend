@@ -58,9 +58,9 @@ class SliderCards extends Component {
         const currentDevices = this.props?.userId
 
 
-        if(prevDevices !== currentDevices || prevProps.cardsInfoLength !== this.props.cardsInfoLength){
+        if(prevDevices !== currentDevices ||  prevProps.cardsInfoLength !== this.props.cardsInfoLength){
             debugger
-            setTimeout(()=>{this.setParameters()}, 200)
+            setTimeout(()=>{this.setParameters()}, 300)
         }
 
 

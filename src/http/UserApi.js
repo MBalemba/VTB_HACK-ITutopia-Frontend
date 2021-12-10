@@ -19,6 +19,10 @@ export const currentAdminCheck = async () => {
     return response
 }
 
+
+
+
+
 export const departmentsWorkersCards = async () => {
     const response = await $authHost.get('/start/getDepartmentsWorkersCards')
     return response
@@ -40,6 +44,13 @@ export const getWorkerInfo = async (id) => {
 }
 export const getInfoOfCardsByWorkerId = async (id) => {
     const response = await $authHost.get('/worker/getInfoOfCardsByWorkerId'+`?worker_id=${id}`)
+    return response
+}
+
+
+
+export const blablabla = async (id) => {
+    const response = await $authHost.get('/createTransactions')
     return response
 }
 
@@ -69,6 +80,41 @@ export const setLimitOnCard = async (data) => {
     return response
 }
 
+
+//TransactionAdmin
+
+export const expenseSchedule = async (str='') => {
+    const response = await $authHost.get('/transaction/expenseSchedule'+str)
+    return response
+}
+
+export const topSpendingCategories = async (str='') => {
+    const response = await $authHost.get('/transaction/topSpendingCategories')
+    return response
+}
+
+export const transactionHistory = async () => {
+    const response = await $authHost.get('/transaction/transactionHistory')
+    return response
+}
+
+
+//TransactionUser
+
+
+
+
+export const topSpendingCategoriesUser = async (str='') => {
+
+    const response = await $authHost.get('/transaction/topSpendingCategoriesByWorker'+str)
+    return response
+}
+
+export const transactionHistoryUser = async (str='') => {
+
+    const response = await $authHost.get('/transaction/transactionHistoryByWorkerId'+str)
+    return response
+}
 
 
 

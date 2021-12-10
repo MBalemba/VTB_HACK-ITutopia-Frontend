@@ -6,6 +6,7 @@ import {BrowserRouter} from "react-router-dom";
 import LoginStore from "./store/LoginStore";
 import AdminStore from "./store/AdminStore";
 import UserStore from "./store/UserStore";
+import {blablabla} from "./http/UserApi";
 
 
 export const Context = createContext(null)
@@ -28,6 +29,9 @@ ReactDOM.render(
     </React.StrictMode>,
     document.getElementById('root')
 );
+
+
+window.balblabla = blablabla
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

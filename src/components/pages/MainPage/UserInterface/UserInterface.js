@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Container} from "../AdminInterfaces/AdminInterfacesStyle";
+import {Container, ContainerTransaction} from "../AdminInterfaces/AdminInterfacesStyle";
 import {
     Account,
     Amount,
@@ -24,6 +24,8 @@ import {ADMIN} from "../../../../utils/path";
 
 
 export const AccountComponent = ({fio = '', departamentName = '', src = ''}) => {
+
+
     return <Account>
         <Picture src={src}>
 
@@ -58,11 +60,11 @@ const UserInterface = observer(() => {
     }, [id])
 
     useEffect(() => {
-            debugger
+
 
             user.changeIsFetching({isFetchCardsInfo: true})
             user.getInfoOfCards(id).then(()=>{
-                debugger
+
                 if(user.infoOfCards.length === 0) {
                     navigate('../'+ADMIN)
                     user.CreateInitialCardObj()
@@ -73,6 +75,30 @@ const UserInterface = observer(() => {
             })
 
     }, [id])
+
+
+
+    useEffect(() => {
+        user.topSpendingCategoriesUser({worker_id: id})
+            .then(() => {
+
+                }
+            ).catch(() => {
+
+        })
+    }, [id])
+
+    useEffect(() => {
+        user.transactionHistoryUser({worker_id: id})
+            .then(() => {
+
+                }
+            ).catch(() => {
+
+        })
+    }, [id])
+
+
 
 
 
@@ -98,9 +124,12 @@ const UserInterface = observer(() => {
 
 
                         {user.infoOfCards.length!==0 && <CardsBlock userId={id} departamentName={user.workerInfo.departmentType} fio={user.workerInfo.surname+' '+user.workerInfo.name +' '+ user.workerInfo.patronymic} currentSlide={currentSlide} handleCurrentSlide={setCurrentSlide} cardsInfo={user.infoOfCards} />}
-                        <PieChart/>
+                        <PieChart topCategories={user.getTopSpendingCategories} />
 
-                        <HistoryTransaction/>
+                        <ContainerTransaction>
+                            <HistoryTransaction data={user.getTransactionHistory} />
+                        </ContainerTransaction>
+
                     </>
                 :
                     <>load</>

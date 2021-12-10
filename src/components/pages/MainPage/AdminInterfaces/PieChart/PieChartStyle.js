@@ -112,7 +112,7 @@ export const ItemList = styled.div`
 export const Dot = styled.div`
   width: 10px;
   height: 10px;
-  background: #0643C2;
+  background: ${({color})=>color};
   border-radius: 50%;
   margin-right: 10px;
 `

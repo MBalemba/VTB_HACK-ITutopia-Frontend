@@ -1,6 +1,8 @@
 import React, {useContext, useEffect} from 'react';
 import ReactApexChart from "react-apexcharts";
 import {ContainerChart} from "./WeekChartStyle";
+import {observer} from "mobx-react-lite";
+import {Context} from "../../../../../index";
 
 
 class ApexChat extends React.Component {
@@ -77,7 +79,7 @@ class ApexChat extends React.Component {
                     labels: {
                         show: true,
                         formatter: (value) => {
-                            return Math.ceil(value/1000) + ' тыс'
+                            return Math.ceil(value / 1000) + ' тыс'
                         },
                         style: {
                             colors: ['rgba(20, 24, 52, 0.4)'],
@@ -133,8 +135,6 @@ class ApexChat extends React.Component {
             },
 
 
-
-
         }
     }
 
@@ -142,20 +142,46 @@ class ApexChat extends React.Component {
 
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot){
-/*
-        if(prevProps.dateData.length !== this.props.dateData.length){
-            const arr = this.props.dateData.map((el,index)=>[index+1 , el.sum])
+    componentDidUpdate(prevProps, prevState, snapshot) {
 
-            this.setState({
-                ...this.state,
-                series: [{
-                    name: this.state.series.name,
-                    data: arr,
-                    store: [...this.props.dateData]
-                }]
-            })
-        }*/
+        if(prevProps.data === null){
+            if (this.props.data !== null) {
+                this.setState({
+                    ...this.state,
+                    series: [{
+                        name: "Desktops",
+                        data: this.props.data.map((el, index) => [index + 1, el.amount])
+                    }],
+
+                    options: {
+                        ...this.state.options,
+                        xaxis: {
+                            ...this.state.options.xaxis,
+                            categories: this.props.data.map((el, index) => el.date),
+                        }
+                    }
+
+
+                })
+            }
+        }
+
+
+
+
+        /*
+                if(prevProps.dateData.length !== this.props.dateData.length){
+                    const arr = this.props.dateData.map((el,index)=>[index+1 , el.sum])
+
+                    this.setState({
+                        ...this.state,
+                        series: [{
+                            name: this.state.series.name,
+                            data: arr,
+                            store: [...this.props.dateData]
+                        }]
+                    })
+                }*/
     }
 
 
@@ -173,14 +199,15 @@ class ApexChat extends React.Component {
 }
 
 
-const WeekChart = () => {
+const WeekChart = observer(() => {
+    const {admin} = useContext(Context)
 
 
     return (
         <ContainerChart className={'monthChart'}>
-            <ApexChat />
+            <ApexChat data={admin.getExpenseSchedule}/>
         </ContainerChart>
     );
-};
+});
 
 export default WeekChart;

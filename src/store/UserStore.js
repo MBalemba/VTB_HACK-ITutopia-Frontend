@@ -1,5 +1,11 @@
 import {makeAutoObservable, toJS} from "mobx";
-import {getInfoOfCardsByWorkerId, getWorkerInfo, setLimitOnCard, transferToCard} from "../http/UserApi";
+import {
+    getInfoOfCardsByWorkerId,
+    getWorkerInfo,
+    setLimitOnCard, topSpendingCategoriesUser,
+    transactionHistoryUser,
+    transferToCard
+} from "../http/UserApi";
 
 
 export default class UserStore {
@@ -35,6 +41,13 @@ export default class UserStore {
             isFetchCardsInfo: true,
         }
 
+        this._expenseSchedule = null
+        this._topSpendingCategories = {
+            maxSum: null,
+            list: [],
+        }
+        this._transactionHistory = []
+
         makeAutoObservable(this)
     }
 
@@ -55,7 +68,7 @@ export default class UserStore {
 
 
     getInfoOfCards(id) {
-        debugger
+
         return getInfoOfCardsByWorkerId(id).then(({data}) => {
 
             this._infoOfCards = [...data]
@@ -83,12 +96,12 @@ export default class UserStore {
 
     setLimitOnCard(data){
         return setLimitOnCard(data).then(()=>{
-            debugger
+
 
             return Promise.resolve()
         }).catch(()=>{
 
-            debugger
+
             return Promise.resolve()
         })
     }
@@ -119,6 +132,86 @@ export default class UserStore {
 
     changeIsFetching(obj){
         this._isFecthing = {...this._isFecthing, ...obj}
+    }
+
+
+    //Transaction
+
+
+    topSpendingCategoriesUser(queryObj={}) {
+
+        let j = 0;
+        let str='';
+
+
+        for(let i in queryObj){
+            if(j===0){
+                str+='?'+ i+ '='+ queryObj[i]
+            } else {
+                str+='&'+ i+ '='+ queryObj[i]
+            }
+
+
+            j++
+
+        }
+
+        if(j===0){
+            str=''
+        }
+
+        return topSpendingCategoriesUser(str).then(({data}) => {
+            this._topSpendingCategories = data
+            return Promise.resolve()
+        })
+            .catch(({response}) => {
+
+                return Promise.reject()
+            })
+    }
+
+    transactionHistoryUser(queryObj = {},) {
+
+        let j = 0;
+        let str='';
+
+
+        for(let i in queryObj){
+            if(j===0){
+                str+='?'+ i+ '='+ queryObj[i]
+            } else {
+                str+='&'+ i+ '='+ queryObj[i]
+            }
+
+
+            j++
+
+        }
+
+        if(j===0){
+            str=''
+        }
+
+
+
+        return transactionHistoryUser(str).then(({data}) => {
+
+            this._transactionHistory = [...this._transactionHistory, ...data]
+            return Promise.resolve()
+        })
+            .catch(({response}) => {
+
+                return Promise.reject()
+            })
+    }
+
+
+    get getTopSpendingCategories(){
+        return toJS(this._topSpendingCategories)
+    }
+
+    get getTransactionHistory(){
+        return toJS(this._transactionHistory)
     }
 
 

@@ -108,7 +108,7 @@ const AdminMenuLeft = observer(() => {
 
     useEffect(() => {
         admin.getAllDepartments().then(()=>{
-            debugger
+
         }).catch(() => {
 
         })
@@ -117,7 +117,7 @@ const AdminMenuLeft = observer(() => {
 
     useEffect(()=>{
         admin.getCurrentCheck().then(()=>{
-            debugger
+
         }).catch(()=>{
 
         })

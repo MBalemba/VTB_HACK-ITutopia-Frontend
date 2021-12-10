@@ -10,6 +10,7 @@ import AdminFullPage from "./components/pages/FullPage/Admin/AdminFullPage";
 import FullPage from "./components/pages/FullPage/FullPage";
 import {observer} from "mobx-react-lite";
 import {Context} from "./index";
+import {blablabla} from "./http/UserApi";
 
 
 export function Redirect(to) {
@@ -26,6 +27,11 @@ const App = observer(() => {
 
     const {login} = useContext(Context)
     let navigate = useNavigate();
+
+    useEffect(()=>{
+
+    }, [])
+
 
     useEffect(() => {
 

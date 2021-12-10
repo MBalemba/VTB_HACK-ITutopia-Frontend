@@ -6,7 +6,7 @@ import {
     AllDepartments,
     AllWorkers,
     currentAdminCheck,
-    departmentsWorkersCards
+    departmentsWorkersCards, expenseSchedule, topSpendingCategories, transactionHistory
 } from "../http/UserApi";
 
 export default class AdminStore {
@@ -55,6 +55,12 @@ export default class AdminStore {
             }
         ]
 
+        this._expenseSchedule = null
+        this._topSpendingCategories = {
+            maxSum: null,
+            list: [],
+        }
+        this._transactionHistory = []
         makeAutoObservable(this)
     }
 
@@ -168,5 +174,103 @@ export default class AdminStore {
             })
     }
 
+
+
+
+    //transactions
+
+
+    expenseSchedule(queryObj ={}) {
+
+        let j = 0;
+        let str;
+
+
+        for(let i in queryObj){
+            j++
+        }
+
+        if(j===0){
+            str=''
+        }
+
+
+
+        return expenseSchedule(str).then(({data}) => {
+
+             this._expenseSchedule = data
+
+
+            return Promise.resolve()
+        })
+            .catch(({response}) => {
+
+                return Promise.reject()
+            })
+    }
+
+    topSpendingCategories(queryObj={}) {
+
+        let j = 0;
+        let str;
+
+
+        for(let i in queryObj){
+            j++
+        }
+
+        if(j===0){
+            str=''
+        }
+
+        return topSpendingCategories(queryObj).then(({data}) => {
+            this._topSpendingCategories = data
+            return Promise.resolve()
+        })
+            .catch(({response}) => {
+
+                return Promise.reject()
+            })
+    }
+
+    transactionHistory(queryObj = {}) {
+
+        let j = 0;
+        let str;
+
+
+        for(let i in queryObj){
+            j++
+        }
+
+        if(j===0){
+            str=''
+        }
+
+
+
+        return transactionHistory(queryObj).then(({data}) => {
+
+            this._transactionHistory = [...this._transactionHistory, ...data]
+            return Promise.resolve()
+        })
+            .catch(({response}) => {
+
+                return Promise.reject()
+            })
+    }
+
+
+    get getExpenseSchedule(){
+        return this._expenseSchedule
+    }
+
+    get getTopSpendingCategories(){
+        return toJS(this._topSpendingCategories)
+    }
+
+    get getTransactionHistory(){
+        return toJS(this._transactionHistory)
+    }
 
 }

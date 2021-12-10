@@ -11,7 +11,6 @@ export const ContainerHistory = styled.div`
 `
 
 export const Ph = styled.div`
-  font-family: SF Pro Display;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;

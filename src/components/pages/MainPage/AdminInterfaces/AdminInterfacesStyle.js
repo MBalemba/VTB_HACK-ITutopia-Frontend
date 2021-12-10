@@ -17,3 +17,9 @@ export const H1 = styled.h2`
   line-height: 26px;
   color: #000000;
 `
+export const ContainerTransaction = styled.div`
+  width: 100%;
+  margin-top: 20px;
+  max-height: 860px;
+  overflow-y: auto;
+`

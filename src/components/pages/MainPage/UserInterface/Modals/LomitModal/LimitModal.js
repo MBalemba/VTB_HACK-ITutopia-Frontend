@@ -153,7 +153,7 @@ const LimitModal = observer(({info, cardId, userId, active, setActive, fio, depa
                 </MyButton>
 
                 <MyButton clickHandler={() => {
-                    debugger
+
                     const data = {
                         autoUpdate: check,
                         card_id: cardId,
