@@ -143,76 +143,84 @@ const CardsBlock = ({userId ,departamentName, fio, handleCurrentSlide, cardsInfo
 
                     </TopMenuCard>
 
-                    <Divider/>
 
-                    <BottomMenuCard>
-                        <Item>
-                            <Key>
-                                Лимит
-                            </Key>
-                                <Dot>
+                    {cardsInfo[currentSlide]?.status !== 'BLOCKING' &&
+                        <>
 
-                                </Dot>
-                            <Value>
+                            <Divider/>
 
-                                {cardsInfo[currentSlide]?.term === 0 ?
-                                    '-'
-                                    :
+                            <BottomMenuCard>
+                                <Item>
+                                    <Key>
+                                        Лимит
+                                    </Key>
+                                    <Dot>
 
-                                    ((cardsInfo[currentSlide]?.limit).toLocaleString() +' ₽')
-                                }
-                            </Value>
-                        </Item>
+                                    </Dot>
+                                    <Value>
 
-                        <Item>
-                            <Key>
-                                Остаток
-                            </Key>
-                                <Dot>
+                                        {cardsInfo[currentSlide]?.term === 0 ?
+                                            '-'
+                                            :
 
-                                </Dot>
-                            <Value>
-                                {cardsInfo[currentSlide].term === 0 ?
-                                    '-'
-                                    :
+                                            ((cardsInfo[currentSlide]?.limit).toLocaleString() +' ₽')
+                                        }
+                                    </Value>
+                                </Item>
 
-                                    ((cardsInfo[currentSlide].remains).toLocaleString() +' ₽')
-                                }
+                                <Item>
+                                    <Key>
+                                        Остаток
+                                    </Key>
+                                    <Dot>
+
+                                    </Dot>
+                                    <Value>
+                                        {cardsInfo[currentSlide].term === 0 ?
+                                            '-'
+                                            :
+
+                                            ((cardsInfo[currentSlide].remains).toLocaleString() +' ₽')
+                                        }
 
 
-                            </Value>
-                        </Item>
+                                    </Value>
+                                </Item>
 
-                        <Item>
-                            <Key>
-                                Срок
-                            </Key>
-                                <Dot>
+                                <Item>
+                                    <Key>
+                                        Срок
+                                    </Key>
+                                    <Dot>
 
-                                </Dot>
-                            <Value>
+                                    </Dot>
+                                    <Value>
 
-                                {cardsInfo[currentSlide].term === 0 ?
-                                    '-'
-                                    :
+                                        {cardsInfo[currentSlide].term === 0 ?
+                                            '-'
+                                            :
 
-                                    (cardsInfo[currentSlide].term+ ' дней')
-                                }
+                                            (cardsInfo[currentSlide].term+ ' дней')
+                                        }
 
-                            </Value>
-                        </Item>
+                                    </Value>
+                                </Item>
 
-                        <ProgressBar>
-                            <Loader percent={cardsInfo[currentSlide].term === 0 ? 0: (cardsInfo[currentSlide].remains -cardsInfo[currentSlide].limit)/ cardsInfo[currentSlide].remains *100}>
+                                <ProgressBar>
+                                    <Loader percent={cardsInfo[currentSlide].term === 0 ? 0: (cardsInfo[currentSlide].remains -cardsInfo[currentSlide].limit)/ cardsInfo[currentSlide].remains *100}>
 
-                            </Loader>
-                        </ProgressBar>
+                                    </Loader>
+                                </ProgressBar>
 
-                        <ChangeThis onClick={()=>setModalChange(true)} >
-                            Изменить
-                        </ChangeThis>
+                                <ChangeThis onClick={()=>setModalChange(true)} >
+                                    Изменить
+                                </ChangeThis>
 
-                    </BottomMenuCard>
+                            </BottomMenuCard>
+                        </>
+                    }
+
+
                 </CardInfo>
 
                 <SpecialOffer>
