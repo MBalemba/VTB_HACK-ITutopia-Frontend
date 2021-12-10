@@ -16,7 +16,7 @@ import {ADMIN} from "../../../../../utils/path";
 
 const Item = ({name, patronymic, surname, id, cards}) => {
     const [activeMy, setActive] = useState('false');
-
+    console.log(activeMy)
 
 
     return (
@@ -24,7 +24,7 @@ const Item = ({name, patronymic, surname, id, cards}) => {
             if(cards.length===0){
                 e.preventDefault()
             }
-        } } style={({ isActive }) =>
+        }} style={({ isActive }) =>
         {isActive? setActive(true) :setActive(false)
 
         return ''

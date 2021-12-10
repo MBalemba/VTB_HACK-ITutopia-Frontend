@@ -1,11 +1,13 @@
 import {makeAutoObservable, toJS} from "mobx";
 import {
+    expenseScheduleByWorker, getAllTypeOfCards, getAllTypeOfCardsByWorker,
     getInfoOfCardsByWorkerId,
     getWorkerInfo, lockUnlockCard, perpetualCardBlocking,
-    setLimitOnCard, topSpendingCategoriesUser,
+    setLimitOnCard, topSpendingCategoriesByWorker, topSpendingCategoriesUser, transactionHistoryByWorkerId,
     transactionHistoryUser,
     transferToCard
 } from "../http/UserApi";
+import {createQuery} from "../utils/CreateQuery";
 
 
 export default class UserStore {
@@ -41,7 +43,15 @@ export default class UserStore {
             isFetchCardsInfo: true,
         }
 
-        this._expenseSchedule = null
+
+        this._expenseSchedule = []
+        this._topSpendingCategories = {
+            maxSum: null,
+            list: [],
+        }
+        this._transactionHistory = []
+
+        this._typeOfCards = []
         this._topSpendingCategories = {
             maxSum: null,
             list: [],
@@ -234,6 +244,110 @@ export default class UserStore {
 
     get getTransactionHistory() {
         return toJS(this._transactionHistory)
+    }
+
+
+
+    // transactions
+
+
+    expenseSchedule(queryObj = {}) {
+
+
+
+
+        let str = createQuery(queryObj)
+
+        debugger
+
+        return expenseScheduleByWorker(str).then(({data}) => {
+            debugger
+            this._expenseSchedule = data
+
+
+            return Promise.resolve()
+        })
+            .catch(({response}) => {
+
+                return Promise.reject()
+            })
+    }
+
+    topSpendingCategories(queryObj = {}) {
+
+        let str = createQuery(queryObj)
+
+        return topSpendingCategoriesByWorker(str).then(({data}) => {
+            debugger
+            this._topSpendingCategories = data
+            return Promise.resolve()
+        })
+            .catch(({response}) => {
+
+                return Promise.reject()
+            })
+    }
+
+    allTypeOfCards(id) {
+        return getAllTypeOfCardsByWorker().then(({data}) => {
+            debugger
+            this._typeOfCards = data
+            return Promise.resolve()
+        })
+            .catch(({response}) => {
+
+                return Promise.reject()
+            })
+    }
+
+
+    transactionHistory(queryObj = {}, clear = true) {
+
+        if(clear){
+            this.currentPage = 0
+        }
+
+        let str = createQuery(queryObj)
+
+        if(str!==''){
+            str= str + '&page=' + this.currentPage
+        } else{
+            str = '?page=' + this.currentPage
+        }
+
+        return transactionHistoryByWorkerId(str).then(({data}) => {
+
+            if(data[0]=== null && this.currentPage === 0 ){
+                this._transactionHistory = []
+                this.buttonDisabled = true
+                return Promise.resolve()
+            }
+
+            this.buttonDisabled = false
+
+
+            if (clear) {
+                this.currentPage = 1
+                this._transactionHistory = data
+            } else {
+
+                if(data[0]=== null){
+                    this.buttonDisabled = true
+                    return Promise.resolve()
+                }
+                this._transactionHistory = [...this._transactionHistory, ...data]
+                this.currentPage = this.currentPage + 1
+
+
+            }
+
+
+            return Promise.resolve()
+        })
+            .catch(({response}) => {
+
+                return Promise.reject()
+            })
     }
 
 

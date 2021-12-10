@@ -73,12 +73,12 @@ export const Fio = styled.div`
   justify-content: flex-start;
   align-items: center;
   font-style: normal;
-  font-weight: 500;
+  
   font-size: 18px;
   line-height: 21px;
-  color: #001A68;
   margin-bottom: 20px;
   margin-top: 10px;
+  color: ${({active=false})=> active ? '#0142D3' : '#001A68' };
 `
 export const ButtonDots = styled.div`
   height: 100%;

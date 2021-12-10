@@ -23,8 +23,8 @@ export const currentAdminCheck = async () => {
 
 
 
-export const departmentsWorkersCards = async () => {
-    const response = await $authHost.get('/start/getDepartmentsWorkersCards')
+export const departmentsWorkersCards = async (str) => {
+    const response = await $authHost.get('/start/getDepartmentsWorkersCards'+ str)
     return response
 }
 
@@ -121,6 +121,23 @@ export const transactionHistory = async (str) => {
 //TransactionUser
 
 
+export const expenseScheduleByWorker = async (str='') => {
+    const response = await $authHost.get('/transaction/expenseScheduleByWorker'+str)
+    return response
+}
+
+export const topSpendingCategoriesByWorker = async (str='') => {
+    const response = await $authHost.get('/transaction/topSpendingCategoriesByWorker'+str)
+    return response
+}
+
+export const transactionHistoryByWorkerId= async (str) => {
+    const response = await $authHost.get('/transaction/transactionHistoryByWorkerId'+str)
+    return response
+}
+
+
+
 
 
 export const topSpendingCategoriesUser = async (str='') => {
@@ -137,6 +154,11 @@ export const transactionHistoryUser = async (str='') => {
 
 export const getAllTypeOfCards = async () => {
     const response = await $authHost.get('/transaction/getAllTypeOfCards')
+    return response
+}
+
+export const getAllTypeOfCardsByWorker = async (id) => {
+    const response = await $authHost.get('/transaction/getAllTypeOfCardsByWorker?worker_id='+id)
     return response
 }
 

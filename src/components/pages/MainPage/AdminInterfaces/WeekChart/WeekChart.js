@@ -5,10 +5,11 @@ import {observer} from "mobx-react-lite";
 import {Context} from "../../../../../index";
 
 
-class ApexChat extends React.Component {
+export class ApexChat extends React.Component {
 
     constructor(props) {
         super(props);
+        debugger
         let custom = function ({series, seriesIndex, dataPointIndex, w}) {
 
             //let data = this?.props?.dateData[dataPointIndex]?.data
@@ -201,11 +202,13 @@ class ApexChat extends React.Component {
 
 
 const WeekChart = observer(() => {
-    const {admin} = useContext(Context)
+    const {admin, user} = useContext(Context)
 
     useEffect(()=>{
 
     }, [admin.getExpenseSchedule?.length])
+
+
 
     return (
         <ContainerChart className={'monthChart'}>

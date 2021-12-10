@@ -6,6 +6,6 @@ export const MAIN_PAGE = 'home/'
 export const ADMIN = 'admin'
 export const FULL = 'full'
 export const FULLPAGEADMIN = 'adminHome'
-export const FULLPAGEUSER = 'adminHome'
+export const FULLPAGEUSER = 'userHome'
 export const USER = 'user'
 

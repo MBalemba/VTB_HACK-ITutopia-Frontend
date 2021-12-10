@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import {Navigate, Route, Routes, useNavigate} from "react-router-dom";
-import {ADMIN, AUTH_ROUTE, FULL, FULLPAGEADMIN, MAIN_PAGE, routes, USER} from "./utils/path";
+import {ADMIN, AUTH_ROUTE, FULL, FULLPAGEADMIN, FULLPAGEUSER, MAIN_PAGE, routes, USER} from "./utils/path";
 import AuthPage from "./components/pages/AuthPage/AuthPage";
 import MainPage from "./components/pages/MainPage/MainPage";
 import Header from "./components/pages/MainPage/Header/Header";
@@ -11,7 +11,9 @@ import FullPage from "./components/pages/FullPage/FullPage";
 import {observer} from "mobx-react-lite";
 import {Context} from "./index";
 import {blablabla} from "./http/UserApi";
-
+import UserFullPage from "./components/pages/FullPage/User/UserFullPage";
+import styled from "styled-components";
+import {MoonLoader} from "react-spinners";
 
 export function Redirect(to) {
 
@@ -21,6 +23,15 @@ export function Redirect(to) {
         </>
     )
 }
+
+
+const Loader = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 
 const App = observer(() => {
@@ -53,9 +64,11 @@ const App = observer(() => {
 
 
     if( login.FirstLoad){
-        return <div>
-            загрузка
-        </div>
+        return <Loader>
+            <div>
+                <MoonLoader />
+            </div>
+        </Loader>
     }
 
     return (
@@ -72,8 +85,8 @@ const App = observer(() => {
                             <Route path={ADMIN} element={<AdminInterfaces/>}>
                             </Route>
 
-                            <Route path={USER} element={< UserInterface/>}>
-                                <Route path={':id'} element={< UserInterface/>}></Route>
+                            <Route path={USER} exec element={< UserInterface/>}>
+                                <Route  path={':id'} element={<UserInterface/>}></Route>
                             </Route>
 
                             <Route index element={<Navigate to={ADMIN} />} />
@@ -85,7 +98,7 @@ const App = observer(() => {
 
                             </Route>
 
-                            <Route path="*" element={<Navigate to={FULLPAGEADMIN} />} />
+
                         </Route>
 
                         <Route index element={<Navigate to={AUTH_ROUTE} />} />

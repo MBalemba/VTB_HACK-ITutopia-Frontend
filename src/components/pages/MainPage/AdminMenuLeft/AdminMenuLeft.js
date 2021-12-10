@@ -22,6 +22,7 @@ import NewDepartamentModal from "./NewDepartamentModal/NewDepartamentModal";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../../index";
 import useDebounce from "../../../../utils/useDebounce";
+import {createQuery} from "../../../../utils/CreateQuery";
 
 let activeStyle = {
     display: "none",
@@ -36,13 +37,13 @@ const customStyles = {
 
 export function SearchC({
                             isSearchLogo = true,
-                            type='text',
+                            type = 'text',
 
                             placeholder = '',
                             handleChange = () => {
                             },
                             value = '',
-                            input=null,
+                            input = null,
                         }) {
 
     const [focus, isFocus] = useState(false)
@@ -54,14 +55,14 @@ export function SearchC({
 
                 input === null
                     ?
-                    <Input  onFocus={() => isFocus(true)} onBlur={() => isFocus(false)} onChange={handleChange} value={value}
-                            placeholder={placeholder} id={'search_1'} type={type}/>
+                    <Input onFocus={() => isFocus(true)} onBlur={() => isFocus(false)} onChange={handleChange}
+                           value={value}
+                           placeholder={placeholder} id={'search_1'} type={type}/>
 
                     :
                     input()
 
             }
-
 
 
             {isSearchLogo && <SearchLogo for={'search_1'}>
@@ -84,16 +85,39 @@ const options = [
 ];
 
 const AdminMenuLeft = observer(() => {
+
+    const {admin} = useContext(Context)
+
     const [selectedOption, setSelectedOption] = useState(null);
     const [modalCard, setModalCard] = useState(false)
     const [modalEmployer, setModalEmployer] = useState(false)
     const [modalDepartament, setModalDeartament] = useState(false)
 
 
+    const [department, changeDep] = useState('')
+    const [status, changeStatus] = useState('')
+    const [type, changeType] = useState('')
+    const [search, setSearch] = useState('')
+    const debouncedSearchTerm = useDebounce(search, 500);
+
+    const allDepartments = admin.allDepartments.map(el => ({value: el.name, label: el.name}))
+
+    const allStatus = [
+        {value: 'ACTIVE', label: 'ACTIVE'},
+        {value: 'BLOCKING', label: 'BLOCKING'},
+        {value: 'TEMPORARY BLOCKING', label: 'TEMPORARY BLOCKING'},
+    ]
 
 
-    const {admin} = useContext(Context)
+    useEffect(() => {
+        admin.allTypeOfCards()
+            .then(() => {
 
+                }
+            ).catch(() => {
+
+        })
+    }, [])
 
     useEffect(() => {
         admin.getAllTree().then(() => {
@@ -104,7 +128,7 @@ const AdminMenuLeft = observer(() => {
     }, [])
 
     useEffect(() => {
-        admin.getAllWorkers().then(()=>{
+        admin.getAllWorkers().then(() => {
 
         }).catch(() => {
 
@@ -112,7 +136,7 @@ const AdminMenuLeft = observer(() => {
     }, [])
 
     useEffect(() => {
-        admin.getAllDepartments().then(()=>{
+        admin.getAllDepartments().then(() => {
 
         }).catch(() => {
 
@@ -120,13 +144,31 @@ const AdminMenuLeft = observer(() => {
     }, [])
 
 
-    useEffect(()=>{
-        admin.getCurrentCheck().then(()=>{
+    useEffect(() => {
+        admin.getCurrentCheck().then(() => {
+
+        }).catch(() => {
+
+        })
+    }, [])
+
+    useEffect(() => {
+        let obj = {}
+        if(department) obj.department = department.value
+        if(status) obj.status = status.value
+        if(type) obj.type = type.value
+        if(debouncedSearchTerm) obj.worker_name = debouncedSearchTerm.value
+
+        admin.getAllTree(createQuery(obj)).then(()=>{
 
         }).catch(()=>{
 
         })
-    }, [])
+
+    }, [department, status, type, debouncedSearchTerm])
+
+
+
 
     return (
         <Container>
@@ -134,7 +176,7 @@ const AdminMenuLeft = observer(() => {
                 Текущий счёт
             </HeaderCheck>
 
-            <CurrentCheckComponent isLink={true} />
+            <CurrentCheckComponent isLink={true}/>
 
 
             <EmployeesCardsMenu>
@@ -142,41 +184,43 @@ const AdminMenuLeft = observer(() => {
                     Карты сотрудников
                 </HeaderCheck>
 
-                <SearchC/>
+                <SearchC value={search} handleChange={(e) => setSearch(e.target.value)}/>
                 <SelectWrapper>
 
-                    <ItemSelect>
+                    <ItemSelect width={'180px'}>
                         <Select
+                            isClearable
                             className={'ads'}
                             classNamePrefix="menu_admin"
                             placeholder='Отдел'
-                            defaultValue={selectedOption}
-                            onChange={setSelectedOption}
-                            options={options}
+                            onChange={changeDep}
+                            options={allDepartments}
                         />
                     </ItemSelect>
 
-                    <ItemSelect>
+                    <ItemSelect width={'150px'}>
                         <Select
-                            className={'ads'}
-                            classNamePrefix="menu_admin"
-                            placeholder='Категория'
-                            defaultValue={selectedOption}
-                            onChange={setSelectedOption}
-                            options={options}
-                        />
-                    </ItemSelect>
-
-                    <ItemSelect>
-                        <Select
+                            isClearable
                             className={'ads'}
                             classNamePrefix="menu_admin"
                             placeholder='Статус'
-                            defaultValue={selectedOption}
-                            onChange={setSelectedOption}
-                            options={options}
+                            onChange={changeStatus}
+                            options={allStatus}
                         />
                     </ItemSelect>
+
+                    <ItemSelect width={'150px'}>
+                        <Select
+                            isClearable
+                            className={'ads'}
+                            classNamePrefix="menu_admin"
+                            placeholder='Категория'
+                            onChange={changeType}
+                            options={admin.getTypeOfCards}
+                        />
+                    </ItemSelect>
+
+
                 </SelectWrapper>
 
                 <AddWrapper>

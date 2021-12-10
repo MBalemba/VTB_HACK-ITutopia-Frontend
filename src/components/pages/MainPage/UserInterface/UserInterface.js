@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Container, ContainerTransaction} from "../AdminInterfaces/AdminInterfacesStyle";
+import {BlockToFull, Container, ContainerTransaction} from "../AdminInterfaces/AdminInterfacesStyle";
 import {
     Account,
     Amount,
@@ -18,9 +18,10 @@ import PieChart from "../AdminInterfaces/PieChart/PieChart";
 import HistoryTransaction from "../AdminInterfaces/HistoryTransaction/HistoryTransaction";
 import {Ph} from "../AdminInterfaces/HistoryTransaction/HistoryTransactionStyle";
 import {observer} from "mobx-react-lite";
-import {useNavigate, useParams} from "react-router-dom";
+import {Navigate, useNavigate, useParams} from "react-router-dom";
 import {Context} from "../../../../index";
 import {ADMIN} from "../../../../utils/path";
+import MyButton from "../../../common/Buttons/MyButton";
 
 
 export const AccountComponent = ({fio = '', departamentName = '', src = ''}) => {
@@ -99,8 +100,18 @@ const UserInterface = observer(() => {
     }, [id])
 
 
+    useEffect(()=>{
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }, [id])
 
 
+
+    if(!id){
+        return <Navigate to='../admin' />
+    }
 
     return (
         <Container>
@@ -129,6 +140,13 @@ const UserInterface = observer(() => {
                         <ContainerTransaction>
                             <HistoryTransaction data={user.getTransactionHistory} />
                         </ContainerTransaction>
+
+{/*
+                        <BlockToFull>
+                            <MyButton height={'40px'} width={'240px'} clickHandler={(e)=>{navigate("../../full/userHome/"+id)}}>
+                                Открыть историю транзакций
+                            </MyButton>
+                        </BlockToFull>*/}
 
                     </>
                 :

@@ -16,12 +16,14 @@ export const HeaderCheck = styled.div`
 export const SelectWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
 `
 
 export const ItemSelect = styled.div`
   margin-top: 10px;
-  min-width: 100px;
-  max-width: 200px;
+  max-width: ${({width})=>width};
+  min-width: ${({width})=>width};
   margin-right: 10px;
 `
 

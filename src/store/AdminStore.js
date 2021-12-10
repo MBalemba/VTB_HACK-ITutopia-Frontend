@@ -109,8 +109,8 @@ export default class AdminStore {
     }
 
 
-    getAllTree() {
-        return departmentsWorkersCards()
+    getAllTree(str = '') {
+        return departmentsWorkersCards(str)
             .then(({data}) => {
 
                 this._allTree = [
@@ -163,7 +163,7 @@ export default class AdminStore {
     }
 
     get allDepartments() {
-        return this._allDepartments
+        return toJS(this._allDepartments)
     }
 
 

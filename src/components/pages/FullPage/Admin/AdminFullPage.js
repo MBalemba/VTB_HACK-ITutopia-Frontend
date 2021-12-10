@@ -73,11 +73,12 @@ const AdminFullPage = observer(() => {
         { value: 'expenses', label: 'Траты' },
     ];
 
-
-
-    function initialRequestwithQuery(){
-
-    }
+    useEffect(()=>{
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }, [])
 
 
     useEffect(()=>{
@@ -252,7 +253,7 @@ const AdminFullPage = observer(() => {
                             isClearable={true}
                             className={'ads'}
                             classNamePrefix="menu_admin"
-                            placeholder = 'Тип'
+                            placeholder = 'Транзакции'
                             defaultValue={typeElem}
                             onChange={(value)=>{setTypeElem(value)}}
                             options={type}
@@ -265,7 +266,7 @@ const AdminFullPage = observer(() => {
                             isClosed ={true}
                             className={'ads'}
                             classNamePrefix="menu_admin"
-                            placeholder = 'Назначение'
+                            placeholder = 'Тип карты'
                             defaultValue={selectedOption}
                             onChange={setSelectedOption}
                             options={admin.getTypeOfCards}
