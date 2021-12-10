@@ -167,6 +167,10 @@ const LimitModal = observer(({info, cardId, userId, active, setActive, fio, depa
                     }
 
                     user.setLimitOnCard(data).then(()=>{
+
+                        user.getInfoOfCards(id).then(()=>{
+
+                        })
                         setActive(false)
                         setCheck(false)
                         setSumm('')
@@ -178,9 +182,7 @@ const LimitModal = observer(({info, cardId, userId, active, setActive, fio, depa
 
                         })
 
-                        user.getInfoOfCards(id).then(()=>{
 
-                        })
 
                     })
 
