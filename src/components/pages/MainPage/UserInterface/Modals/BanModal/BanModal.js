@@ -16,8 +16,10 @@ import MaskedInput from "react-text-mask";
 import MyButton from "../../../../../common/Buttons/MyButton";
 import Modal from "../../../../../common/Modal/Modal";
 import {Context} from "../../../../../../index";
+import {useParams} from "react-router-dom";
 
 const BanModal = ({info, cardId, userId, active, setActive, fio, departamentName}) => {
+    const {id} = useParams()
     const {user, admin} = useContext(Context)
     const [days, setDays] = useState('')
     const [summ, setSumm] = useState('')
@@ -95,6 +97,11 @@ const BanModal = ({info, cardId, userId, active, setActive, fio, departamentName
                 <MyButton bgc={'#F64E4E'} clickHandler={() => {
                     user.perpetualCardBlocking(cardId).then(()=>{
                         setActive(false)
+
+
+                        user.getInfoOfCards(id).then(()=>{
+
+                        })
 
                         admin.fiveGeneralInformation().then(() => {
 
