@@ -105,6 +105,10 @@ export const Time = styled.div`
   background: #747E9D;
   border-radius: 50%;
   margin-right: 10px;
+  cursor: pointer;
+  &:hover{
+    opacity: 0.9;
+  }
 `
 
 export const Blocker = styled.div`
@@ -117,6 +121,11 @@ export const Blocker = styled.div`
   top: 802px;
   background: #F64E4E;
   border-radius: 50%;
+  cursor: pointer;
+  
+  &:hover{
+    opacity: 0.9;
+  }
 `
 
 export const BottomMenuCard = styled.div`

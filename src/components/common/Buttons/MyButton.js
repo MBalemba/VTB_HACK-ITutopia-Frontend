@@ -8,12 +8,16 @@ const Button = styled.button`
   align-items: center;
   background: ${({bgc})=>bgc};
   border-radius: 5px;
-  transition: 0.5s ease-in-out ;
+  transition: 0.2s ease-in-out ;
   cursor: ${({disabled})=>disabled ? 'default': 'pointer'};
   opacity: ${({disabled})=>disabled ? '0.5': '1'};
   width: 100%;
   height: 100%;
   color: ${({color})=>color};
+  &:hover{
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
 `
 const Container = styled.div`
   width: ${({width})=>width};

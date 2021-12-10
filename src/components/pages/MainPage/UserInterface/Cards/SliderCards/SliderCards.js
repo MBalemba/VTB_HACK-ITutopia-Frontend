@@ -47,9 +47,10 @@ class SliderCards extends Component {
 
 
     componentDidMount() {
-        this.setParameters()
-        // this.setParametersTimeInterval()
-        this.setEvents()
+
+            this.setParameters()
+            // this.setParametersTimeInterval()
+            this.setEvents()
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -59,22 +60,18 @@ class SliderCards extends Component {
 
 
         if(prevDevices !== currentDevices ||  prevProps.cardsInfoLength !== this.props.cardsInfoLength){
-            debugger
-            setTimeout(()=>{this.setParameters()}, 300)
+            this.setParameters()
         }
 
 
     }
 
     componentWillUnmount() {
-
         clearInterval(this.updateSliderIntervalId)
         this.removeEvents()
     }
 
-    setParametersTimeInterval() {
-        this.updateSliderIntervalId = setInterval(this.setParameters,2000 )
-    }
+
 
     switchTimeInterval() {
         if (this.currentSlide < this.numberItemsGallery - 1) {
@@ -89,6 +86,7 @@ class SliderCards extends Component {
     }
 
     setParameters() {
+        debugger
         this.containerNode = document.getElementById(`gallery_${this.props.id}`)
         this.lineNode = this.containerNode.querySelector(`.gallery-line_${this.props.id}`)
         this.numberItemsGallery = this.lineNode.childElementCount;
@@ -126,7 +124,7 @@ class SliderCards extends Component {
 
     setEvents() {
 
-        setTimeout(()=>{this.resizeGallery()}, 700)
+        this.timeout = setTimeout(()=>{this.resizeGallery()}, 700)
         this.debounceResizeGalary = debounce(this.resizeGallery)
         window.addEventListener('resize', this.debounceResizeGalary)
         this.containerNode.addEventListener('mouseenter', this.mouseEnter)
@@ -139,6 +137,7 @@ class SliderCards extends Component {
         window.removeEventListener('resize', this.debounceResizeGalary)
         this.containerNode.removeEventListener('mouseenter', this.mouseEnter)
         this.containerNode.removeEventListener('mouseleave', this.mouseLeave)
+        clearTimeout(this.timeout)
     }
 
     mouseEnter() {

@@ -52,7 +52,7 @@ export function SearchC({
 
             {
 
-                input ===null
+                input === null
                     ?
                     <Input  onFocus={() => isFocus(true)} onBlur={() => isFocus(false)} onChange={handleChange} value={value}
                             placeholder={placeholder} id={'search_1'} type={type}/>
