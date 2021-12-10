@@ -114,7 +114,7 @@ const CardsBlock = ({userId ,departamentName, fio, handleCurrentSlide, cardsInfo
 
                         <ButtonsControl>
                             <ButtonWrapper>
-                                <MyButton clickHandler={()=>setModalFill(true)} >
+                                <MyButton disabled={cardsInfo[currentSlide]?.status ==='BLOCKING'} clickHandler={()=>setModalFill(true)} >
                                     Пополнить
                                 </MyButton>
                             </ButtonWrapper>
