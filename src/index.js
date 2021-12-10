@@ -1,5 +1,6 @@
 import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
+import './assets/fonts/VTBGroupUI-Regular/VTBGroupUI-Regular_stylesheet.css'
 import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 
 export const ContainerHistory = styled.div`
+  padding-right: 10px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -12,9 +13,11 @@ export const ContainerHistory = styled.div`
 
 export const Ph = styled.div`
   font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 26px;
+  color: #000000;
+  margin-bottom: 30px;
 `
 
 
@@ -122,6 +125,7 @@ export const Time = styled.div`
 export const Person = styled.div`
     display: flex;
   justify-content: space-between;
+  
 `
 
 export const IcoPerson = styled.div`
@@ -182,12 +186,32 @@ export const CardNumber = styled.div`
 
 
 export const Price = styled.div`
+    display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
 `
 
 export const PriceValue = styled.div`
+    margin-bottom: 3px;
 `
 
 export const Currency = styled.div`
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+
+  color: rgba(0, 0, 0, 0.3);
+
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  margin: 3px 0px;
 `
 
 export const Divider = styled.div`

@@ -143,8 +143,9 @@ class ApexChat extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-
-        if(prevProps.data === null){
+        debugger
+        if(prevProps.data.length !== this.props.data.length ||prevProps.data[0] !== this.props.data[0] ){
+            debugger
             if (this.props.data !== null) {
                 this.setState({
                     ...this.state,

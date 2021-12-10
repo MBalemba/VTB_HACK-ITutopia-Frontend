@@ -194,7 +194,7 @@ const CardsBlock = ({userId ,departamentName, fio, handleCurrentSlide, cardsInfo
                         </Item>
 
                         <ProgressBar>
-                            <Loader percent={cardsInfo[currentSlide].term === 0 ? 0: cardsInfo[currentSlide].limit/ cardsInfo[currentSlide].remains *100}>
+                            <Loader percent={cardsInfo[currentSlide].term === 0 ? 0: (cardsInfo[currentSlide].remains -cardsInfo[currentSlide].limit)/ cardsInfo[currentSlide].remains *100}>
 
                             </Loader>
                         </ProgressBar>

@@ -163,6 +163,9 @@ const LimitModal = observer(({info, cardId, userId, active, setActive, fio, depa
 
                     user.setLimitOnCard(data).then(()=>{
                         setActive(false)
+                        setCheck(false)
+                        setSumm('')
+                        setDays('')
                     })
 
 

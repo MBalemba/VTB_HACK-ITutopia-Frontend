@@ -9,7 +9,7 @@ const Button = styled.button`
   background: ${({bgc})=>bgc};
   border-radius: 5px;
   transition: 0.2s ease-in-out ;
-  cursor: ${({disabled})=>disabled ? 'default': 'pointer'};
+  cursor: ${({disabled})=>disabled ? 'pointer': 'pointer'};
   opacity: ${({disabled})=>disabled ? '0.5': '1'};
   width: 100%;
   height: 100%;

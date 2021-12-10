@@ -147,10 +147,23 @@ const ReplishCardModal = observer(({info, userId, active, setActive, fio, depart
 
                         })
 
+                        admin.getAllTree().then(() => {
+
+                        }).catch(() => {
+
+                        })
+
+
+                        admin.getCurrentCheck().then(()=>{
+
+                        }).catch(()=>{
+
+                        })
+
 
                     })
 
-                }} disabled={warning} width={'200px'}
+                }} disabled={warning || summ===''} width={'200px'}
                           height={'50px'}>
                     Перевести
                 </MyButton>

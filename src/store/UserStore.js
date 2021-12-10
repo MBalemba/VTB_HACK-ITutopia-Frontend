@@ -1,7 +1,7 @@
 import {makeAutoObservable, toJS} from "mobx";
 import {
     getInfoOfCardsByWorkerId,
-    getWorkerInfo,
+    getWorkerInfo, lockUnlockCard, perpetualCardBlocking,
     setLimitOnCard, topSpendingCategoriesUser,
     transactionHistoryUser,
     transferToCard
@@ -37,7 +37,7 @@ export default class UserStore {
         ]
 
 
-        this._isFecthing={
+        this._isFecthing = {
             isFetchCardsInfo: true,
         }
 
@@ -82,24 +82,47 @@ export default class UserStore {
         return toJS(this._infoOfCards)
     }
 
-    transferToCard(data){
-        return transferToCard(data).then(()=>{
+    transferToCard(data) {
+        return transferToCard(data).then(() => {
 
 
             return Promise.resolve()
-        }).catch(()=>{
+        }).catch(() => {
 
 
             return Promise.resolve()
         })
     }
 
-    setLimitOnCard(data){
-        return setLimitOnCard(data).then(()=>{
+    setLimitOnCard(data) {
+        return setLimitOnCard(data).then(() => {
 
 
             return Promise.resolve()
-        }).catch(()=>{
+        }).catch(() => {
+
+
+            return Promise.resolve()
+        })
+    }
+
+    lockUnlockCard(id) {
+        return lockUnlockCard(id).then(() => {
+
+
+            return Promise.resolve()
+        }).catch(() => {
+
+
+            return Promise.resolve()
+        })
+    }
+
+    perpetualCardBlocking(id) {
+        return perpetualCardBlocking(id).then(() => {
+
+            return Promise.resolve()
+        }).catch(() => {
 
 
             return Promise.resolve()
@@ -130,7 +153,7 @@ export default class UserStore {
         return toJS(this._isFecthing)
     }
 
-    changeIsFetching(obj){
+    changeIsFetching(obj) {
         this._isFecthing = {...this._isFecthing, ...obj}
     }
 
@@ -138,17 +161,17 @@ export default class UserStore {
     //Transaction
 
 
-    topSpendingCategoriesUser(queryObj={}) {
+    topSpendingCategoriesUser(queryObj = {}) {
 
         let j = 0;
-        let str='';
+        let str = '';
 
 
-        for(let i in queryObj){
-            if(j===0){
-                str+='?'+ i+ '='+ queryObj[i]
+        for (let i in queryObj) {
+            if (j === 0) {
+                str += '?' + i + '=' + queryObj[i]
             } else {
-                str+='&'+ i+ '='+ queryObj[i]
+                str += '&' + i + '=' + queryObj[i]
             }
 
 
@@ -156,8 +179,8 @@ export default class UserStore {
 
         }
 
-        if(j===0){
-            str=''
+        if (j === 0) {
+            str = ''
         }
 
         return topSpendingCategoriesUser(str).then(({data}) => {
@@ -173,14 +196,14 @@ export default class UserStore {
     transactionHistoryUser(queryObj = {},) {
 
         let j = 0;
-        let str='';
+        let str = '';
 
 
-        for(let i in queryObj){
-            if(j===0){
-                str+='?'+ i+ '='+ queryObj[i]
+        for (let i in queryObj) {
+            if (j === 0) {
+                str += '?' + i + '=' + queryObj[i]
             } else {
-                str+='&'+ i+ '='+ queryObj[i]
+                str += '&' + i + '=' + queryObj[i]
             }
 
 
@@ -188,10 +211,9 @@ export default class UserStore {
 
         }
 
-        if(j===0){
-            str=''
+        if (j === 0) {
+            str = ''
         }
-
 
 
         return transactionHistoryUser(str).then(({data}) => {
@@ -206,11 +228,11 @@ export default class UserStore {
     }
 
 
-    get getTopSpendingCategories(){
+    get getTopSpendingCategories() {
         return toJS(this._topSpendingCategories)
     }
 
-    get getTransactionHistory(){
+    get getTransactionHistory() {
         return toJS(this._transactionHistory)
     }
 

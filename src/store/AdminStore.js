@@ -6,7 +6,12 @@ import {
     AllDepartments,
     AllWorkers,
     currentAdminCheck,
-    departmentsWorkersCards, expenseSchedule, getAllTypeOfCards, topSpendingCategories, transactionHistory
+    departmentsWorkersCards,
+    expenseSchedule,
+    fiveGeneralInformation,
+    getAllTypeOfCards,
+    topSpendingCategories,
+    transactionHistory
 } from "../http/UserApi";
 import {createQuery} from "../utils/CreateQuery";
 
@@ -17,6 +22,14 @@ export default class AdminStore {
             account_number: ['****', '****', '****', '****', '****'],
             currency: "RUB",
             current_account: '0',
+        }
+
+        this._FiveGeneralInf = {
+            "allocated_funds": 0,
+            "amountOfCards": 0,
+            "amountOfWorkers": 0,
+            "monthlyExpenses": 0,
+            "total_balance": 0
         }
 
         this._allTree = [
@@ -55,7 +68,7 @@ export default class AdminStore {
             }
         ]
 
-        this._expenseSchedule = null
+        this._expenseSchedule = []
         this._topSpendingCategories = {
             maxSum: null,
             list: [],
@@ -130,6 +143,7 @@ export default class AdminStore {
             })
     }
 
+
     get allWorkers() {
         return this._allWorkers
     }
@@ -150,6 +164,24 @@ export default class AdminStore {
 
     get allDepartments() {
         return this._allDepartments
+    }
+
+
+    fiveGeneralInformation() {
+        return fiveGeneralInformation().then(({data}) => {
+
+            this._FiveGeneralInf = data
+            return Promise.resolve()
+        })
+            .catch(({response}) => {
+
+                return Promise.reject()
+            })
+    }
+
+
+    get getFiveGeneralInformation(){
+        return toJS(this._FiveGeneralInf)
     }
 
 
@@ -193,10 +225,10 @@ export default class AdminStore {
 
         let str = createQuery(queryObj)
 
-
+        debugger
 
         return expenseSchedule(str).then(({data}) => {
-
+            debugger
             this._expenseSchedule = data
 
 
@@ -224,7 +256,7 @@ export default class AdminStore {
     }
 
     transactionHistory(queryObj = {}, clear = true) {
-        debugger
+
         if(clear){
             this.currentPage = 0
         }

@@ -93,9 +93,11 @@ const TemporaryModal = ({info, cardId, userId, active, setActive, fio, departame
                 </MyButton>
 
                 <MyButton  clickHandler={() => {
+                    user.lockUnlockCard(cardId).then(()=>{
+                        setActive(false)
+                    }).catch(()=>{
 
-
-
+                    })
 
 
                 }} disabled={Number(days) !== (info.card_number%10000)} width={'200px'}

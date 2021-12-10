@@ -42,8 +42,15 @@ export const getWorkerInfo = async (id) => {
     const response = await $authHost.get('worker/getWorkerInfo'+`?worker_id=${id}`)
     return response
 }
+
 export const getInfoOfCardsByWorkerId = async (id) => {
     const response = await $authHost.get('/worker/getInfoOfCardsByWorkerId'+`?worker_id=${id}`)
+    return response
+}
+
+
+export const fiveGeneralInformation = async () => {
+    const response = await $authHost.get('/start/fiveGeneralInformation')
     return response
 }
 
@@ -79,6 +86,18 @@ export const setLimitOnCard = async (data) => {
     const response = await $authHost.put('/worker/setLimitOnCard?'+`autoUpdate=${data.autoUpdate}&card_id=${data.card_id}&limit=${data.limit}&term=${data.term}`)
     return response
 }
+
+export const lockUnlockCard = async (id) => {
+    const response = await $authHost.put('/worker/lockUnlockCard?'+`card_id=${id}`)
+    return response
+}
+
+export const perpetualCardBlocking = async (id) => {
+    const response = await $authHost.put('/worker/perpetualCardBlocking?'+`card_id=${id}`)
+    return response
+}
+
+
 
 
 //TransactionAdmin

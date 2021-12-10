@@ -1,16 +1,24 @@
 import React, {useContext, useEffect} from 'react';
-import {Container, ContainerTransaction, H1} from "./AdminInterfacesStyle";
+import {BlockToFull, Container, ContainerTransaction, H1} from "./AdminInterfacesStyle";
 import WeekChart from "./WeekChart/WeekChart";
 import PieChart from "./PieChart/PieChart";
 import HistoryTransaction from "./HistoryTransaction/HistoryTransaction";
 import {Ph} from "./HistoryTransaction/HistoryTransactionStyle";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../../index";
+import MyButton from "../../../common/Buttons/MyButton";
+import {useNavigate} from "react-router-dom";
+import {FULLPAGEADMIN} from "../../../../utils/path";
 
 const AdminInterfaces = observer(() => {
 
     const {admin} = useContext(Context);
+    const navigate  = useNavigate()
 
+
+    useEffect(()=>{
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [])
 
     useEffect(() => {
         admin.expenseSchedule({})
@@ -60,6 +68,12 @@ const AdminInterfaces = observer(() => {
                 <HistoryTransaction data={admin.getTransactionHistory} />
             </ContainerTransaction>
 
+
+            <BlockToFull>
+                <MyButton height={'40px'} width={'240px'} clickHandler={(e)=>{navigate("../../full/adminHome")}}>
+                    Открыть историю транзакций
+                </MyButton>
+            </BlockToFull>
 
         </Container>
     );

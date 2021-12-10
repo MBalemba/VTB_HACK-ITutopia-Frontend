@@ -7,6 +7,7 @@ export const Container = styled.div`
   background: #FFFFFF;
   box-shadow: 0px 4px 65px rgba(0, 22, 86, 0.15);
   border-radius: 15px;
+  margin-bottom: 100px;
   
 `
 
@@ -22,4 +23,11 @@ export const ContainerTransaction = styled.div`
   margin-top: 20px;
   max-height: 860px;
   overflow-y: auto;
+`
+export const BlockToFull = styled.div`
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  
 `
