@@ -258,10 +258,10 @@ export default class UserStore {
 
         let str = createQuery(queryObj)
 
-        debugger
+
 
         return expenseScheduleByWorker(str).then(({data}) => {
-            debugger
+
             this._expenseSchedule = data
 
 
@@ -278,7 +278,7 @@ export default class UserStore {
         let str = createQuery(queryObj)
 
         return topSpendingCategoriesByWorker(str).then(({data}) => {
-            debugger
+
             this._topSpendingCategories = data
             return Promise.resolve()
         })
@@ -290,7 +290,7 @@ export default class UserStore {
 
     allTypeOfCards(id) {
         return getAllTypeOfCardsByWorker().then(({data}) => {
-            debugger
+
             this._typeOfCards = data
             return Promise.resolve()
         })

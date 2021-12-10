@@ -19,10 +19,13 @@ import Modal from "../../../../../common/Modal/Modal";
 import {Checkbox, Label, SumToTransferBlock} from "./LimitModalStyle";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../../../../index";
+import {ADMIN} from "../../../../../../utils/path";
+import {useParams} from "react-router-dom";
 
 const LimitModal = observer(({info, cardId, userId, active, setActive, fio, departamentName}) => {
 
 
+    let {id} = useParams();
     const {user} = useContext(Context)
     const [days, setDays] = useState('')
     const [summ, setSumm] = useState('')
@@ -166,6 +169,12 @@ const LimitModal = observer(({info, cardId, userId, active, setActive, fio, depa
                         setCheck(false)
                         setSumm('')
                         setDays('')
+                    })
+
+
+
+                    user.getInfoOfCards(id).then(()=>{
+
                     })
 
 

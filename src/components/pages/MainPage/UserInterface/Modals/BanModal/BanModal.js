@@ -18,7 +18,7 @@ import Modal from "../../../../../common/Modal/Modal";
 import {Context} from "../../../../../../index";
 
 const BanModal = ({info, cardId, userId, active, setActive, fio, departamentName}) => {
-    const {user} = useContext(Context)
+    const {user, admin} = useContext(Context)
     const [days, setDays] = useState('')
     const [summ, setSumm] = useState('')
     const [check, setCheck] = useState(false)
@@ -96,6 +96,12 @@ const BanModal = ({info, cardId, userId, active, setActive, fio, departamentName
                     user.perpetualCardBlocking(cardId).then(()=>{
                         setActive(false)
                     }).catch(()=>{
+
+                    })
+
+                    admin.getAllTree().then(() => {
+
+                    }).catch(() => {
 
                     })
 

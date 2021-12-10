@@ -86,7 +86,7 @@ class SliderCards extends Component {
     }
 
     setParameters() {
-        debugger
+
         this.containerNode = document.getElementById(`gallery_${this.props.id}`)
         this.lineNode = this.containerNode.querySelector(`.gallery-line_${this.props.id}`)
         this.numberItemsGallery = this.lineNode.childElementCount;

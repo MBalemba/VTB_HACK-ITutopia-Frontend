@@ -88,10 +88,10 @@ const AdminFullPage = observer(() => {
     //get data for graphic
     useEffect(() => {
         const a = getQueryObject()
-        debugger
+
         admin.expenseSchedule(getQueryObject())
             .then(() => {
-                debugger
+
                 }
             ).catch(() => {
 

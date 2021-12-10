@@ -9,7 +9,7 @@ export class ApexChat extends React.Component {
 
     constructor(props) {
         super(props);
-        debugger
+
         let custom = function ({series, seriesIndex, dataPointIndex, w}) {
 
             //let data = this?.props?.dateData[dataPointIndex]?.data
@@ -144,9 +144,9 @@ export class ApexChat extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        debugger
+
         if(prevProps.data.length !== this.props.data.length ||prevProps.data[0] !== this.props.data[0] ){
-            debugger
+
             if (this.props.data !== null) {
                 this.setState({
                     ...this.state,

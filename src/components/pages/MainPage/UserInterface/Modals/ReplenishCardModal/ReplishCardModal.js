@@ -154,6 +154,13 @@ const ReplishCardModal = observer(({info, userId, active, setActive, fio, depart
                         })
 
 
+                        admin.fiveGeneralInformation().then(() => {
+
+                        }).catch(() => {
+
+                        })
+
+
                         admin.getCurrentCheck().then(()=>{
 
                         }).catch(()=>{

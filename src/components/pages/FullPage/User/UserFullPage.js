@@ -87,10 +87,10 @@ const UserFullPage = observer(() => {
     //get data for graphic
     useEffect(() => {
         const a = getQueryObject()
-        debugger
+
         user.expenseSchedule(getQueryObject())
             .then(() => {
-                debugger
+
                 }
             ).catch(() => {
 
