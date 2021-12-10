@@ -74,7 +74,7 @@ const PieChart = observer(({topCategories}) => {
 
         <BlockPie className={'monthChart'}>
 
-            {topCategories.maxSum !== null  &&   <ContainerChart>
+            {topCategories?.maxSum !== null  &&   <ContainerChart>
                 <ApexChart data={topCategories.list} />
                 <CircleExpenses>
                     <CircleHeader>

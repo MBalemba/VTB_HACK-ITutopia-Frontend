@@ -10,6 +10,7 @@ export const Container = styled.div`
   box-shadow: 0px 4px 65px rgba(0, 22, 86, 0.15);
   border-radius: 15px;
   padding: 50px;
+  margin-bottom: 200px;
 `
 export const FirstSection = styled.div`
   width: 100%;
@@ -109,4 +110,12 @@ export const HeaderSectionHistory = styled.div`
 export const ButtonWrapper = styled.div`
   width: 157px;
   height: 43px;
+`
+
+export const ContainerTransaction = styled.div`
+  width: 100%;
+  max-height: 620px;
+  width: 100%;
+  margin-top: 20px;
+  overflow-y: auto;
 `

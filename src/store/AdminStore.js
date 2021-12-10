@@ -6,8 +6,9 @@ import {
     AllDepartments,
     AllWorkers,
     currentAdminCheck,
-    departmentsWorkersCards, expenseSchedule, topSpendingCategories, transactionHistory
+    departmentsWorkersCards, expenseSchedule, getAllTypeOfCards, topSpendingCategories, transactionHistory
 } from "../http/UserApi";
+import {createQuery} from "../utils/CreateQuery";
 
 export default class AdminStore {
 
@@ -44,8 +45,7 @@ export default class AdminStore {
             }
         ]
 
-        this._allWorkers = [
-        ]
+        this._allWorkers = []
 
         this._allDepartments = [
             {
@@ -61,6 +61,15 @@ export default class AdminStore {
             list: [],
         }
         this._transactionHistory = []
+
+        this._typeOfCards = []
+
+
+        //pagination
+
+        this.currentPage = 0;
+        this.isfetchingAdditionalData = false
+
         makeAutoObservable(this)
     }
 
@@ -127,7 +136,7 @@ export default class AdminStore {
     getAllDepartments() {
         return AllDepartments().then(({data}) => {
 
-            this._allDepartments= [
+            this._allDepartments = [
                 ...data
             ]
             return Promise.resolve()
@@ -154,7 +163,7 @@ export default class AdminStore {
             })
     }
 
-    addWorker(data){
+    addWorker(data) {
         return addWorker(data)
             .then(({data}) => {
 
@@ -164,7 +173,8 @@ export default class AdminStore {
                 return Promise.reject()
             })
     }
-    addCard(data){
+
+    addCard(data) {
         return addCard(data)
             .then(({data}) => {
                 return Promise.resolve()
@@ -175,30 +185,18 @@ export default class AdminStore {
     }
 
 
-
-
     //transactions
 
 
-    expenseSchedule(queryObj ={}) {
+    expenseSchedule(queryObj = {}) {
 
-        let j = 0;
-        let str;
-
-
-        for(let i in queryObj){
-            j++
-        }
-
-        if(j===0){
-            str=''
-        }
+        let str = createQuery(queryObj)
 
 
 
         return expenseSchedule(str).then(({data}) => {
-
-             this._expenseSchedule = data
+            debugger
+            this._expenseSchedule = data
 
 
             return Promise.resolve()
@@ -209,18 +207,18 @@ export default class AdminStore {
             })
     }
 
-    topSpendingCategories(queryObj={}) {
+    topSpendingCategories(queryObj = {}) {
 
         let j = 0;
         let str;
 
 
-        for(let i in queryObj){
+        for (let i in queryObj) {
             j++
         }
 
-        if(j===0){
-            str=''
+        if (j === 0) {
+            str = ''
         }
 
         return topSpendingCategories(queryObj).then(({data}) => {
@@ -233,25 +231,33 @@ export default class AdminStore {
             })
     }
 
-    transactionHistory(queryObj = {}) {
+    transactionHistory(queryObj = {}, clear = true) {
 
         let j = 0;
         let str;
 
+        queryObj = {...queryObj, page: this.currentPage}
 
-        for(let i in queryObj){
+
+        for (let i in queryObj) {
             j++
         }
 
-        if(j===0){
-            str=''
+        if (j === 0) {
+            str = ''
         }
 
 
-
         return transactionHistory(queryObj).then(({data}) => {
+            if (clear) {
+                this.currentPage = 1
+                this._transactionHistory = data
+            } else {
+                this._transactionHistory = [...this._transactionHistory, ...data]
+                this.currentPage = this.currentPage + 1
+            }
 
-            this._transactionHistory = [...this._transactionHistory, ...data]
+
             return Promise.resolve()
         })
             .catch(({response}) => {
@@ -261,16 +267,38 @@ export default class AdminStore {
     }
 
 
-    get getExpenseSchedule(){
-        return this._expenseSchedule
+    allTypeOfCards() {
+        return getAllTypeOfCards().then(({data}) => {
+            debugger
+            this._typeOfCards = data
+            return Promise.resolve()
+        })
+            .catch(({response}) => {
+
+                return Promise.reject()
+            })
     }
 
-    get getTopSpendingCategories(){
+    get getTypeOfCards(){
+        return this._typeOfCards.map(el=>({value: el, label: el}))
+    }
+
+
+    get getExpenseSchedule() {
+        return toJS(this._expenseSchedule)
+    }
+
+    get getTopSpendingCategories() {
         return toJS(this._topSpendingCategories)
     }
 
-    get getTransactionHistory(){
+    get getTransactionHistory() {
         return toJS(this._transactionHistory)
+    }
+
+
+    get getCurrentPage() {
+        return this.currentPage
     }
 
 }

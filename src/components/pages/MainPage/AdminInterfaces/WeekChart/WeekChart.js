@@ -202,6 +202,9 @@ class ApexChat extends React.Component {
 const WeekChart = observer(() => {
     const {admin} = useContext(Context)
 
+    useEffect(()=>{
+
+    }, [admin.getExpenseSchedule?.length])
 
     return (
         <ContainerChart className={'monthChart'}>

@@ -1,9 +1,9 @@
-import React, {forwardRef, useState} from 'react';
+import React, {forwardRef, useContext, useEffect, useState} from 'react';
 import {
     AdminLeft,
     AdminRight,
     Arrow, ButtonDate, ButtonWrapper,
-    Container,
+    Container, ContainerTransaction,
     DatePickerBlock, DonutSection,
     FirstSection,
     GoBack,
@@ -21,12 +21,15 @@ import {SearchC} from "../../MainPage/AdminMenuLeft/AdminMenuLeft";
 import Select from "react-select";
 import MyButton from "../../../common/Buttons/MyButton";
 import HistoryTransaction from "../../MainPage/AdminInterfaces/HistoryTransaction/HistoryTransaction";
+import {observer} from "mobx-react-lite";
+import {Context} from "../../../../index";
+import useDebounce from "../../../../utils/useDebounce";
 
 
 
 export const CustomDatePicker = forwardRef(({ value ='', myText, onClick }, ref) =>
     {
-        console.log(myText)
+
 
         return (
             <ButtonDate className="example-custom-input" onClick={onClick} ref={ref}>
@@ -50,11 +53,127 @@ const options = [
     { value: 'vanilla', label: 'Vanilla' },
 ];
 
-const AdminFullPage = () => {
 
+const AdminFullPage = observer(() => {
+
+
+    const {admin} = useContext(Context)
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState(new Date());
     const [selectedOption, setSelectedOption] = useState(null);
+    const [typeElem, setTypeElem] = useState(null)
+    const [searchTerm, setSearchTerm] = useState('');
+    const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+    const type = [
+        { value: 'refill', label: 'Пополнение' },
+        { value: 'expenses', label: 'Траты' },
+    ];
+
+
+
+    function initialRequestwithQuery(){
+
+    }
+
+
+    useEffect(()=>{
+        console.log(admin.getTypeOfCards)
+    }, [admin.getTypeOfCards.length])
+
+    //get data for graphic
+    useEffect(() => {
+        const a = getQueryObject()
+
+        admin.expenseSchedule(getQueryObject())
+            .then(() => {
+
+                }
+            ).catch(() => {
+
+        })
+    }, [selectedOption,endDate,startDate,debouncedSearchTerm ])
+
+
+    //get data for pie
+     useEffect(() => {
+        admin.topSpendingCategories({})
+            .then(() => {
+
+                }
+            ).catch(() => {
+
+        })
+    }, [selectedOption,endDate,startDate,debouncedSearchTerm ])
+
+    //get history
+    useEffect(() => {
+        admin.transactionHistory({})
+            .then(() => {
+
+                }
+            ).catch(() => {
+
+        })
+    }, [selectedOption,endDate,startDate,debouncedSearchTerm, typeElem])
+
+    //get all types cards:
+    useEffect(() => {
+        admin.allTypeOfCards()
+            .then(() => {
+
+                }
+            ).catch(() => {
+
+        })
+    }, [])
+
+
+
+
+
+
+
+
+
+
+
+    function clickButtonPaginate() {
+        admin.transactionHistory(getQueryObject(),false)
+            .then(() => {
+
+                }
+            ).catch(() => {
+
+        })
+    }
+
+    function getQueryObject(isGraphic=true){
+        let obj = {}
+
+            if(startDate ===''){
+
+            } else{
+                obj.from = startDate.getFullYear()+'-'+startDate.getMonth() +'-'+(Math.floor(startDate.getDate()/10)<1?'0'+ startDate.getDate(): startDate.getDate())
+            }
+
+            obj.to = endDate.getFullYear()+'-'+(Math.floor(endDate.getMonth()/10)<1?('0'+ endDate.getMonth()): endDate.getMonth()) +'-'+(Math.floor(endDate.getDate()/10)<1?'0'+ endDate.getDate(): endDate.getDate())
+
+            if(selectedOption) obj.purpose =selectedOption.value
+
+            if(debouncedSearchTerm) obj.whatWasSpentOn = debouncedSearchTerm
+
+        if(!isGraphic){
+            if(typeElem) obj.refillOrExpenses = typeElem.value
+        }
+
+
+
+
+        return obj
+    }
+
+
 
     return (
         <Container>
@@ -103,7 +222,8 @@ const AdminFullPage = () => {
                         />
                     </DatePickerBlock>
 
-                    <WeekChart />
+                    <WeekChart  />
+
 
 
 
@@ -114,21 +234,21 @@ const AdminFullPage = () => {
             </FirstSection>
 
             <DonutSection>
-                <PieChart />
+                <PieChart topCategories={admin.getTopSpendingCategories} />
             </DonutSection>
 
             <MenuSection>
-                <SearchC/>
+                <SearchC value={searchTerm} handleChange={(e)=>{setSearchTerm(e.target.value)}}/>
 
                 <SelectWrapper>
                     <SelectItem>
                         <Select
                             className={'ads'}
                             classNamePrefix="menu_admin"
-                            placeholder = 'Статус'
-                            defaultValue={selectedOption}
-                            onChange={setSelectedOption}
-                            options={options}
+                            placeholder = 'Тип'
+                            defaultValue={typeElem}
+                            onChange={(value)=>{setTypeElem(value)}}
+                            options={type}
                         />
                     </SelectItem>
 
@@ -136,10 +256,10 @@ const AdminFullPage = () => {
                         <Select
                             className={'ads'}
                             classNamePrefix="menu_admin"
-                            placeholder = 'Статус'
+                            placeholder = 'Назначение'
                             defaultValue={selectedOption}
                             onChange={setSelectedOption}
-                            options={options}
+                            options={admin.getTypeOfCards}
                         />
                     </SelectItem>
 
@@ -160,12 +280,20 @@ const AdminFullPage = () => {
                 </HeaderSectionHistory>
 
 
-                <HistoryTransaction isHeader={false} />
+                <HeaderSectionHistory>
+
+
+                </HeaderSectionHistory>
+
+
+                <ContainerTransaction>
+                    <HistoryTransaction paginateClick={clickButtonPaginate}  paginate={true} data={admin.getTransactionHistory} />
+                </ContainerTransaction>
             </HistorySection>
 
         </Container>
 
     );
-};
+});
 
 export default AdminFullPage;

@@ -30,6 +30,13 @@ export const Data = styled.div`
 export const TransactionItems = styled.div`
 `
 
+export const PaginationBlock = styled.div`
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+  justify-content: center;
+`
+
 export const TrItem = styled.div`
   padding: 15px;
   width: 100%;

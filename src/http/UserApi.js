@@ -116,6 +116,11 @@ export const transactionHistoryUser = async (str='') => {
     return response
 }
 
+export const getAllTypeOfCards = async () => {
+    const response = await $authHost.get('/transaction/getAllTypeOfCards')
+    return response
+}
+
 
 
 

@@ -1,19 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import cardVisaImg from './assets/image 1.png'
 import {
     Block, Card, CardIco, CardNumber, Category,
     ContainerHistory, Currency,
     Data, Departament, Divider, Fio,
-    Ico, IcoDown, IcoDownStyle, IcoPerson, IcoStyle, IcoUp, Name, Person,
+    Ico, IcoDown, IcoDownStyle, IcoPerson, IcoStyle, IcoUp, Name, PaginationBlock, Person,
     Ph, Picture, Price, PriceValue, TextBlock, Time,
     TransactionFIRM,
     TransactionItems,
     TrItem
 } from "./HistoryTransactionStyle";
 import {objIcons} from "../../../../../assets/SpentMoneyServicesIcons/ObjIcons";
+import MyButton from "../../../../common/Buttons/MyButton";
+import {observer} from "mobx-react-lite";
+import {Context} from "../../../../../index";
 
-export const HistoryTransaction = ({isHeader = true, data: information}) => {
 
+export const HistoryTransaction = observer(({isHeader = true, data: information , paginate = false, paginateClick=()=>{}}) => {
+    const {admin} = useContext(Context)
     return (
         <ContainerHistory>
 
@@ -131,11 +135,16 @@ export const HistoryTransaction = ({isHeader = true, data: information}) => {
             }
 
 
+            <PaginationBlock>
+                <MyButton clickHandler={paginateClick} width={'240px'} height={'40px'}>
+                    Загрузить еще {admin.currentPage}
+                </MyButton>
 
+            </PaginationBlock>
 
         </ContainerHistory>
 
     )
-};
+});
 
 export default HistoryTransaction;
