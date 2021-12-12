@@ -90,6 +90,8 @@ const UserInterface = observer(() => {
     }, [id])
 
     useEffect(() => {
+
+      
         user.transactionHistoryUser({worker_id: id})
             .then(() => {
 
@@ -113,6 +115,8 @@ const UserInterface = observer(() => {
         return <Navigate to='../admin' />
     }
 
+    console.log("133" + JSON.stringify(user.getTopSpendingCategories))
+
     return (
         <Container>
 
@@ -135,7 +139,7 @@ const UserInterface = observer(() => {
 
 
                         {user.infoOfCards.length!==0 && <CardsBlock userId={id} departamentName={user.workerInfo.departmentType} fio={user.workerInfo.surname+' '+user.workerInfo.name +' '+ user.workerInfo.patronymic} currentSlide={currentSlide} handleCurrentSlide={setCurrentSlide} cardsInfo={user.infoOfCards} />}
-                        <PieChart topCategories={user.getTopSpendingCategories} />
+                        { user.getTopSpendingCategories && user.getTopSpendingCategories.maxSum > 0 ? <PieChart topCategories={user.getTopSpendingCategories} /> : null }
 
                         <ContainerTransaction>
                             <HistoryTransaction data={user.getTransactionHistory} />

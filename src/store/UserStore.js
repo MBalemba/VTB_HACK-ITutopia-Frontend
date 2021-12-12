@@ -225,10 +225,12 @@ export default class UserStore {
             str = ''
         }
 
+        debugger
+        
 
         return transactionHistoryUser(str).then(({data}) => {
-
-            this._transactionHistory = [...this._transactionHistory, ...data]
+          debugger
+            this._transactionHistory = [...data]
             return Promise.resolve()
         })
             .catch(({response}) => {

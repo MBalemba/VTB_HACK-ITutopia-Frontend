@@ -39,11 +39,9 @@ const CurrentCheckComponent = observer(({isLink = true}) => {
                         </P>
 
                         <Number>
-                            {admin.currentCheck.account_number.map((el,index)=>
-                                <NumberItem key={index}>
-                                    {el}
-                                </NumberItem>
-                            )}
+                          <NumberItem>
+                              {"40702810400000123456"}
+                          </NumberItem>
                         </Number>
                     </Left>
 

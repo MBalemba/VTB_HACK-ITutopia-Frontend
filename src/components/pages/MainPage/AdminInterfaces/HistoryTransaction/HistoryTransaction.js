@@ -18,18 +18,19 @@ import {Context} from "../../../../../index";
 
 export const HistoryTransaction = observer(({isHeader = true, data: information , paginate = false, paginateClick=()=>{}}) => {
     const {admin} = useContext(Context)
+
     return (
         <ContainerHistory>
 
             {isHeader && <Ph>
-                {information?.length === 0 ? 'У вас нет истории операции по таким критериям' : 'История последних операций'}
+                {information.indexOf(null) !== -1 ? 'У вас нет истории операции по таким критериям' : 'История последних операций'}
             </Ph>}
 
 
             {
-                information?.map(({date, group}, index) => <Block key={index}>
+                information?.map((item, index) => <Block key={index}>
                         <Data>
-                            {date}
+                            {item && item.date ? item.date : null}
                         </Data>
 
                         <TransactionItems>
@@ -37,7 +38,7 @@ export const HistoryTransaction = observer(({isHeader = true, data: information 
 
                             {
 
-                                group.map((
+                                item && item.group ? item.group.map((
                                     {
                                         card_number,
                                         currency,
@@ -133,7 +134,7 @@ export const HistoryTransaction = observer(({isHeader = true, data: information 
                                         </TrItem>
                                         <Divider/>
                                     </React.Fragment>
-                                )
+                                ) : null
 
                             }
 

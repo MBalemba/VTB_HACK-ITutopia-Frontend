@@ -100,7 +100,7 @@ const PieChart = observer(({topCategories}) => {
 
                     {
                         topCategories?.list.map((el, index)=>
-                            <ItemList>
+                            <ItemList key={index} >
                                 <Dot color={colors[index]}>
 
                                 </Dot>

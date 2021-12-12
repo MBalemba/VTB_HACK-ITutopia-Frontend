@@ -7,14 +7,14 @@ import {Ph} from "./HistoryTransaction/HistoryTransactionStyle";
 import {observer} from "mobx-react-lite";
 import {Context} from "../../../../index";
 import MyButton from "../../../common/Buttons/MyButton";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {FULLPAGEADMIN} from "../../../../utils/path";
 
 const AdminInterfaces = observer(() => {
 
     const {admin} = useContext(Context);
     const navigate  = useNavigate()
-
+    const { id } = useParams()
 
     useEffect(()=>{
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -48,7 +48,7 @@ const AdminInterfaces = observer(() => {
             ).catch(() => {
 
         })
-    }, [])
+    }, [id])
 
 
 
@@ -61,7 +61,7 @@ const AdminInterfaces = observer(() => {
 
             <WeekChart/>
 
-            <PieChart topCategories={admin.getTopSpendingCategories} />
+            { admin.getTopSpendingCategories && admin.getTopSpendingCategories.maxSum > 0 ? <PieChart topCategories={admin.getTopSpendingCategories} /> : null }
 
 
             <ContainerTransaction>

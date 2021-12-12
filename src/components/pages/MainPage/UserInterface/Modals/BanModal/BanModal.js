@@ -62,7 +62,7 @@ const BanModal = ({info, cardId, userId, active, setActive, fio, departamentName
 
                     <SumToTransferBlock>
                         <SumToTransferText>
-                            Введите последнии 4 цифры карты
+                            Введите последние 4 цифры карты
                         </SumToTransferText>
                         <SearchC
                             input={

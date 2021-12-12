@@ -60,7 +60,7 @@ const TemporaryModal = ({info, cardId, userId, active, setActive, fio, departame
 
                     <SumToTransferBlock>
                         <SumToTransferText>
-                            Введите последнии 4 цифры карты
+                            Введите последние 4 цифры карты
                         </SumToTransferText>
                         <SearchC
                             input={

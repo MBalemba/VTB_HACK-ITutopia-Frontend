@@ -157,7 +157,9 @@ const AdminMenuLeft = observer(() => {
         if(department) obj.department = department.value
         if(status) obj.status = status.value
         if(type) obj.type = type.value
-        if(debouncedSearchTerm) obj.worker_name = debouncedSearchTerm.value
+        if(debouncedSearchTerm) obj.worker_name = debouncedSearchTerm
+
+        debugger
 
         admin.getAllTree(createQuery(obj)).then(()=>{
 

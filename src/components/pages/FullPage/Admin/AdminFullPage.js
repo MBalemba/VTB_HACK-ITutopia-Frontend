@@ -241,7 +241,7 @@ const AdminFullPage = observer(() => {
             </FirstSection>
 
             <DonutSection>
-                <PieChart topCategories={admin.getTopSpendingCategories} />
+                { admin.getTopSpendingCategories && admin.getTopSpendingCategories.maxSum > 0 ? <PieChart topCategories={admin.getTopSpendingCategories} /> : null }
             </DonutSection>
 
             <MenuSection>
@@ -297,7 +297,7 @@ const AdminFullPage = observer(() => {
 
 
                 <ContainerTransaction>
-                    <HistoryTransaction isHeader={false} paginateClick={clickButtonPaginate}  paginate={!admin.getButtonDisabled} data={admin.getTransactionHistory} />
+                   <HistoryTransaction isHeader={false} paginateClick={clickButtonPaginate}  paginate={!admin.getButtonDisabled} data={admin.getTransactionHistory} />
                 </ContainerTransaction>
             </HistorySection>
 

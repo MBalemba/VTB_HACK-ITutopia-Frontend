@@ -246,7 +246,7 @@ const UserFullPage = observer(() => {
             </FirstSection>
 
             <DonutSection>
-                <PieChart topCategories={user.getTopSpendingCategories} />
+                { user.getTopSpendingCategories && user.getTopSpendingCategories.maxSum > 0 ? <PieChart topCategories={user.getTopSpendingCategories} /> : null }
             </DonutSection>
 
             <MenuSection>
